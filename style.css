@@ -1,0 +1,326 @@
+/* FONT + BASE */
+body {
+    margin: 0;
+    font-family: "Sofia Sans", sans-serif;
+    background: #f5f7fa;
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 300px;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.search {
+    padding: 10px 12px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    outline: none;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    border: none;
+    background: #e8e8e8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filter-btn.active {
+    background: #ccc;
+}
+
+/* LINE LIST */
+.line-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 8px;
+    overflow-y: auto;
+}
+
+/* Pills */
+.line-pill {
+    width: 60px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Metro pills as circles */
+.metro-pill {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 17px;
+    color: white;
+}
+
+/* Header icon + pill */
+.line-header-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.line-header-icon .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line-header-icon .icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.line-header-icon .line-pill {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.line-header-icon .metro-pill {
+    width: 30px;
+    height: 30px;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.line-header-icon .arrow {
+    width: 20px;
+    height: 20px;
+}
+
+.line-header-icon .destination {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.switch-dir {
+    padding: 6px 14px;
+    background: #e1e1e1;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Transport colors */
+.metro1 { background: #ec2029; }
+.metro2 { background: #1077bc; }
+.metro3 { background: #3bb44b; }
+.metro4 { background: #fcd403; color: black; }
+
+.tram { background: #F7941F; }
+.trolley { background: #2AA9E0; }
+.bus { background: #BD202E; }
+.nightbus { background: #000000; }
+
+/* CONTENT PANEL */
+.content {
+    flex: 1;
+    padding: 50px 30px 30px 50px;
+    overflow-y: auto;
+}
+
+/* STOPS LIST */
+.stops {
+    position: relative;
+    padding-left: 40px;
+}
+
+.stops::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 3px;
+    background-color: #525252;
+}
+
+.stop-item {
+    position: relative;
+    margin: 24px 0;
+    font-size: 17px;
+}
+
+.stop-item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -18.5px;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid #525252;
+    border-radius: 50%;
+    background: white;
+    z-index: 2;
+}
+
+/* =====================================
+   LINE → STOPS OPEN ANIMATIONS
+===================================== */
+
+/* Line header animation */
+#lineHeader {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+#lineHeader.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stops container animation */
+#stopsContainer {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+#stopsContainer.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Individual stop items animation */
+.stop-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: stopFadeIn 0.3s ease forwards;
+}
+
+@keyframes stopFadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* MOBILE MODE */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        overflow-x: hidden; /* prevent horizontal scroll */
+    }
+
+    /* Sidebar full width at top */
+    .sidebar {
+        width: 100%;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box; /* include padding in width */
+    }
+
+    /* Website title centered */
+    .sidebar .title {
+        flex: 1 0 100%;
+        font-size: 24px;
+        text-align: center;
+        word-break: break-word;
+    }
+
+    /* Search bar full width */
+    .sidebar .search {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Filters row */
+    .filters {
+        flex: 1 0 100%;
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap; /* wrap if too many buttons */
+    }
+
+    /* Line list remains grid, full width */
+    .line-list {
+        flex: 1 0 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 8px;
+        box-sizing: border-box;
+    }
+
+    /* Ensure pills do not exceed container */
+    .line-pill, .metro-pill {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Content below sidebar */
+    .content {
+        padding: 20px 15px;
+        order: 2; /* shows below sidebar */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Line header: wrap items, switch button on new row, centered */
+    .line-header-icon {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* centers all items */
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+    }
+
+    /* Switch button on a new row, centered */
+    .line-header-icon .switch-dir {
+        flex-basis: 100%; /* moves to a new row */
+        margin-top: 8px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}

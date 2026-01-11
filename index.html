@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GTSOFIA</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Sofia Sans font -->
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="title">GTSOFIA</div>
+    <input class="search" id="searchLine" placeholder="Търсене по линия..." />
+
+    <div class="filters">
+        <button class="filter-btn active" data-type="">Всички линии</button>
+        <button class="filter-btn" data-type="metro">Метро</button>
+        <button class="filter-btn" data-type="tram">Трамваи</button>
+        <button class="filter-btn" data-type="trolley">Тролеи</button>
+        <button class="filter-btn" data-type="bus">Автобуси</button>
+        <button class="filter-btn" data-type="nightbus">Нощни линии</button>
+    </div>
+
+    <div id="lineList" class="line-list"></div>
+</div>
+
+<!-- CONTENT -->    
+<div class="content">
+    <div id="lineHeader" class="line-header"></div>
+    <div id="stopsContainer" class="stops"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
