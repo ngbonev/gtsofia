@@ -135,7 +135,7 @@ function renderStops(stops) {
 -------------------------------------------*/
 function renderMap(relationId) {
     const mapContainer = document.getElementById("mapContainer");
-    mapContainer.innerHTML = ""; // clear previous map
+    mapContainer.innerHTML = "";
 
     if (!relationId) {
         mapContainer.innerHTML = `
@@ -147,7 +147,7 @@ function renderMap(relationId) {
     }
 
     const iframe = document.createElement("iframe");
-    iframe.src = `https://www.openstreetmap.org/?relation=${relationId}&layers=M&map=14`;
+    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
     iframe.loading = "lazy";
     iframe.referrerPolicy = "no-referrer";
     iframe.width = "100%";
@@ -156,4 +156,3 @@ function renderMap(relationId) {
 
     mapContainer.appendChild(iframe);
 }
-
