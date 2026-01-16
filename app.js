@@ -2,7 +2,6 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
-let mapLayer = null;     // Leaflet layer for current polyline
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -12,7 +11,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && !type.startsWith(filter)) continue;
+        if (filter && (type.startsWith(filter) === false)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -25,7 +24,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = data.number;
+        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -65,11 +64,10 @@ function showLine(lineKey) {
     let color = COLORS[data.type] || "#000";
 
     if (data.type.startsWith("metro")) {
-        const metroLineNumber = lineKey.split("-")[1];
-        const metroKey = "metro" + metroLineNumber;
-        if (COLORS[metroKey]) color = COLORS[metroKey];
-    }
-
+    const metroLineNumber = lineKey.split("-")[1];
+    const metroKey = "metro" + metroLineNumber;
+    if (COLORS[metroKey]) color = COLORS[metroKey];
+}
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -95,25 +93,14 @@ function showLine(lineKey) {
                 Промяна на посоката
             </button>
         </div>
-        <div id="mapWrapper" style="display:flex; margin-top:10px;">
-            <div id="mapContainer" style="flex:1; min-width:150px; aspect-ratio:1/1; border:1px solid #ccc;"></div>
-            <div id="mapPlaceholder" style="flex:1; min-width:150px; aspect-ratio:1/1; display:flex; justify-content:center; align-items:center; color:#777; font-weight:600;">
-                No map available
-            </div>
-        </div>
     `;
 
-    header.querySelector(".switch-dir")
-        .addEventListener("click", () => switchDirection(lineKey));
+   header.querySelector(".switch-dir")
+      .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
     renderStops(data.directions[dir].stops);
-
-    // Show map for this direction
-    const relationId = data.directions[dir].relationId || null;
-    let lineColor = color; // use COLORS
-    showLineMap(relationId, lineColor);
 }
 
 function switchDirection(lineKey) {
@@ -139,70 +126,5 @@ function renderStops(stops) {
     container.classList.add("animate-in");
 }
 
-/* ---------------------------
-   SHOW MAP FUNCTION
-----------------------------*/
-function showLineMap(relationId, color = "#ff0000") {
-    const mapContainer = document.getElementById("mapContainer");
-    const placeholder = document.getElementById("mapPlaceholder");
 
-    if (!mapContainer || !placeholder) return;
 
-    // Always show map container
-    mapContainer.style.display = "block";
-
-    // Remove previous polyline if exists
-    if (mapLayer) {
-        mapLayer.remove();
-        mapLayer = null;
-    }
-
-    if (!relationId) {
-        // No map → show placeholder
-        placeholder.style.display = "flex";
-
-        if (window.lineMap) window.lineMap.getContainer().style.visibility = "hidden";
-        return;
-    }
-
-    // Map exists → hide placeholder
-    placeholder.style.display = "none";
-
-    if (!window.lineMap) {
-        window.lineMap = L.map("mapContainer").setView([42.6977, 23.3219], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(window.lineMap);
-    } else {
-        window.lineMap.getContainer().style.visibility = "visible";
-    }
-
-    const overpassQuery = `
-        [out:json];
-        relation(${relationId});
-        (._;>;);
-        out geom;
-    `;
-
-    fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`)
-        .then(res => res.json())
-        .then(data => {
-            const latlngs = [];
-            data.elements.forEach(el => {
-                if (el.type === "way" && el.geometry) {
-                    latlngs.push(el.geometry.map(g => [g.lat, g.lon]));
-                }
-            });
-
-            if (latlngs.length > 0) {
-                mapLayer = L.layerGroup(
-                    latlngs.map(path => L.polyline(path, { color: color, weight: 5 }))
-                ).addTo(window.lineMap);
-
-                const allPoints = latlngs.flat();
-                const bounds = L.latLngBounds(allPoints);
-                window.lineMap.fitBounds(bounds, { padding: [50, 50] });
-            }
-        })
-        .catch(err => console.error("OSM fetch error:", err));
-}
