@@ -106,7 +106,7 @@ function showLine(lineKey) {
         colorKey = data.type;
     }
 
-    // Render map with dynamic color
+    // Render map
     renderMap(data.directions[dir].relationId || null, colorKey);
 }
 
@@ -147,6 +147,9 @@ function renderMap(relationId, lineType) {
         return;
     }
 
+    // Show loading immediately
+    mapContainer.innerHTML = `<div class="no-map">Зареждане на картата...</div>`;
+
     if (!currentMap) {
         currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -158,16 +161,13 @@ function renderMap(relationId, lineType) {
     currentLayers.forEach(layer => currentMap.removeLayer(layer));
     currentLayers = [];
 
-    // Show temporary loading
-    mapContainer.innerHTML = "";
-
     const query = `[out:json];
 relation(${relationId});
 (._;>;);
 out body;`;
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+    const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout
 
     fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
@@ -183,19 +183,26 @@ out body;`;
             if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
         });
 
-        const lines = data.elements
+        const linesCoords = data.elements
             .filter(el => el.type === "way")
             .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
 
+        if (linesCoords.length === 0 || linesCoords.flat().length === 0) {
+            mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+            return;
+        }
+
+        mapContainer.innerHTML = ""; // clear loading
+
         const lineColor = COLORS[lineType] || "red";
 
-        lines.forEach(coords => {
+        linesCoords.forEach(coords => {
             const poly = L.polyline(coords, { color: lineColor, weight: 4 }).addTo(currentMap);
             currentLayers.push(poly);
         });
 
-        const allCoords = lines.flat();
-        if (allCoords.length) currentMap.fitBounds(allCoords);
+        const allCoords = linesCoords.flat();
+        currentMap.fitBounds(allCoords);
     })
     .catch(err => {
         console.error(err);
