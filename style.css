@@ -158,28 +158,31 @@ body.fade-out {
 .nightbus { background: #000000; }
 
 /* CONTENT PANEL */
-/* CONTENT WITH MAP */
 .content {
-  display: grid;
-  grid-template-columns: 1fr 420px;
+  display: flex;
+  flex-wrap: nowrap; /* stops + map side by side */
   gap: 24px;
 }
 
-/* Map wrapper */
-#mapWrapper {
-  position: relative;
+/* Stops container grows, map fixed width */
+#stopsContainer {
+  flex: 1 1 auto; /* take remaining space */
 }
 
-/* Square map */
+/* Map wrapper fixed width */
+#mapWrapper {
+  width: 420px;  /* fixed width for desktop */
+  flex-shrink: 0;
+}
+
+/* Map itself is square */
 #map {
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
-  overflow: hidden;
   background: #eaeaea;
 }
 
-/* No map text */
 #noMap {
   padding: 20px;
   text-align: center;
@@ -350,4 +353,5 @@ body.fade-out {
         box-sizing: border-box;
     }
 }
+
 
