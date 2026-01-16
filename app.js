@@ -135,21 +135,62 @@ function renderStops(stops) {
 -------------------------------------------*/
 function renderMap(relationId) {
     const mapContainer = document.getElementById("mapContainer");
-    mapContainer.innerHTML = "";
+    mapContainer.innerHTML = ""; // clear previous map
 
     if (!relationId) {
-        mapContainer.innerHTML = `
-            <div class="no-map">
-                Няма налична карта
-            </div>
-        `;
+        mapContainer.innerHTML = `<div class="no-map">Няма налична карта</div>`;
         return;
     }
 
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer";
+    // Create Leaflet map
+    const map = L.map(mapContainer, { zoomControl: false, attributionControl: false });
 
-    mapContainer.appendChild(iframe);
+    // Add OpenStreetMap tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+    }).addTo(map);
+
+    // Fetch route from Overpass API
+    const query = `
+        [out:json];
+        relation(${relationId});
+        (._;>;);
+        out body;
+    `;
+
+    fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        body: query,
+    })
+        .then(res => res.json())
+        .then(data => {
+            // Extract coordinates
+            const nodes = {};
+            data.elements.forEach(el => {
+                if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
+            });
+
+            const polylinePoints = [];
+            data.elements.forEach(el => {
+                if (el.type === "way") {
+                    el.nodes.forEach(id => {
+                        if (nodes[id]) polylinePoints.push(nodes[id]);
+                    });
+                }
+            });
+
+            if (polylinePoints.length === 0) {
+                mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+                return;
+            }
+
+            const color = COLORS.metro1 || "#ec2029"; // default color; replace with correct logic if needed
+
+            L.polyline(polylinePoints, { color, weight: 5 }).addTo(map);
+            map.fitBounds(polylinePoints);
+        })
+        .catch(err => {
+            console.error(err);
+            mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+        });
 }
