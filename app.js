@@ -11,7 +11,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && !type.startsWith(filter)) continue;
+        if (filter && (type.startsWith(filter) === false)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -64,10 +64,10 @@ function showLine(lineKey) {
     let color = COLORS[data.type] || "#000";
 
     if (data.type.startsWith("metro")) {
-        const metroLineNumber = lineKey.split("-")[1];
-        const metroKey = "metro" + metroLineNumber;
-        if (COLORS[metroKey]) color = COLORS[metroKey];
-    }
+    const metroLineNumber = lineKey.split("-")[1];
+    const metroKey = "metro" + metroLineNumber;
+    if (COLORS[metroKey]) color = COLORS[metroKey];
+}
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -95,24 +95,20 @@ function showLine(lineKey) {
         </div>
     `;
 
-    header.querySelector(".switch-dir")
-        .addEventListener("click", () => switchDirection(lineKey));
+   header.querySelector(".switch-dir")
+      .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
-    renderMap(data.directions[dir].relationId);
     renderStops(data.directions[dir].stops);
 }
 
-/* SWITCH DIRECTION */
 function switchDirection(lineKey) {
     directionState[lineKey] = directionState[lineKey] === 0 ? 1 : 0;
     showLine(lineKey);
 }
 
-/* ----------------------------------------
-   STOP LIST RENDERING WITH ANIMATION
--------------------------------------------*/
+/* STOP LIST RENDERING WITH ANIMATION */
 function renderStops(stops) {
     const container = document.getElementById("stopsContainer");
     container.classList.remove("animate-in");
@@ -130,67 +126,5 @@ function renderStops(stops) {
     container.classList.add("animate-in");
 }
 
-/* ----------------------------------------
-   MAP RENDERING
--------------------------------------------*/
-function renderMap(relationId) {
-    const mapContainer = document.getElementById("mapContainer");
-    mapContainer.innerHTML = ""; // clear previous map
 
-    if (!relationId) {
-        mapContainer.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-        return;
-    }
 
-    // Create Leaflet map
-    const map = L.map(mapContainer, { zoomControl: false, attributionControl: false });
-
-    // Add OpenStreetMap tiles
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-    }).addTo(map);
-
-    // Fetch route from Overpass API
-    const query = `
-        [out:json];
-        relation(${relationId});
-        (._;>;);
-        out body;
-    `;
-
-    fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query,
-    })
-        .then(res => res.json())
-        .then(data => {
-            // Extract coordinates
-            const nodes = {};
-            data.elements.forEach(el => {
-                if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
-            });
-
-            const polylinePoints = [];
-            data.elements.forEach(el => {
-                if (el.type === "way") {
-                    el.nodes.forEach(id => {
-                        if (nodes[id]) polylinePoints.push(nodes[id]);
-                    });
-                }
-            });
-
-            if (polylinePoints.length === 0) {
-                mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
-                return;
-            }
-
-            const color = COLORS.metro1 || "#ec2029"; // default color; replace with correct logic if needed
-
-            L.polyline(polylinePoints, { color, weight: 5 }).addTo(map);
-            map.fitBounds(polylinePoints);
-        })
-        .catch(err => {
-            console.error(err);
-            mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
-        });
-}

@@ -164,47 +164,6 @@ body.fade-out {
     overflow-y: auto;
 }
 
-.line-body {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
-}
-
-/* Stops take remaining space */
-.line-body .stops {
-    flex: 1;
-    min-width: 0;
-}
-
-/* Map fixed square size */
-.line-body .map-container {
-    width: 320px;
-    aspect-ratio: 1 / 1; /* always square */
-    flex-shrink: 0;
-}
-
-.map-container {
-    background: #eaeaea;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.no-map {
-    font-size: 16px;
-    color: #555;
-    text-align: center;
-    padding: 20px;
-}
-
 /* STOPS LIST */
 .stops {
     position: relative;
@@ -346,15 +305,6 @@ body.fade-out {
         width: 100%;
         box-sizing: border-box;
     }
-
-    .line-body {
-    flex-direction: column;
-    gap: 20px;
-}
-
-.line-body .map-container {
-    width: 100%;
-}
 
     /* Line header: wrap items, switch button on new row, centered */
     .line-header-icon {
