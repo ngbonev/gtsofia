@@ -200,6 +200,40 @@ body.fade-out {
     z-index: 2;
 }
 
+/* Container holding stops + map */
+.line-body {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Stops panel */
+.stops {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Map panel */
+.map {
+    width: 400px;
+    aspect-ratio: 1 / 1; /* makes it square */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    position: relative; /* needed for placeholder */
+}
+
+/* Placeholder text for missing map */
+.map-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #555;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
 /* =====================================
    LINE → STOPS OPEN ANIMATIONS
 ===================================== */
@@ -323,4 +357,16 @@ body.fade-out {
         max-width: 100%;
         box-sizing: border-box;
     }
+
+        .line-body {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .map {
+        width: 100%;
+        aspect-ratio: auto;
+        min-height: 300px;
+    }
 }
+
