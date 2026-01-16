@@ -140,16 +140,52 @@ function renderMap(relationId) {
     if (!relationId) {
         mapContainer.innerHTML = `
             <div class="no-map">
-                Няма налична карта за тази линия/дестинация
+                Няма налична карта
             </div>
         `;
         return;
     }
 
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer";
+    // Create Leaflet map
+    const map = L.map(mapContainer, { zoomControl: true, scrollWheelZoom: false }).setView([42.6977, 23.3219], 12);
 
-    mapContainer.appendChild(iframe);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Fetch relation from Overpass API
+    const query = `
+        [out:json];
+        relation(${relationId});
+        (._;>;);
+        out body;
+    `;
+
+    fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        body: query
+    })
+    .then(res => res.json())
+    .then(data => {
+        const nodes = {};
+        data.elements.forEach(el => {
+            if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
+        });
+
+        const lines = data.elements
+            .filter(el => el.type === "way")
+            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
+
+        lines.forEach(coords => {
+            L.polyline(coords, { color: "red", weight: 4 }).addTo(map);
+        });
+
+        // Fit map to route bounds
+        const allCoords = lines.flat();
+        if (allCoords.length) map.fitBounds(allCoords);
+    })
+    .catch(err => {
+        console.error(err);
+        mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+    });
 }
