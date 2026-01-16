@@ -54,7 +54,76 @@ document.getElementById("searchLine").addEventListener("input", e => {
     });
 });
 
-/* LINE DISPLAY */
+/* ----------------------------------------
+   LEAFLET MAP SETUP
+-------------------------------------------*/
+let currentMap = null;
+let currentLayers = [];
+
+/**
+ * Render a map for the given OSM relation ID.
+ * If no relation ID, shows a message instead.
+ */
+function renderMap(relationId) {
+    const mapContainer = document.getElementById("mapContainer");
+
+    if (!relationId) {
+        mapContainer.innerHTML = `<div class="no-map">Няма налична карта за тази линия/посока</div>`;
+        if (currentMap) currentMap.remove();
+        currentMap = null;
+        currentLayers = [];
+        return;
+    }
+
+    if (!currentMap) {
+        currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(currentMap);
+    }
+
+    // Remove previous polylines
+    currentLayers.forEach(layer => currentMap.removeLayer(layer));
+    currentLayers = [];
+
+    // Overpass API query to get relation
+    const query = `[out:json];
+relation(${relationId});
+(._;>;);
+out body;`;
+
+    fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        body: query
+    })
+    .then(res => res.json())
+    .then(data => {
+        const nodes = {};
+        data.elements.forEach(el => {
+            if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
+        });
+
+        const lines = data.elements
+            .filter(el => el.type === "way")
+            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
+
+        lines.forEach(coords => {
+            const poly = L.polyline(coords, { color: "red", weight: 4 }).addTo(currentMap);
+            currentLayers.push(poly);
+        });
+
+        const allCoords = lines.flat();
+        if (allCoords.length) currentMap.fitBounds(allCoords);
+    })
+    .catch(err => {
+        console.error(err);
+        mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+    });
+}
+
+/* ----------------------------------------
+   LINE DISPLAY
+-------------------------------------------*/
 function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
@@ -68,6 +137,7 @@ function showLine(lineKey) {
         const metroKey = "metro" + metroLineNumber;
         if (COLORS[metroKey]) color = COLORS[metroKey];
     }
+
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -100,11 +170,12 @@ function showLine(lineKey) {
 
     header.classList.add("animate-in");
 
-    renderMap(data.directions[dir].relationId);
     renderStops(data.directions[dir].stops);
+
+    // --- Render map for this direction ---
+    renderMap(data.directions[dir].relationId || null);
 }
 
-/* SWITCH DIRECTION */
 function switchDirection(lineKey) {
     directionState[lineKey] = directionState[lineKey] === 0 ? 1 : 0;
     showLine(lineKey);
@@ -128,31 +199,4 @@ function renderStops(stops) {
 
     void container.offsetWidth; // force reflow
     container.classList.add("animate-in");
-}
-
-/* ----------------------------------------
-   MAP RENDERING
--------------------------------------------*/
-function renderMap(relationId) {
-    const mapContainer = document.getElementById("mapContainer");
-    mapContainer.innerHTML = "";
-
-    if (!relationId) {
-        mapContainer.innerHTML = `
-            <div class="no-map">
-                Няма налична карта за тази линия/посока
-            </div>
-        `;
-        return;
-    }
-
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer";
-    iframe.width = "100%";
-    iframe.height = "100%";
-    iframe.style.border = "0";
-
-    mapContainer.appendChild(iframe);
 }
