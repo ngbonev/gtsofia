@@ -61,7 +61,7 @@ const lines = {
             },
             {
                 name: "КОКАЛЯНЕ",
-				relationId: 16914093,
+				relationId: 16914095,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -8753,6 +8753,7 @@ const lines = {
         ]
     },
 };
+
 
 
 
