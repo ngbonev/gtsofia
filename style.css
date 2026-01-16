@@ -159,37 +159,9 @@ body.fade-out {
 
 /* CONTENT PANEL */
 .content {
-  display: flex;
-  flex-wrap: nowrap; /* stops + map side by side */
-  gap: 24px;
-}
-
-/* Stops container grows, map fixed width */
-#stopsContainer {
-  flex: 1 1 auto; /* take remaining space */
-}
-
-/* Map wrapper fixed width */
-#mapWrapper {
-  width: 420px;  /* fixed width for desktop */
-  flex-shrink: 0;
-}
-
-/* Map itself is square */
-#map {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  background: #eaeaea;
-}
-
-#noMap {
-  padding: 20px;
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-  background: #f0f0f0;
-  border-radius: 12px;
+    flex: 1;
+    padding: 50px 30px 30px 50px;
+    overflow-y: auto;
 }
 
 /* STOPS LIST */
@@ -329,7 +301,6 @@ body.fade-out {
     /* Content below sidebar */
     .content {
         padding: 20px 15px;
-        grid-template-columns: 1fr;
         order: 2; /* shows below sidebar */
         width: 100%;
         box-sizing: border-box;
@@ -353,5 +324,3 @@ body.fade-out {
         box-sizing: border-box;
     }
 }
-
-
