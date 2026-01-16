@@ -2,8 +2,12 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
+
 let currentMap = null;
 let currentLayers = [];
+
+// COLORS already defined in data.js
+// ICONS already defined in data.js
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -73,7 +77,7 @@ function showLine(lineKey) {
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     header.classList.remove("animate-in");
-    void header.offsetWidth;
+    void header.offsetWidth; // force reflow
 
     let colorClass = '';
     if (data.type.startsWith("metro")) {
@@ -94,7 +98,10 @@ function showLine(lineKey) {
                 Промяна на посоката
             </button>
         </div>
-        <div id="mapContainer" class="map-container"></div>
+        <div id="mapWrapper" class="map-wrapper">
+            <div id="mapContainer" class="map-container"></div>
+            <div id="mapMessage" class="map-message"></div>
+        </div>
     `;
 
     header.querySelector(".switch-dir")
@@ -104,10 +111,7 @@ function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    // Map
-    const relationId = data.directions[dir].relationId || null;
-    const lineColorKey = data.type.startsWith("metro") ? "metro" + data.number : data.type;
-    renderMap(relationId, lineColorKey);
+    renderMap(data.directions[dir].relationId, data.type);
 }
 
 function switchDirection(lineKey) {
@@ -129,25 +133,26 @@ function renderStops(stops) {
         container.appendChild(item);
     });
 
-    void container.offsetWidth;
+    void container.offsetWidth; // force reflow
     container.classList.add("animate-in");
 }
 
 /* ----------------------------------------
-   MAP FUNCTION
+   MAP RENDERING
 -------------------------------------------*/
 function renderMap(relationId, lineType) {
     const mapContainer = document.getElementById("mapContainer");
+    const mapMessage = document.getElementById("mapMessage");
 
     if (!relationId) {
-        mapContainer.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        mapMessage.textContent = "Няма налична карта";
         if (currentMap) currentMap.remove();
         currentMap = null;
         currentLayers = [];
         return;
     }
 
-    mapContainer.innerHTML = `<div class="no-map">Зареждане на картата...</div>`;
+    mapMessage.textContent = "Зареждане на картата...";
 
     const query = `[out:json]; relation(${relationId}); (._;>;); out body;`;
 
@@ -174,11 +179,11 @@ function renderMap(relationId, lineType) {
             .filter(arr => arr.length > 0);
 
         if (linesCoords.length === 0) {
-            mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+            mapMessage.textContent = "Не може да се зареди картата";
             return;
         }
 
-        mapContainer.innerHTML = "";
+        mapMessage.textContent = "";
 
         if (!currentMap) {
             currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
@@ -203,6 +208,6 @@ function renderMap(relationId, lineType) {
     })
     .catch(err => {
         console.error(err);
-        mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+        mapMessage.textContent = "Не може да се зареди картата";
     });
 }
