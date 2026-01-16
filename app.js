@@ -2,8 +2,8 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
-let currentMap = null;   // Leaflet map instance
-let currentLayers = [];  // polylines on map
+let currentMap = null;
+let currentLayers = [];
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -15,7 +15,6 @@ function refreshLineList(filter = null) {
 
         if (filter && !type.startsWith(filter)) continue;
 
-        // Determine correct color class
         let colorClass = '';
         if (type.startsWith("metro")) {
             const metroLineNumber = lineKey.split('-')[1];
@@ -26,7 +25,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
+        pill.textContent = data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -63,12 +62,18 @@ function showLine(lineKey) {
     const dir = directionState[lineKey];
 
     const header = document.getElementById("lineHeader");
+    let color = COLORS[data.type] || "#000";
+
+    if (data.type.startsWith("metro")) {
+        const metroLineNumber = lineKey.split("-")[1];
+        const metroKey = "metro" + metroLineNumber;
+        if (COLORS[metroKey]) color = COLORS[metroKey];
+    }
 
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
-    // Animate header reset
     header.classList.remove("animate-in");
-    void header.offsetWidth; // force reflow
+    void header.offsetWidth;
 
     let colorClass = '';
     if (data.type.startsWith("metro")) {
@@ -78,7 +83,7 @@ function showLine(lineKey) {
     }
 
     header.innerHTML = `
-        <div class="line-header-icon" style="--line-color:${COLORS[data.type.startsWith("metro") ? "metro" + data.number : data.type] || '#000'}">
+        <div class="line-header-icon" style="--line-color:${color}">
             <div class="icon"><img src="${icon}" alt="${data.type} icon"></div>
             <div class="line-pill ${data.type} ${data.type.startsWith("metro") ? "metro-pill " + colorClass : ""}">
                 ${data.number}
@@ -89,6 +94,7 @@ function showLine(lineKey) {
                 Промяна на посоката
             </button>
         </div>
+        <div id="mapContainer" class="map-container"></div>
     `;
 
     header.querySelector(".switch-dir")
@@ -98,16 +104,10 @@ function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    // Determine correct color key for map
-    let colorKey;
-    if (data.type.startsWith("metro")) {
-        colorKey = "metro" + data.number;
-    } else {
-        colorKey = data.type;
-    }
-
-    // Render map
-    renderMap(data.directions[dir].relationId || null, colorKey);
+    // Map
+    const relationId = data.directions[dir].relationId || null;
+    const lineColorKey = data.type.startsWith("metro") ? "metro" + data.number : data.type;
+    renderMap(relationId, lineColorKey);
 }
 
 function switchDirection(lineKey) {
@@ -129,12 +129,12 @@ function renderStops(stops) {
         container.appendChild(item);
     });
 
-    void container.offsetWidth; // force reflow
+    void container.offsetWidth;
     container.classList.add("animate-in");
 }
 
 /* ----------------------------------------
-   MAP RENDERING USING LEAFLET + OVERPASS
+   MAP FUNCTION
 -------------------------------------------*/
 function renderMap(relationId, lineType) {
     const mapContainer = document.getElementById("mapContainer");
@@ -147,13 +147,12 @@ function renderMap(relationId, lineType) {
         return;
     }
 
-    // Show loading but do not remove old map yet
     mapContainer.innerHTML = `<div class="no-map">Зареждане на картата...</div>`;
 
     const query = `[out:json]; relation(${relationId}); (._;>;); out body;`;
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout
+    const timeout = setTimeout(() => controller.abort(), 40000); // 40s timeout
 
     fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
@@ -172,17 +171,15 @@ function renderMap(relationId, lineType) {
         const linesCoords = data.elements
             .filter(el => el.type === "way")
             .map(way => way.nodes.map(id => nodes[id]).filter(Boolean))
-            .filter(arr => arr.length > 0); // only keep non-empty ways
+            .filter(arr => arr.length > 0);
 
         if (linesCoords.length === 0) {
             mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
             return;
         }
 
-        // Clear loading
         mapContainer.innerHTML = "";
 
-        // Initialize map if not already
         if (!currentMap) {
             currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -190,7 +187,6 @@ function renderMap(relationId, lineType) {
             }).addTo(currentMap);
         }
 
-        // Remove previous polylines only now
         currentLayers.forEach(layer => currentMap.removeLayer(layer));
         currentLayers = [];
 
@@ -210,4 +206,3 @@ function renderMap(relationId, lineType) {
         mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
     });
 }
-
