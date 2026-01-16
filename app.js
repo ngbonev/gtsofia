@@ -2,6 +2,7 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
+let mapLayer = null;
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -11,7 +12,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && (type.startsWith(filter) === false)) continue;
+        if (filter && !type.startsWith(filter)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -24,7 +25,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
+        pill.textContent = data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -64,10 +65,11 @@ function showLine(lineKey) {
     let color = COLORS[data.type] || "#000";
 
     if (data.type.startsWith("metro")) {
-    const metroLineNumber = lineKey.split("-")[1];
-    const metroKey = "metro" + metroLineNumber;
-    if (COLORS[metroKey]) color = COLORS[metroKey];
-}
+        const metroLineNumber = lineKey.split("-")[1];
+        const metroKey = "metro" + metroLineNumber;
+        if (COLORS[metroKey]) color = COLORS[metroKey];
+    }
+
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -95,12 +97,13 @@ function showLine(lineKey) {
         </div>
     `;
 
-   header.querySelector(".switch-dir")
-      .addEventListener("click", () => switchDirection(lineKey));
+    header.querySelector(".switch-dir")
+        .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
     renderStops(data.directions[dir].stops);
+    showLineMap(data.directions[dir].relationId); // show map for this direction
 }
 
 function switchDirection(lineKey) {
@@ -126,5 +129,65 @@ function renderStops(stops) {
     container.classList.add("animate-in");
 }
 
+/* -----------------------------
+   MAP HANDLING
+------------------------------*/
+function showLineMap(relationId) {
+    const mapContainer = document.getElementById("mapContainer");
+    const placeholder = document.getElementById("mapPlaceholder");
 
+    if (!mapContainer || !placeholder) return;
 
+    if (!relationId) {
+        // No map available
+        placeholder.style.display = "flex";
+        if (window.lineMap) window.lineMap.getContainer().style.display = "none";
+        return;
+    }
+
+    // Map exists
+    placeholder.style.display = "none";
+
+    if (!window.lineMap) {
+        window.lineMap = L.map("mapContainer").setView([42.6977, 23.3219], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(window.lineMap);
+    } else {
+        window.lineMap.getContainer().style.display = "block";
+    }
+
+    // Remove previous line
+    if (mapLayer) mapLayer.remove();
+
+    // Fetch route from Overpass API
+    const overpassQuery = `
+        [out:json];
+        relation(${relationId});
+        (._;>;);
+        out geom;
+    `;
+
+    fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`)
+        .then(res => res.json())
+        .then(data => {
+            const latlngs = [];
+
+            data.elements.forEach(el => {
+                if (el.type === "way" && el.geometry) {
+                    latlngs.push(el.geometry.map(g => [g.lat, g.lon]));
+                }
+            });
+
+            if (latlngs.length > 0) {
+                mapLayer = L.layerGroup(
+                    latlngs.map(path => L.polyline(path, { color: 'red', weight: 5 }))
+                ).addTo(window.lineMap);
+
+                const allPoints = latlngs.flat();
+                const bounds = L.latLngBounds(allPoints);
+                window.lineMap.fitBounds(bounds, { padding: [50, 50] });
+            }
+        })
+        .catch(err => console.error("OSM fetch error:", err));
+}
