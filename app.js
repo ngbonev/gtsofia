@@ -3,12 +3,6 @@
 -------------------------------------------*/
 let directionState = {}; // track direction per line
 
-let currentMap = null;
-let currentLayers = [];
-
-// COLORS already defined in data.js
-// ICONS already defined in data.js
-
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
     list.innerHTML = "";
@@ -19,6 +13,7 @@ function refreshLineList(filter = null) {
 
         if (filter && !type.startsWith(filter)) continue;
 
+        // Determine correct color class
         let colorClass = '';
         if (type.startsWith("metro")) {
             const metroLineNumber = lineKey.split('-')[1];
@@ -29,7 +24,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = data.number;
+        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -73,9 +68,9 @@ function showLine(lineKey) {
         const metroKey = "metro" + metroLineNumber;
         if (COLORS[metroKey]) color = COLORS[metroKey];
     }
-
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
+    // Animate header reset
     header.classList.remove("animate-in");
     void header.offsetWidth; // force reflow
 
@@ -98,10 +93,6 @@ function showLine(lineKey) {
                 Промяна на посоката
             </button>
         </div>
-        <div id="mapWrapper" class="map-wrapper">
-            <div id="mapContainer" class="map-container"></div>
-            <div id="mapMessage" class="map-message"></div>
-        </div>
     `;
 
     header.querySelector(".switch-dir")
@@ -109,17 +100,19 @@ function showLine(lineKey) {
 
     header.classList.add("animate-in");
 
+    renderMap(data.directions[dir].relationId);
     renderStops(data.directions[dir].stops);
-
-    renderMap(data.directions[dir].relationId, data.type);
 }
 
+/* SWITCH DIRECTION */
 function switchDirection(lineKey) {
     directionState[lineKey] = directionState[lineKey] === 0 ? 1 : 0;
     showLine(lineKey);
 }
 
-/* STOP LIST RENDERING WITH ANIMATION */
+/* ----------------------------------------
+   STOP LIST RENDERING WITH ANIMATION
+-------------------------------------------*/
 function renderStops(stops) {
     const container = document.getElementById("stopsContainer");
     container.classList.remove("animate-in");
@@ -140,74 +133,23 @@ function renderStops(stops) {
 /* ----------------------------------------
    MAP RENDERING
 -------------------------------------------*/
-function renderMap(relationId, lineType) {
+function renderMap(relationId) {
     const mapContainer = document.getElementById("mapContainer");
-    const mapMessage = document.getElementById("mapMessage");
+    mapContainer.innerHTML = "";
 
     if (!relationId) {
-        mapMessage.textContent = "Няма налична карта";
-        if (currentMap) currentMap.remove();
-        currentMap = null;
-        currentLayers = [];
+        mapContainer.innerHTML = `
+            <div class="no-map">
+                Няма налична карта
+            </div>
+        `;
         return;
     }
 
-    mapMessage.textContent = "Зареждане на картата...";
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer";
 
-    const query = `[out:json]; relation(${relationId}); (._;>;); out body;`;
-
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 40000); // 40s timeout
-
-    fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query,
-        signal: controller.signal
-    })
-    .then(res => res.json())
-    .then(data => {
-        clearTimeout(timeout);
-
-        const nodes = {};
-        data.elements.forEach(el => {
-            if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
-        });
-
-        const linesCoords = data.elements
-            .filter(el => el.type === "way")
-            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean))
-            .filter(arr => arr.length > 0);
-
-        if (linesCoords.length === 0) {
-            mapMessage.textContent = "Не може да се зареди картата";
-            return;
-        }
-
-        mapMessage.textContent = "";
-
-        if (!currentMap) {
-            currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(currentMap);
-        }
-
-        currentLayers.forEach(layer => currentMap.removeLayer(layer));
-        currentLayers = [];
-
-        const lineColor = COLORS[lineType] || "red";
-
-        linesCoords.forEach(coords => {
-            const poly = L.polyline(coords, { color: lineColor, weight: 4 }).addTo(currentMap);
-            currentLayers.push(poly);
-        });
-
-        const allCoords = linesCoords.flat();
-        currentMap.fitBounds(allCoords);
-
-    })
-    .catch(err => {
-        console.error(err);
-        mapMessage.textContent = "Не може да се зареди картата";
-    });
+    mapContainer.appendChild(iframe);
 }
