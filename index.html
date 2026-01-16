@@ -10,6 +10,12 @@
 
     <!-- Sofia Sans font -->
     <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
+
 </head>
 <body>
 
@@ -34,10 +40,16 @@
 <div class="content">
     <div id="lineHeader" class="line-header"></div>
     <div id="stopsContainer" class="stops"></div>
+    <div id="mapWrapper">
+  <div id="map"></div>
+  <div id="noMap" hidden>Няма налична карта за тази линия</div>
+</div>
 </div>
 
 <script src="data.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="app.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
+
