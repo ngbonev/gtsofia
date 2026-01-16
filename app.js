@@ -11,7 +11,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && (type.startsWith(filter) === false)) continue;
+        if (filter && !type.startsWith(filter)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -64,10 +64,10 @@ function showLine(lineKey) {
     let color = COLORS[data.type] || "#000";
 
     if (data.type.startsWith("metro")) {
-    const metroLineNumber = lineKey.split("-")[1];
-    const metroKey = "metro" + metroLineNumber;
-    if (COLORS[metroKey]) color = COLORS[metroKey];
-}
+        const metroLineNumber = lineKey.split("-")[1];
+        const metroKey = "metro" + metroLineNumber;
+        if (COLORS[metroKey]) color = COLORS[metroKey];
+    }
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -95,20 +95,24 @@ function showLine(lineKey) {
         </div>
     `;
 
-   header.querySelector(".switch-dir")
-      .addEventListener("click", () => switchDirection(lineKey));
+    header.querySelector(".switch-dir")
+        .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
+    renderMap(data.directions[dir].relationId);
     renderStops(data.directions[dir].stops);
 }
 
+/* SWITCH DIRECTION */
 function switchDirection(lineKey) {
     directionState[lineKey] = directionState[lineKey] === 0 ? 1 : 0;
     showLine(lineKey);
 }
 
-/* STOP LIST RENDERING WITH ANIMATION */
+/* ----------------------------------------
+   STOP LIST RENDERING WITH ANIMATION
+-------------------------------------------*/
 function renderStops(stops) {
     const container = document.getElementById("stopsContainer");
     container.classList.remove("animate-in");
@@ -126,5 +130,26 @@ function renderStops(stops) {
     container.classList.add("animate-in");
 }
 
+/* ----------------------------------------
+   MAP RENDERING
+-------------------------------------------*/
+function renderMap(relationId) {
+    const mapContainer = document.getElementById("mapContainer");
+    mapContainer.innerHTML = "";
 
+    if (!relationId) {
+        mapContainer.innerHTML = `
+            <div class="no-map">
+                Няма налична карта за тази линия/дестинация
+            </div>
+        `;
+        return;
+    }
 
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.openstreetmap.org/export/embed.html?relation=${relationId}&layer=mapnik`;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer";
+
+    mapContainer.appendChild(iframe);
+}
