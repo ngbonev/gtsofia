@@ -140,31 +140,17 @@ function renderMap(relationId, lineType) {
     const mapContainer = document.getElementById("mapContainer");
 
     if (!relationId) {
-        mapContainer.innerHTML = `<div class="no-map">Няма налична карта за тази линия/посока</div>`;
+        mapContainer.innerHTML = `<div class="no-map">Няма налична карта</div>`;
         if (currentMap) currentMap.remove();
         currentMap = null;
         currentLayers = [];
         return;
     }
 
-    // Show loading immediately
+    // Show loading but do not remove old map yet
     mapContainer.innerHTML = `<div class="no-map">Зареждане на картата...</div>`;
 
-    if (!currentMap) {
-        currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(currentMap);
-    }
-
-    // Remove previous polylines
-    currentLayers.forEach(layer => currentMap.removeLayer(layer));
-    currentLayers = [];
-
-    const query = `[out:json];
-relation(${relationId});
-(._;>;);
-out body;`;
+    const query = `[out:json]; relation(${relationId}); (._;>;); out body;`;
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 30000); // 30s timeout
@@ -185,14 +171,28 @@ out body;`;
 
         const linesCoords = data.elements
             .filter(el => el.type === "way")
-            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
+            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean))
+            .filter(arr => arr.length > 0); // only keep non-empty ways
 
-        if (linesCoords.length === 0 || linesCoords.flat().length === 0) {
+        if (linesCoords.length === 0) {
             mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
             return;
         }
 
-        mapContainer.innerHTML = ""; // clear loading
+        // Clear loading
+        mapContainer.innerHTML = "";
+
+        // Initialize map if not already
+        if (!currentMap) {
+            currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(currentMap);
+        }
+
+        // Remove previous polylines only now
+        currentLayers.forEach(layer => currentMap.removeLayer(layer));
+        currentLayers = [];
 
         const lineColor = COLORS[lineType] || "red";
 
@@ -203,9 +203,11 @@ out body;`;
 
         const allCoords = linesCoords.flat();
         currentMap.fitBounds(allCoords);
+
     })
     .catch(err => {
         console.error(err);
         mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
     });
 }
+
