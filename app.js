@@ -63,13 +63,6 @@ function showLine(lineKey) {
     const dir = directionState[lineKey];
 
     const header = document.getElementById("lineHeader");
-    let color = COLORS[data.type] || "#000";
-
-    if (data.type.startsWith("metro")) {
-        const metroLineNumber = lineKey.split("-")[1];
-        const metroKey = "metro" + metroLineNumber;
-        if (COLORS[metroKey]) color = COLORS[metroKey];
-    }
 
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
@@ -85,7 +78,7 @@ function showLine(lineKey) {
     }
 
     header.innerHTML = `
-        <div class="line-header-icon" style="--line-color:${color}">
+        <div class="line-header-icon" style="--line-color:${COLORS[data.type.startsWith("metro") ? "metro" + data.number : data.type] || '#000'}">
             <div class="icon"><img src="${icon}" alt="${data.type} icon"></div>
             <div class="line-pill ${data.type} ${data.type.startsWith("metro") ? "metro-pill " + colorClass : ""}">
                 ${data.number}
@@ -105,8 +98,16 @@ function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
+    // Determine correct color key for map
+    let colorKey;
+    if (data.type.startsWith("metro")) {
+        colorKey = "metro" + data.number;
+    } else {
+        colorKey = data.type;
+    }
+
     // Render map with dynamic color
-    renderMap(data.directions[dir].relationId || null, data.type.startsWith("metro") ? "metro" + data.number : data.type);
+    renderMap(data.directions[dir].relationId || null, colorKey);
 }
 
 function switchDirection(lineKey) {
@@ -166,7 +167,7 @@ relation(${relationId});
 out body;`;
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout
+    const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
     fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
