@@ -2,6 +2,8 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
+let currentMap = null;   // Leaflet map instance
+let currentLayers = [];  // polylines on map
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -54,76 +56,7 @@ document.getElementById("searchLine").addEventListener("input", e => {
     });
 });
 
-/* ----------------------------------------
-   LEAFLET MAP SETUP
--------------------------------------------*/
-let currentMap = null;
-let currentLayers = [];
-
-/**
- * Render a map for the given OSM relation ID.
- * If no relation ID, shows a message instead.
- */
-function renderMap(relationId) {
-    const mapContainer = document.getElementById("mapContainer");
-
-    if (!relationId) {
-        mapContainer.innerHTML = `<div class="no-map">Няма налична карта за тази линия/посока</div>`;
-        if (currentMap) currentMap.remove();
-        currentMap = null;
-        currentLayers = [];
-        return;
-    }
-
-    if (!currentMap) {
-        currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(currentMap);
-    }
-
-    // Remove previous polylines
-    currentLayers.forEach(layer => currentMap.removeLayer(layer));
-    currentLayers = [];
-
-    // Overpass API query to get relation
-    const query = `[out:json];
-relation(${relationId});
-(._;>;);
-out body;`;
-
-    fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query
-    })
-    .then(res => res.json())
-    .then(data => {
-        const nodes = {};
-        data.elements.forEach(el => {
-            if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
-        });
-
-        const lines = data.elements
-            .filter(el => el.type === "way")
-            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
-
-        lines.forEach(coords => {
-            const poly = L.polyline(coords, { color: "red", weight: 4 }).addTo(currentMap);
-            currentLayers.push(poly);
-        });
-
-        const allCoords = lines.flat();
-        if (allCoords.length) currentMap.fitBounds(allCoords);
-    })
-    .catch(err => {
-        console.error(err);
-        mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
-    });
-}
-
-/* ----------------------------------------
-   LINE DISPLAY
--------------------------------------------*/
+/* LINE DISPLAY */
 function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
@@ -172,8 +105,8 @@ function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    // --- Render map for this direction ---
-    renderMap(data.directions[dir].relationId || null);
+    // Render map with dynamic color
+    renderMap(data.directions[dir].relationId || null, data.type.startsWith("metro") ? "metro" + data.number : data.type);
 }
 
 function switchDirection(lineKey) {
@@ -181,9 +114,7 @@ function switchDirection(lineKey) {
     showLine(lineKey);
 }
 
-/* ----------------------------------------
-   STOP LIST RENDERING WITH ANIMATION
--------------------------------------------*/
+/* STOP LIST RENDERING WITH ANIMATION */
 function renderStops(stops) {
     const container = document.getElementById("stopsContainer");
     container.classList.remove("animate-in");
@@ -199,4 +130,74 @@ function renderStops(stops) {
 
     void container.offsetWidth; // force reflow
     container.classList.add("animate-in");
+}
+
+/* ----------------------------------------
+   MAP RENDERING USING LEAFLET + OVERPASS
+-------------------------------------------*/
+function renderMap(relationId, lineType) {
+    const mapContainer = document.getElementById("mapContainer");
+
+    if (!relationId) {
+        mapContainer.innerHTML = `<div class="no-map">Няма налична карта за тази линия/посока</div>`;
+        if (currentMap) currentMap.remove();
+        currentMap = null;
+        currentLayers = [];
+        return;
+    }
+
+    if (!currentMap) {
+        currentMap = L.map(mapContainer, { zoomControl: true }).setView([42.6977, 23.3219], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(currentMap);
+    }
+
+    // Remove previous polylines
+    currentLayers.forEach(layer => currentMap.removeLayer(layer));
+    currentLayers = [];
+
+    // Show temporary loading
+    mapContainer.innerHTML = "";
+
+    const query = `[out:json];
+relation(${relationId});
+(._;>;);
+out body;`;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
+    fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        body: query,
+        signal: controller.signal
+    })
+    .then(res => res.json())
+    .then(data => {
+        clearTimeout(timeout);
+
+        const nodes = {};
+        data.elements.forEach(el => {
+            if (el.type === "node") nodes[el.id] = [el.lat, el.lon];
+        });
+
+        const lines = data.elements
+            .filter(el => el.type === "way")
+            .map(way => way.nodes.map(id => nodes[id]).filter(Boolean));
+
+        const lineColor = COLORS[lineType] || "red";
+
+        lines.forEach(coords => {
+            const poly = L.polyline(coords, { color: lineColor, weight: 4 }).addTo(currentMap);
+            currentLayers.push(poly);
+        });
+
+        const allCoords = lines.flat();
+        if (allCoords.length) currentMap.fitBounds(allCoords);
+    })
+    .catch(err => {
+        console.error(err);
+        mapContainer.innerHTML = `<div class="no-map">Не може да се зареди картата</div>`;
+    });
 }
