@@ -27,7 +27,6 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
-				relationId: 16914094,
                 stops: [
                    { name: "СЕЛО КОКАЛЯНЕ", onDemand: false },
                     { name: "УЛ. ЦАР ИВАН АСЕН ІІ", onDemand: false },
@@ -61,7 +60,6 @@ const lines = {
             },
             {
                 name: "КОКАЛЯНЕ",
-				relationId: 16914095,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -8753,7 +8751,5 @@ const lines = {
         ]
     },
 };
-
-
 
 

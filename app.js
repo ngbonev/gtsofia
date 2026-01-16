@@ -24,7 +24,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = data.number;
+        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -54,82 +54,7 @@ document.getElementById("searchLine").addEventListener("input", e => {
     });
 });
 
-/* ----------------------------------------
-   MAP SETUP
--------------------------------------------*/
-let map = null;
-let mapLayer = null;
-
-async function loadMapForRelation(relationId, lineColor) {
-    const mapDiv = document.getElementById("map");
-    const msg = document.getElementById("mapMessage");
-
-    if (!relationId) {
-        mapDiv.style.display = "none";
-        msg.style.display = "block";
-        msg.textContent = "Няма налична карта";
-        return;
-    }
-
-    msg.style.display = "none";
-    mapDiv.style.display = "block";
-
-    if (!map) {
-        map = L.map("map");
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19
-        }).addTo(map);
-    }
-
-    if (mapLayer) {
-        map.removeLayer(mapLayer);
-    }
-
-    try {
-        const query = `
-            [out:json];
-            relation(${relationId});
-            (._; >>;);
-            out geom;
-        `;
-
-        const response = await fetch("https://overpass-api.de/api/interpreter", {
-            method: "POST",
-            body: query
-        });
-
-        const json = await response.json();
-
-        const coords = [];
-
-        json.elements.forEach(el => {
-            if (el.type === "way" && el.geometry) {
-                const wayCoords = el.geometry.map(p => [p.lat, p.lon]);
-                coords.push(...wayCoords);
-            }
-        });
-
-        if (coords.length === 0) {
-            throw new Error("No geometry");
-        }
-
-        mapLayer = L.polyline(coords, {
-            color: lineColor,
-            weight: 4
-        }).addTo(map);
-
-        map.fitBounds(mapLayer.getBounds());
-
-    } catch (err) {
-        mapDiv.style.display = "none";
-        msg.style.display = "block";
-        msg.textContent = "Грешка при зареждане на картата";
-    }
-}
-
-/* ----------------------------------------
-   LINE DISPLAY
--------------------------------------------*/
+/* LINE DISPLAY */
 function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
@@ -139,11 +64,10 @@ function showLine(lineKey) {
     let color = COLORS[data.type] || "#000";
 
     if (data.type.startsWith("metro")) {
-        const metroLineNumber = lineKey.split("-")[1];
-        const metroKey = "metro" + metroLineNumber;
-        if (COLORS[metroKey]) color = COLORS[metroKey];
-    }
-
+    const metroLineNumber = lineKey.split("-")[1];
+    const metroKey = "metro" + metroLineNumber;
+    if (COLORS[metroKey]) color = COLORS[metroKey];
+}
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -171,15 +95,12 @@ function showLine(lineKey) {
         </div>
     `;
 
-    header.querySelector(".switch-dir")
-        .addEventListener("click", () => switchDirection(lineKey));
+   header.querySelector(".switch-dir")
+      .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
     renderStops(data.directions[dir].stops);
-
-    // Load map for this direction
-    loadMapForRelation(data.directions[dir].relationId, color);
 }
 
 function switchDirection(lineKey) {
@@ -204,4 +125,6 @@ function renderStops(stops) {
     void container.offsetWidth; // force reflow
     container.classList.add("animate-in");
 }
+
+
 
