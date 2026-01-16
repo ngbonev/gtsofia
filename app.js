@@ -74,7 +74,6 @@ async function loadMapForRelation(relationId, lineColor) {
     msg.style.display = "none";
     mapDiv.style.display = "block";
 
-    // Init map once
     if (!map) {
         map = L.map("map");
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -82,44 +81,45 @@ async function loadMapForRelation(relationId, lineColor) {
         }).addTo(map);
     }
 
-    // Remove previous polyline
     if (mapLayer) {
         map.removeLayer(mapLayer);
     }
 
     try {
-        const url = `https://www.openstreetmap.org/api/0.6/relation/${relationId}/full`;
-        const xml = await fetch(url).then(r => r.text());
-        const parser = new DOMParser();
-        const data = parser.parseFromString(xml, "text/xml");
+        const query = `
+            [out:json];
+            relation(${relationId});
+            (._; >>;);
+            out geom;
+        `;
 
-        const nodes = {};
-        data.querySelectorAll("node").forEach(n => {
-            const id = n.getAttribute("id");
-            const lat = parseFloat(n.getAttribute("lat"));
-            const lon = parseFloat(n.getAttribute("lon"));
-            if (!isNaN(lat) && !isNaN(lon)) {
-                nodes[id] = [lat, lon];
+        const response = await fetch("https://overpass-api.de/api/interpreter", {
+            method: "POST",
+            body: query
+        });
+
+        const json = await response.json();
+
+        const coords = [];
+
+        json.elements.forEach(el => {
+            if (el.type === "way" && el.geometry) {
+                const wayCoords = el.geometry.map(p => [p.lat, p.lon]);
+                coords.push(...wayCoords);
             }
         });
 
-        const ways = [];
-        data.querySelectorAll("way").forEach(w => {
-            const nds = [...w.querySelectorAll("nd")]
-                .map(nd => nodes[nd.getAttribute("ref")])
-                .filter(coord => coord);
-            if (nds.length > 0) ways.push(nds);
-        });
+        if (coords.length === 0) {
+            throw new Error("No geometry");
+        }
 
-        const allCoords = ways.flat();
-        if (allCoords.length === 0) throw new Error("No valid coordinates");
-
-        mapLayer = L.polyline(allCoords, {
+        mapLayer = L.polyline(coords, {
             color: lineColor,
             weight: 4
         }).addTo(map);
 
         map.fitBounds(mapLayer.getBounds());
+
     } catch (err) {
         mapDiv.style.display = "none";
         msg.style.display = "block";
@@ -204,3 +204,4 @@ function renderStops(stops) {
     void container.offsetWidth; // force reflow
     container.classList.add("animate-in");
 }
+
