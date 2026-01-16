@@ -87,29 +87,34 @@ async function loadMapForRelation(relationId, lineColor) {
         map.removeLayer(mapLayer);
     }
 
-    // Fetch OSM relation geometry
-    const url = `https://www.openstreetmap.org/api/0.6/relation/${relationId}/full`;
-
     try {
+        const url = `https://www.openstreetmap.org/api/0.6/relation/${relationId}/full`;
         const xml = await fetch(url).then(r => r.text());
         const parser = new DOMParser();
         const data = parser.parseFromString(xml, "text/xml");
 
         const nodes = {};
         data.querySelectorAll("node").forEach(n => {
-            nodes[n.getAttribute("id")] = [
-                parseFloat(n.getAttribute("lat")),
-                parseFloat(n.getAttribute("lon"))
-            ];
+            const id = n.getAttribute("id");
+            const lat = parseFloat(n.getAttribute("lat"));
+            const lon = parseFloat(n.getAttribute("lon"));
+            if (!isNaN(lat) && !isNaN(lon)) {
+                nodes[id] = [lat, lon];
+            }
         });
 
         const ways = [];
         data.querySelectorAll("way").forEach(w => {
-            const nds = [...w.querySelectorAll("nd")].map(nd => nodes[nd.getAttribute("ref")]);
-            ways.push(nds);
+            const nds = [...w.querySelectorAll("nd")]
+                .map(nd => nodes[nd.getAttribute("ref")])
+                .filter(coord => coord);
+            if (nds.length > 0) ways.push(nds);
         });
 
-        mapLayer = L.polyline(ways.flat(), {
+        const allCoords = ways.flat();
+        if (allCoords.length === 0) throw new Error("No valid coordinates");
+
+        mapLayer = L.polyline(allCoords, {
             color: lineColor,
             weight: 4
         }).addTo(map);
