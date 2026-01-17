@@ -2,7 +2,7 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
-const mapCache = {};     // store already loaded map wrappers for caching
+const mapCache = {};     // store already loaded map wrappers + map instance for caching
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -17,9 +17,7 @@ function refreshLineList(filter = null) {
         // Determine correct color class
         let colorClass = '';
         if (type.startsWith("metro")) {
-            const metroLineNumber = lineKey.split('-')[1];
-            colorClass = 'metro' + metroLineNumber;
-            if (!COLORS[colorClass]) colorClass = 'metro1';
+            colorClass = getMetroColorClass(lineKey);
         }
 
         const pill = document.createElement("div");
@@ -72,12 +70,7 @@ async function showLine(lineKey) {
     header.classList.remove("animate-in");
     void header.offsetWidth;
 
-    let colorClass = '';
-    if (data.type.startsWith("metro")) {
-        const metroLineNumber = lineKey.split('-')[1];
-        colorClass = 'metro' + metroLineNumber;
-        if (!COLORS[colorClass]) colorClass = 'metro1';
-    }
+    const colorClass = data.type.startsWith("metro") ? getMetroColorClass(lineKey) : '';
 
     header.innerHTML = `
         <div class="line-header-icon" style="--line-color:${color}">
@@ -101,24 +94,41 @@ async function showLine(lineKey) {
     // Determine map container (desktop: right of stops, mobile: below stops)
     const layoutContainer = getMapLayoutContainer();
 
-    // Remove old map from DOM (cached wrapper remains)
+    // Remove old map from DOM (cached wrapper remains in mapCache)
     const oldMap = document.querySelector(".map-wrapper");
     if (oldMap) oldMap.remove();
 
     if (mapCache[cacheKey]) {
-        // Load map from cache
-        layoutContainer.appendChild(mapCache[cacheKey]);
+        // Load map from cache (re-attach wrapper and ensure proper redraw)
+        const cached = mapCache[cacheKey];
+        layoutContainer.appendChild(cached.wrapper);
+
+        // Ensure Leaflet recalculates size and fits bounds after reattachment
+        requestAnimationFrame(() => {
+            try {
+                cached.map.invalidateSize();
+                if (cached.bounds) cached.map.fitBounds(cached.bounds, { padding: [20, 20] });
+            } catch (e) {
+                // If something goes wrong re-render fresh map
+                console.warn("Cached map redraw failed, re-rendering:", e);
+                cached.wrapper.remove();
+                delete mapCache[cacheKey];
+                showLine(lineKey); // re-run to create fresh map
+            }
+        });
     } else {
         // Create new map wrapper
         const wrapper = document.createElement("div");
         wrapper.className = "map-wrapper";
         layoutContainer.appendChild(wrapper);
 
-        // Render map (async)
-        await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
+        // Render map (async) -> returns { wrapper, map, bounds } on success
+        const result = await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
 
-        // Store in cache
-        mapCache[cacheKey] = wrapper;
+        // If renderLeafletMap returned a map object, store it for reuse
+        if (result && result.wrapper && result.map) {
+            mapCache[cacheKey] = result;
+        }
     }
 }
 
@@ -158,6 +168,12 @@ function getLineColor(type, lineKey) {
     return COLORS[type] || "#000";
 }
 
+function getMetroColorClass(lineKey) {
+    const metroLineNumber = lineKey.split('-')[1];
+    const colorClass = 'metro' + metroLineNumber;
+    return COLORS[colorClass] ? colorClass : 'metro1';
+}
+
 // Determine proper container for map (desktop vs mobile)
 function getMapLayoutContainer() {
     const layout = document.querySelector(".stops-map-layout");
@@ -165,12 +181,36 @@ function getMapLayoutContainer() {
     return document.querySelector(".content"); // fallback for mobile
 }
 
+async function fetchOverpass(query, timeoutMs = 60000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        const res = await fetch("https://overpass-api.de/api/interpreter", {
+            method: "POST",
+            body: query,
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+            const txt = await res.text().catch(() => "");
+            throw new Error(`Overpass API returned ${res.status} ${res.statusText} - ${txt}`);
+        }
+
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        clearTimeout(timeoutId);
+        throw err;
+    }
+}
+
 async function renderLeafletMap(direction, type, lineKey, wrapper) {
     wrapper.innerHTML = ""; // clear wrapper
 
     if (!direction.relationId) {
         wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-        return wrapper;
+        return { wrapper };
     }
 
     const mapDiv = document.createElement("div");
@@ -189,38 +229,62 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
             maxZoom: 19
         }).addTo(map);
 
-        // Fetch relation GeoJSON with 60s timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s
-        const res = await fetch("https://overpass-api.de/api/interpreter", {
-            method: "POST",
-            body: `[out:json];relation(${direction.relationId});out geom;`,
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
+        // Primary Overpass query: try to get geometry (relation members may or may not contain geometry)
+        const primaryQuery = `[out:json];relation(${direction.relationId});out geom;`;
+        let data;
+        try {
+            data = await fetchOverpass(primaryQuery, 60000);
+        } catch (err) {
+            console.warn("Primary Overpass fetch failed:", err);
+            // try fallback below
+        }
 
-        const data = await res.json();
-
-        // Build GeoJSON
-        const geojson = {
-            type: "FeatureCollection",
-            features: data.elements
-                .filter(el => el.type === "relation")
-                .map(rel => ({
-                    type: "Feature",
-                    geometry: {
-                        type: "MultiLineString",
-                        coordinates: rel.members
-                            .filter(m => m.geometry)
-                            .map(m => m.geometry.map(p => [p.lon, p.lat]))
-                    }
-                }))
+        // Helper to extract coordinate arrays from any element with geometry
+        const elementsToFeatures = (elements) => {
+            if (!elements || !Array.isArray(elements)) return [];
+            return elements
+                .filter(el => Array.isArray(el.geometry) && el.geometry.length > 0)
+                .map(el => {
+                    const coords = el.geometry.map(p => [p.lon, p.lat]);
+                    // Use LineString per element (ways) to keep things simple
+                    return {
+                        type: "Feature",
+                        geometry: {
+                            type: "LineString",
+                            coordinates: coords
+                        }
+                    };
+                });
         };
 
-        if (!geojson.features || geojson.features.length === 0) {
-            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-            return wrapper;
+        let features = [];
+        if (data) {
+            features = elementsToFeatures(data.elements);
         }
+
+        // If no geometry was found, retry with a recursive query to fetch member ways/nodes
+        if (!features || features.length === 0) {
+            console.info("No geometry from primary query, trying recursive Overpass query for members...");
+            try {
+                const recursiveQuery = `[out:json];relation(${direction.relationId});>;out geom;`;
+                const data2 = await fetchOverpass(recursiveQuery, 60000);
+                features = elementsToFeatures(data2.elements);
+            } catch (err) {
+                console.warn("Recursive Overpass fetch failed:", err);
+            }
+        }
+
+        if (!features || features.length === 0) {
+            // Nothing to draw
+            console.warn("No geometry available for relation", direction.relationId);
+            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+            return { wrapper, map };
+        }
+
+        const geojson = {
+            type: "FeatureCollection",
+            features
+        };
 
         // Add GeoJSON to map
         const layer = L.geoJSON(geojson, {
@@ -228,15 +292,27 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
         }).addTo(map);
 
         // Fit bounds
-        map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+        const bounds = layer.getBounds();
+        if (bounds && typeof bounds.isValid === "function" && bounds.isValid()) {
+            try {
+                map.fitBounds(bounds, { padding: [20, 20] });
+            } catch (e) {
+                console.warn("fitBounds failed:", e);
+            }
+        } else {
+            // fallback to city center
+            map.setView([42.6977, 23.3219], 12);
+        }
 
         // Force redraw in case container dimensions changed
         requestAnimationFrame(() => map.invalidateSize());
 
+        // Return wrapper + map + bounds for caching
+        return { wrapper, map, bounds };
+
     } catch (e) {
         console.error("Leaflet map error:", e);
         wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        return { wrapper };
     }
-
-    return wrapper;
 }
