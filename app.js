@@ -8,12 +8,14 @@ const mapCache = {};     // store already loaded map wrappers + map instance for
 const relationGeoCache = {};    // relationId -> { geojson, bounds }
 const inflightGeoFetches = {};  // relationId -> Promise
 
-// TIMETABLE MODAL (created once)
+/* ----------------------------------------
+   TIMETABLE MODAL (created once)
+-------------------------------------------*/
 let _timetableModal = null;
 function ensureTimetableModal() {
     if (_timetableModal) return _timetableModal;
 
-    // overlay with an iframe and a fallback area (fallback uses existing .switch-dir styling for the button)
+    // overlay with an iframe and a fallback area
     const overlay = document.createElement("div");
     overlay.className = "timetable-modal";
     overlay.innerHTML = `
@@ -55,56 +57,89 @@ function ensureTimetableModal() {
     return _timetableModal;
 }
 
-function openTimetable(url) {
+function openTimetable(url, opener = null) {
     if (!url) return;
     const modal = ensureTimetableModal();
     const iframe = modal.querySelector(".timetable-iframe");
     const fallback = modal.querySelector(".timetable-fallback");
 
+    // store the opener to restore focus later
+    modal._lastOpener = opener || null;
+
     // Reset state
     fallback.style.display = "none";
     iframe.style.display = "block";
     iframe.dataset.src = url;
-    iframe.src = "about:blank"; // reset first to ensure load toggles reliably
+    try { iframe.src = "about:blank"; } catch (e) {}
 
-    // show modal immediately
+    // show modal and lock body scroll
     modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    // focus close button for accessibility
+    const closeBtn = modal.querySelector(".timetable-close");
+    if (closeBtn) closeBtn.focus();
 
     let loaded = false;
 
     const onLoad = () => {
         loaded = true;
-        clearTimeout(timer);
-        // iframe loaded successfully — ensure fallback hidden
+        if (modal._timetableTimer) {
+            clearTimeout(modal._timetableTimer);
+            modal._timetableTimer = null;
+        }
         fallback.style.display = "none";
         iframe.style.display = "block";
     };
 
-    // attach handler
+    // attach handler; remove then add to avoid duplicates
     iframe.removeEventListener("load", onLoad);
     iframe.addEventListener("load", onLoad);
 
-    // Start loading the iframe
-    // small delay to let modal paint
+    // Start loading the iframe after a tiny delay so the modal paints first
     setTimeout(() => { iframe.src = url; }, 50);
 
-    // If iframe doesn't load within timeout, show fallback inside modal (do NOT auto-open new window)
-    const timer = setTimeout(() => {
+    // If iframe doesn't load in time, show fallback inside modal (do NOT auto-open new window)
+    modal._timetableTimer = setTimeout(() => {
         if (!loaded) {
-            // Show fallback UI inside modal
             iframe.style.display = "none";
-            fallback.style.display = "block";
+            fallback.style.display = "flex";
         }
     }, 1500);
 }
 
 function closeTimetable() {
     if (!_timetableModal) return;
-    const iframe = _timetableModal.querySelector(".timetable-iframe");
+    const modal = _timetableModal;
+    const iframe = modal.querySelector(".timetable-iframe");
+    const fallback = modal.querySelector(".timetable-fallback");
+
+    // Clear any pending timer
+    if (modal._timetableTimer) {
+        clearTimeout(modal._timetableTimer);
+        modal._timetableTimer = null;
+    }
+
+    // Reset iframe
     try { iframe.src = "about:blank"; } catch (e) {}
-    const fallback = _timetableModal.querySelector(".timetable-fallback");
+
+    // Hide fallback and modal
     if (fallback) fallback.style.display = "none";
-    _timetableModal.classList.remove("open");
+    modal.classList.remove("open");
+
+    // Restore body scrolling
+    document.body.style.overflow = "";
+
+    // Restore focus to the opener if available
+    try {
+        if (modal._lastOpener && typeof modal._lastOpener.focus === "function") {
+            modal._lastOpener.focus();
+        } else {
+            document.body.focus();
+        }
+    } catch (e) {
+        // ignore
+    }
 }
 
 /* ----------------------------------------
@@ -213,15 +248,19 @@ async function showLine(lineKey) {
 
     const switchBtn = header.querySelector(".switch-dir");
     if (switchBtn) {
-        switchBtn.addEventListener("click", () => switchDirection(lineKey));
+        // the first .switch-dir is the change-direction button; the timetable uses the same class but has timetable-btn
+        // ensure we attach only to the direction switch (the one without timetable-btn)
+        if (!switchBtn.classList.contains("timetable-btn")) {
+            switchBtn.addEventListener("click", () => switchDirection(lineKey));
+        }
     }
 
     const ttBtn = header.querySelector(".timetable-btn");
     if (ttBtn) {
-        ttBtn.addEventListener("click", () => {
+        ttBtn.addEventListener("click", (ev) => {
             const url = data.directions[dir].timetable;
             if (!url) return;
-            openTimetable(url);
+            openTimetable(url, ev.currentTarget);
         });
     }
 
