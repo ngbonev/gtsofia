@@ -32,6 +32,7 @@ body.fade-out {
 
 .search {
     padding: 10px 12px;
+    font-family: "Sofia Sans", sans-serif;
     font-size: 15px;
     border-radius: 6px;
     border: 1px solid #bbb;
@@ -48,6 +49,7 @@ body.fade-out {
     padding: 6px 14px;
     border: none;
     background: #e8e8e8;
+    font-family: "Sofia Sans", sans-serif;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
@@ -371,6 +373,7 @@ body.fade-out {
     flex-direction: column;
 }
 }
+
 
 
 
