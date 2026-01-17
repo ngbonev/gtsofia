@@ -150,43 +150,11 @@ function getLineColor(type, lineKey) {
     return COLORS[type] || "#000";
 }
 
-async function fetchRelationGeoJSON(relationId) {
-    const query = `
-        [out:json];
-        relation(${relationId});
-        out geom;
-    `;
-
-    const res = await fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        body: query
-    });
-
-    const data = await res.json();
-
-    return {
-        type: "FeatureCollection",
-        features: data.elements
-            .filter(el => el.type === "relation")
-            .map(rel => ({
-                type: "Feature",
-                geometry: {
-                    type: "MultiLineString",
-                    coordinates: rel.members
-                        .filter(m => m.geometry)
-                        .map(m =>
-                            m.geometry.map(p => [p.lon, p.lat])
-                        )
-                }
-            }))
-    };
-}
-
 async function renderLeafletMap(direction, type, lineKey, wrapper) {
     wrapper.innerHTML = ""; // clear wrapper
 
     if (!direction.relationId) {
-        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
         return wrapper;
     }
 
@@ -206,14 +174,41 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
             maxZoom: 19
         }).addTo(map);
 
-        const geojson = await fetchRelationGeoJSON(direction.relationId);
+        // Fetch Overpass API with 30s max wait
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s
+        const res = await fetch(`https://overpass-api.de/api/interpreter`, {
+            method: "POST",
+            body: `[out:json];relation(${direction.relationId});out geom;`,
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        const data = await res.json();
+
+        const geojson = {
+            type: "FeatureCollection",
+            features: data.elements
+                .filter(el => el.type === "relation")
+                .map(rel => ({
+                    type: "Feature",
+                    geometry: {
+                        type: "MultiLineString",
+                        coordinates: rel.members
+                            .filter(m => m.geometry)
+                            .map(m => m.geometry.map(p => [p.lon, p.lat]))
+                    }
+                }))
+        };
+
+        // If no features returned, show fallback
+        if (!geojson.features || geojson.features.length === 0) {
+            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+            return wrapper;
+        }
 
         const layer = L.geoJSON(geojson, {
-            style: {
-                color,
-                weight: 5,
-                opacity: 0.9
-            }
+            style: { color, weight: 5, opacity: 0.9 }
         }).addTo(map);
 
         map.fitBounds(layer.getBounds(), { padding: [20, 20] });
