@@ -8,9 +8,85 @@ const mapCache = {};     // store already loaded map wrappers + map instance for
 const relationGeoCache = {};    // relationId -> { geojson, bounds }
 const inflightGeoFetches = {};  // relationId -> Promise
 
+// TIMETABLE MODAL (created once)
+let _timetableModal = null;
+function ensureTimetableModal() {
+    if (_timetableModal) return _timetableModal;
+
+    // overlay
+    const overlay = document.createElement("div");
+    overlay.className = "timetable-modal";
+    overlay.innerHTML = `
+        <div class="timetable-modal__box" role="dialog" aria-modal="true" aria-label="Разписание">
+            <button class="timetable-close" aria-label="Затвори">✕</button>
+            <div class="timetable-content">
+                <iframe class="timetable-iframe" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+            </div>
+        </div>
+    `;
+
+    // close handlers
+    overlay.querySelector(".timetable-close").addEventListener("click", closeTimetable);
+    overlay.addEventListener("click", (ev) => {
+        if (ev.target === overlay) closeTimetable();
+    });
+
+    document.body.appendChild(overlay);
+    _timetableModal = overlay;
+    return _timetableModal;
+}
+
+function openTimetable(url) {
+    if (!url) return;
+    const modal = ensureTimetableModal();
+    const iframe = modal.querySelector(".timetable-iframe");
+
+    // show modal immediately
+    modal.classList.add("open");
+
+    // Try to embed in iframe; if not loaded within timeout, fallback to new tab.
+    let loaded = false;
+    const onLoad = () => {
+        loaded = true;
+        clearTimeout(timer);
+        // keep modal open
+    };
+    iframe.removeEventListener("load", onLoad);
+    iframe.addEventListener("load", onLoad);
+
+    // Set src after a tiny delay to allow DOM changes
+    iframe.src = url;
+
+    const timer = setTimeout(() => {
+        if (!loaded) {
+            // fallback: open in new tab and close modal
+            try {
+                window.open(url, "_blank", "noopener");
+            } catch (e) {
+                // ignore
+            }
+            closeTimetable();
+        }
+    }, 1500); // 1.5s — gives a short window for iframe to load; adjust if needed
+}
+
+function closeTimetable() {
+    if (!_timetableModal) return;
+    const iframe = _timetableModal.querySelector(".timetable-iframe");
+    // stop iframe
+    try { iframe.src = "about:blank"; } catch (e) {}
+    _timetableModal.classList.remove("open");
+}
+
+/* ----------------------------------------
+   LINE LIST
+-------------------------------------------*/
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
     list.innerHTML = "";
+
+    // Use fragment to reduce reflow
+    const frag = document.createDocumentFragment();
 
     for (const lineKey in lines) {
         const data = lines[lineKey];
@@ -29,10 +105,22 @@ function refreshLineList(filter = null) {
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
         pill.textContent = data.number;
 
-        pill.onclick = () => showLine(lineKey);
+        // accessibility
+        pill.setAttribute("role", "button");
+        pill.setAttribute("tabindex", "0");
 
-        list.appendChild(pill);
+        pill.addEventListener("click", () => showLine(lineKey));
+        pill.addEventListener("keydown", (ev) => {
+            if (ev.key === "Enter" || ev.key === " ") {
+                ev.preventDefault();
+                showLine(lineKey);
+            }
+        });
+
+        frag.appendChild(pill);
     }
+
+    list.appendChild(frag);
 }
 
 refreshLineList();
@@ -76,6 +164,11 @@ async function showLine(lineKey) {
 
     const colorClass = data.type.startsWith("metro") ? getMetroColorClass(lineKey) : '';
 
+    // Add timetable button only if direction has timetable property
+    const timetableButtonHtml = data.directions[dir].timetable
+        ? `<button class="show-timetable">Разписание</button>`
+        : '';
+
     header.innerHTML = `
         <div class="line-header-icon" style="--line-color:${color}">
             <div class="icon"><img src="${icon}" alt="${data.type} icon"></div>
@@ -85,11 +178,23 @@ async function showLine(lineKey) {
             <img class="arrow" src="https://sofiatraffic.bg/images/next.svg" alt="next">
             <span class="destination">${data.directions[dir].name}</span>
             <button class="switch-dir">Промяна на посоката</button>
+            ${timetableButtonHtml}
         </div>
     `;
 
-    header.querySelector(".switch-dir")
-        .addEventListener("click", () => switchDirection(lineKey));
+    const switchBtn = header.querySelector(".switch-dir");
+    if (switchBtn) {
+        switchBtn.addEventListener("click", () => switchDirection(lineKey));
+    }
+
+    const ttBtn = header.querySelector(".show-timetable");
+    if (ttBtn) {
+        ttBtn.addEventListener("click", () => {
+            const url = data.directions[dir].timetable;
+            if (!url) return;
+            openTimetable(url);
+        });
+    }
 
     header.classList.add("animate-in");
 
@@ -110,8 +215,10 @@ async function showLine(lineKey) {
         // Ensure Leaflet recalculates size and fits bounds after reattachment
         requestAnimationFrame(() => {
             try {
-                cached.map.invalidateSize();
-                if (cached.bounds) cached.map.fitBounds(cached.bounds, { padding: [20, 20] });
+                if (cached.map && typeof cached.map.invalidateSize === "function") {
+                    cached.map.invalidateSize();
+                    if (cached.bounds) cached.map.fitBounds(cached.bounds, { padding: [20, 20] });
+                }
             } catch (e) {
                 // If something goes wrong re-render fresh map
                 console.warn("Cached map redraw failed, re-rendering:", e);
@@ -237,14 +344,19 @@ async function getRelationGeometry(relationId) {
                 if (!el.geometry || !Array.isArray(el.geometry) || el.geometry.length === 0) continue;
 
                 // geometry could be a list of points (node/way); we will create LineString for ways,
-                // and for single-point geometries we create a small line (not ideal) OR skip.
+                // and for single-point geometries we create Point features (so schedules can still show something)
                 const coords = el.geometry.map(p => [p.lon, p.lat]);
 
-                // prefer LineString for sequences, skip single-point nodes
                 if (coords.length >= 2) {
                     features.push({
                         type: "Feature",
                         geometry: { type: "LineString", coordinates: coords },
+                        properties: el.tags || {}
+                    });
+                } else if (coords.length === 1) {
+                    features.push({
+                        type: "Feature",
+                        geometry: { type: "Point", coordinates: coords[0] },
                         properties: el.tags || {}
                     });
                 }
@@ -281,14 +393,37 @@ async function getRelationGeometry(relationId) {
 
                 if (features && features.length > 0) {
                     const geojson = { type: "FeatureCollection", features };
-                    // compute bounds using a temporary Leaflet layer if Leaflet available,
-                    // otherwise omit bounds (map will fallback to city center)
+                    // compute numeric bounds without depending on Leaflet
+                    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                    features.forEach(f => {
+                        const geom = f.geometry;
+                        if (!geom) return;
+                        if (geom.type === "Point") {
+                            const [x, y] = geom.coordinates;
+                            minX = Math.min(minX, x); minY = Math.min(minY, y);
+                            maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
+                        } else if (geom.type === "LineString" && Array.isArray(geom.coordinates)) {
+                            geom.coordinates.forEach(coord => {
+                                const [x, y] = coord;
+                                minX = Math.min(minX, x); minY = Math.min(minY, y);
+                                maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
+                            });
+                        }
+                    });
+
                     let bounds = null;
-                    try {
-                        const tmpLayer = L.geoJSON(geojson);
-                        bounds = tmpLayer.getBounds();
-                    } catch (e) {
-                        bounds = null;
+                    if (isFinite(minX) && isFinite(minY) && isFinite(maxX) && isFinite(maxY)) {
+                        try {
+                            // Try to create Leaflet bounds if L present
+                            if (typeof L !== "undefined" && L && L.latLngBounds) {
+                                bounds = L.latLngBounds([[minY, minX], [maxY, maxX]]);
+                            } else {
+                                // fallback to a simple object used by map code
+                                bounds = { _southWest: { lat: minY, lng: minX }, _northEast: { lat: maxY, lng: maxX } };
+                            }
+                        } catch (e) {
+                            bounds = null;
+                        }
                     }
 
                     const cached = { geojson, bounds };
@@ -366,7 +501,11 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
         // Add GeoJSON to map (use cached geojson)
         const layer = L.geoJSON(geoData.geojson, {
-            style: { color, weight: 5, opacity: 0.9 }
+            style: { color, weight: 5, opacity: 0.9 },
+            pointToLayer: function(feature, latlng) {
+                // small circle marker for Point features
+                return L.circleMarker(latlng, { radius: 6, fillColor: color, color: "#fff", weight: 1, fillOpacity: 0.9 });
+            }
         }).addTo(map);
 
         // Fit bounds (prefer precomputed bounds)
@@ -376,6 +515,17 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
                 map.fitBounds(bounds, { padding: [20, 20] });
             } catch (e) {
                 console.warn("fitBounds failed:", e);
+                map.setView([42.6977, 23.3219], 12);
+            }
+        } else if (bounds && bounds._southWest) {
+            // bounds shaped earlier without Leaflet; convert to LatLngBounds
+            try {
+                const latLngBounds = L.latLngBounds(
+                    [bounds._southWest.lat, bounds._southWest.lng],
+                    [bounds._northEast.lat, bounds._northEast.lng]
+                );
+                map.fitBounds(latLngBounds, { padding: [20, 20] });
+            } catch (e) {
                 map.setView([42.6977, 23.3219], 12);
             }
         } else {
