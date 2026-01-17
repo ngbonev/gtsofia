@@ -149,6 +149,64 @@ body.fade-out {
     cursor: pointer;
 }
 
+/* (your existing CSS unchanged above) */
+
+/* Timetable modal styles */
+.timetable-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.timetable-modal.open {
+    display: flex;
+}
+
+.timetable-modal__box {
+    width: 100%;
+    max-width: 1024px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.timetable-close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 3;
+    border: none;
+    background: rgba(0,0,0,0.06);
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.timetable-content {
+    flex: 1;
+    min-height: 300px;
+    background: #fff;
+}
+
+.timetable-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
 /* Transport colors */
 .metro1 { background: #ec2029; }
 .metro2 { background: #1077bc; }
@@ -374,6 +432,7 @@ body.fade-out {
     flex-direction: column;
 }
 }
+
 
 
 
