@@ -99,7 +99,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ",
+                name: "32 СУ СВ. КЛ. ОХРИДСКИ",
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A31/",
                 stops: [
                     { name: "БАЛКАНКАР АД", onDemand: false },
@@ -9216,3 +9216,4 @@ const lines = {
         ]
     },
 };
+
