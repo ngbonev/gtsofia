@@ -103,7 +103,9 @@ function showLine(lineKey) {
     const stopsContainer = document.getElementById("stopsContainer");
 
     renderLeafletMap(data.directions[dir], data.type, lineKey)
-        .then(map => stopsContainer.after(map));
+        .then(map => {
+    document.querySelector(".stops-map-layout").appendChild(map);
+});
 }
 
 function switchDirection(lineKey) {
@@ -217,3 +219,4 @@ async function renderLeafletMap(direction, type, lineKey) {
 
     return wrapper;
 }
+
