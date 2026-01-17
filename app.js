@@ -2,6 +2,7 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
+const mapCache = {};     // store already loaded map wrappers for caching
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -61,6 +62,7 @@ async function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
     const dir = directionState[lineKey];
+    const cacheKey = `${lineKey}-${dir}`;
 
     const header = document.getElementById("lineHeader");
     let color = getLineColor(data.type, lineKey);
@@ -96,22 +98,28 @@ async function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    /* ----------------------------------------
-       MAP LOGIC (Desktop: right of stops)
-    -------------------------------------------*/
+    // Handle map layout
+    const layoutContainer = getMapLayoutContainer();
 
-    // Remove old map
+    // Remove old map if exists in DOM (but leave cached)
     const oldMap = document.querySelector(".map-wrapper");
     if (oldMap) oldMap.remove();
 
-    // Ensure the wrapper exists in DOM
-    const layoutContainer = document.querySelector(".stops-map-layout");
-    const wrapper = document.createElement("div");
-    wrapper.className = "map-wrapper";
-    layoutContainer.appendChild(wrapper);
+    let wrapper;
+    if (mapCache[cacheKey]) {
+        // Load from cache
+        wrapper = mapCache[cacheKey];
+        layoutContainer.appendChild(wrapper);
+    } else {
+        // Create new map wrapper
+        wrapper = document.createElement("div");
+        wrapper.className = "map-wrapper";
+        layoutContainer.appendChild(wrapper);
 
-    // Render Leaflet map inside the wrapper
-    await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
+        // Render map and store in cache
+        await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
+        mapCache[cacheKey] = wrapper;
+    }
 }
 
 function switchDirection(lineKey) {
@@ -150,11 +158,18 @@ function getLineColor(type, lineKey) {
     return COLORS[type] || "#000";
 }
 
+// Determine the proper container for the map (desktop or mobile)
+function getMapLayoutContainer() {
+    const layout = document.querySelector(".stops-map-layout");
+    if (layout) return layout;          // desktop layout
+    return document.querySelector(".content"); // fallback for mobile
+}
+
 async function renderLeafletMap(direction, type, lineKey, wrapper) {
     wrapper.innerHTML = ""; // clear wrapper
 
     if (!direction.relationId) {
-        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
         return wrapper;
     }
 
@@ -174,7 +189,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
             maxZoom: 19
         }).addTo(map);
 
-        // Fetch Overpass API with 30s max wait
+        // Fetch Overpass API with 60s max wait
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s
         const res = await fetch(`https://overpass-api.de/api/interpreter`, {
@@ -201,9 +216,8 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
                 }))
         };
 
-        // If no features returned, show fallback
         if (!geojson.features || geojson.features.length === 0) {
-            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+            wrapper.innerHTML = `<div class="no-map">No map available</div>`;
             return wrapper;
         }
 
@@ -215,9 +229,8 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
     } catch (e) {
         console.error("Leaflet map error:", e);
-        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
     }
 
     return wrapper;
 }
-
