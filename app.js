@@ -13,7 +13,7 @@ let _timetableModal = null;
 function ensureTimetableModal() {
     if (_timetableModal) return _timetableModal;
 
-    // overlay
+    // overlay with an iframe and a fallback area (fallback uses existing .switch-dir styling for the button)
     const overlay = document.createElement("div");
     overlay.className = "timetable-modal";
     overlay.innerHTML = `
@@ -21,6 +21,15 @@ function ensureTimetableModal() {
             <button class="timetable-close" aria-label="Затвори">✕</button>
             <div class="timetable-content">
                 <iframe class="timetable-iframe" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+                <div class="timetable-fallback" style="display:none; padding:20px;">
+                    <p style="margin:0 0 12px; font-size:15px; color:#333;">
+                        Тази страница не може да се вгради в прозорец. Можете да я отворите в нов прозорец, като натиснете бутона по-долу.
+                    </p>
+                    <div>
+                        <button class="switch-dir open-external" type="button">Отвори в нов прозорец</button>
+                        <button class="switch-dir close-inline" type="button" style="margin-left:8px;">Затвори</button>
+                    </div>
+                </div>
             </div>
         </div>
     `;
@@ -31,6 +40,16 @@ function ensureTimetableModal() {
         if (ev.target === overlay) closeTimetable();
     });
 
+    // external open button handler (only opens when user clicks)
+    overlay.querySelector(".open-external").addEventListener("click", () => {
+        const iframe = overlay.querySelector(".timetable-iframe");
+        const href = iframe.dataset.src || iframe.src;
+        if (href) window.open(href, "_blank", "noopener");
+    });
+
+    // close-inline button: just close modal
+    overlay.querySelector(".close-inline").addEventListener("click", closeTimetable);
+
     document.body.appendChild(overlay);
     _timetableModal = overlay;
     return _timetableModal;
@@ -40,41 +59,51 @@ function openTimetable(url) {
     if (!url) return;
     const modal = ensureTimetableModal();
     const iframe = modal.querySelector(".timetable-iframe");
+    const fallback = modal.querySelector(".timetable-fallback");
+
+    // Reset state
+    fallback.style.display = "none";
+    iframe.style.display = "block";
+    iframe.dataset.src = url;
+    iframe.src = "about:blank"; // reset first to ensure load toggles reliably
 
     // show modal immediately
     modal.classList.add("open");
 
-    // Try to embed in iframe; if not loaded within timeout, fallback to new tab.
     let loaded = false;
+
     const onLoad = () => {
         loaded = true;
         clearTimeout(timer);
-        // keep modal open
+        // iframe loaded successfully — ensure fallback hidden
+        fallback.style.display = "none";
+        iframe.style.display = "block";
     };
+
+    // attach handler
     iframe.removeEventListener("load", onLoad);
     iframe.addEventListener("load", onLoad);
 
-    // Set src after a tiny delay to allow DOM changes
-    iframe.src = url;
+    // Start loading the iframe
+    // small delay to let modal paint
+    setTimeout(() => { iframe.src = url; }, 50);
 
+    // If iframe doesn't load within timeout, show fallback inside modal (do NOT auto-open new window)
     const timer = setTimeout(() => {
         if (!loaded) {
-            // fallback: open in new tab and close modal
-            try {
-                window.open(url, "_blank", "noopener");
-            } catch (e) {
-                // ignore
-            }
-            closeTimetable();
+            // Show fallback UI inside modal
+            iframe.style.display = "none";
+            fallback.style.display = "block";
         }
-    }, 1500); // 1.5s — gives a short window for iframe to load; adjust if needed
+    }, 1500);
 }
 
 function closeTimetable() {
     if (!_timetableModal) return;
     const iframe = _timetableModal.querySelector(".timetable-iframe");
-    // stop iframe
     try { iframe.src = "about:blank"; } catch (e) {}
+    const fallback = _timetableModal.querySelector(".timetable-fallback");
+    if (fallback) fallback.style.display = "none";
     _timetableModal.classList.remove("open");
 }
 
@@ -164,9 +193,9 @@ async function showLine(lineKey) {
 
     const colorClass = data.type.startsWith("metro") ? getMetroColorClass(lineKey) : '';
 
-    // Add timetable button only if direction has timetable property
+    // Use the same styling class as switch button so timetable button looks identical
     const timetableButtonHtml = data.directions[dir].timetable
-        ? `<button class="show-timetable">Разписание</button>`
+        ? `<button class="switch-dir timetable-btn" aria-label="Разписание">Разписание</button>`
         : '';
 
     header.innerHTML = `
@@ -177,7 +206,7 @@ async function showLine(lineKey) {
             </div>
             <img class="arrow" src="https://sofiatraffic.bg/images/next.svg" alt="next">
             <span class="destination">${data.directions[dir].name}</span>
-            <button class="switch-dir">Промяна на посоката</button>
+            <button class="switch-dir" aria-label="Промени посоката">Промяна на посоката</button>
             ${timetableButtonHtml}
         </div>
     `;
@@ -187,7 +216,7 @@ async function showLine(lineKey) {
         switchBtn.addEventListener("click", () => switchDirection(lineKey));
     }
 
-    const ttBtn = header.querySelector(".show-timetable");
+    const ttBtn = header.querySelector(".timetable-btn");
     if (ttBtn) {
         ttBtn.addEventListener("click", () => {
             const url = data.directions[dir].timetable;
