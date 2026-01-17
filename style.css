@@ -165,6 +165,8 @@ body.fade-out {
 }
 
 .map-wrapper {
+    flex-shrink: 0;
+    width: 420px;
     margin-top: 30px;
     width: 100%;
     max-width: 420px;
@@ -193,9 +195,16 @@ body.fade-out {
     font-weight: 500;
 }
 
+.stops-map-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
 /* STOPS LIST */
 .stops {
     position: relative;
+    flex: 1;
     padding-left: 40px;
 }
 
@@ -357,5 +366,10 @@ body.fade-out {
         max-width: 100%;
         margin: 25px auto 0;
     }
+
+    .stops-map-layout {
+    flex-direction: column;
 }
+}
+
 
