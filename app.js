@@ -54,25 +54,21 @@ document.getElementById("searchLine").addEventListener("input", e => {
     });
 });
 
-/* LINE DISPLAY */
+/* ----------------------------------------
+   LINE DISPLAY
+-------------------------------------------*/
 function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
     const dir = directionState[lineKey];
 
     const header = document.getElementById("lineHeader");
-    let color = COLORS[data.type] || "#000";
-
-    if (data.type.startsWith("metro")) {
-    const metroLineNumber = lineKey.split("-")[1];
-    const metroKey = "metro" + metroLineNumber;
-    if (COLORS[metroKey]) color = COLORS[metroKey];
-}
+    let color = getLineColor(data.type, lineKey);
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
     header.classList.remove("animate-in");
-    void header.offsetWidth; // force reflow
+    void header.offsetWidth;
 
     let colorClass = '';
     if (data.type.startsWith("metro")) {
@@ -89,18 +85,25 @@ function showLine(lineKey) {
             </div>
             <img class="arrow" src="https://sofiatraffic.bg/images/next.svg" alt="next">
             <span class="destination">${data.directions[dir].name}</span>
-            <button class="switch-dir" data-line="${lineKey}">
-                Промяна на посоката
-            </button>
+            <button class="switch-dir">Промяна на посоката</button>
         </div>
     `;
 
-   header.querySelector(".switch-dir")
-      .addEventListener("click", () => switchDirection(lineKey));
+    header.querySelector(".switch-dir")
+        .addEventListener("click", () => switchDirection(lineKey));
 
     header.classList.add("animate-in");
 
     renderStops(data.directions[dir].stops);
+
+    // Remove old map
+    const oldMap = document.querySelector(".map-wrapper");
+    if (oldMap) oldMap.remove();
+
+    const stopsContainer = document.getElementById("stopsContainer");
+
+    renderLeafletMap(data.directions[dir], data.type, lineKey)
+        .then(map => stopsContainer.after(map));
 }
 
 function switchDirection(lineKey) {
@@ -108,7 +111,9 @@ function switchDirection(lineKey) {
     showLine(lineKey);
 }
 
-/* STOP LIST RENDERING WITH ANIMATION */
+/* ----------------------------------------
+   STOPS LIST
+-------------------------------------------*/
 function renderStops(stops) {
     const container = document.getElementById("stopsContainer");
     container.classList.remove("animate-in");
@@ -122,9 +127,93 @@ function renderStops(stops) {
         container.appendChild(item);
     });
 
-    void container.offsetWidth; // force reflow
+    void container.offsetWidth;
     container.classList.add("animate-in");
 }
 
+/* ----------------------------------------
+   LEAFLET MAP LOGIC
+-------------------------------------------*/
+function getLineColor(type, lineKey) {
+    if (type.startsWith("metro")) {
+        const n = lineKey.split("-")[1];
+        return COLORS["metro" + n] || COLORS.metro1;
+    }
+    return COLORS[type] || "#000";
+}
 
+async function fetchRelationGeoJSON(relationId) {
+    const query = `
+        [out:json];
+        relation(${relationId});
+        out geom;
+    `;
 
+    const res = await fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        body: query
+    });
+
+    const data = await res.json();
+
+    return {
+        type: "FeatureCollection",
+        features: data.elements
+            .filter(el => el.type === "relation")
+            .map(rel => ({
+                type: "Feature",
+                geometry: {
+                    type: "MultiLineString",
+                    coordinates: rel.members
+                        .filter(m => m.geometry)
+                        .map(m =>
+                            m.geometry.map(p => [p.lon, p.lat])
+                        )
+                }
+            }))
+    };
+}
+
+async function renderLeafletMap(direction, type, lineKey) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "map-wrapper";
+
+    if (!direction.relationId) {
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        return wrapper;
+    }
+
+    const mapDiv = document.createElement("div");
+    mapDiv.className = "leaflet-map";
+    wrapper.appendChild(mapDiv);
+
+    const color = getLineColor(type, lineKey);
+
+    const map = L.map(mapDiv, {
+        zoomControl: false,
+        attributionControl: false
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19
+    }).addTo(map);
+
+    try {
+        const geojson = await fetchRelationGeoJSON(direction.relationId);
+
+        const layer = L.geoJSON(geojson, {
+            style: {
+                color,
+                weight: 5,
+                opacity: 0.9
+            }
+        }).addTo(map);
+
+        map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+
+    } catch (e) {
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+    }
+
+    return wrapper;
+}
