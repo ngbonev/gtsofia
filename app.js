@@ -2,7 +2,7 @@
    BUILD SIDEBAR LINE LIST
 -------------------------------------------*/
 let directionState = {}; // track direction per line
-const mapCache = {};     // store already loaded map wrappers for caching
+let mapCache = {}; // cache loaded maps per lineKey + direction
 
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
@@ -12,7 +12,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && !type.startsWith(filter)) continue;
+        if (filter && (type.startsWith(filter) === false)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -25,7 +25,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = data.number;
+        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -62,10 +62,9 @@ async function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
     const dir = directionState[lineKey];
-    const cacheKey = `${lineKey}-${dir}`;
 
     const header = document.getElementById("lineHeader");
-    let color = getLineColor(data.type, lineKey);
+    const color = getLineColor(data.type, lineKey);
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
     // Animate header reset
@@ -98,28 +97,23 @@ async function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    // Handle map layout
-    const layoutContainer = getMapLayoutContainer();
+    const stopsContainer = document.getElementById("stopsContainer");
 
-    // Remove old map if exists in DOM (but leave cached)
+    // Remove old map
     const oldMap = document.querySelector(".map-wrapper");
     if (oldMap) oldMap.remove();
 
-    let wrapper;
+    // Check cache
+    const cacheKey = lineKey + '-' + dir;
     if (mapCache[cacheKey]) {
-        // Load from cache
-        wrapper = mapCache[cacheKey];
-        layoutContainer.appendChild(wrapper);
-    } else {
-        // Create new map wrapper
-        wrapper = document.createElement("div");
-        wrapper.className = "map-wrapper";
-        layoutContainer.appendChild(wrapper);
-
-        // Render map and store in cache
-        await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
-        mapCache[cacheKey] = wrapper;
+        stopsContainer.after(mapCache[cacheKey]);
+        return;
     }
+
+    // Render map
+    const mapWrapper = await renderLeafletMap(data.directions[dir], data.type, lineKey);
+    mapCache[cacheKey] = mapWrapper;
+    stopsContainer.after(mapWrapper);
 }
 
 function switchDirection(lineKey) {
@@ -158,50 +152,28 @@ function getLineColor(type, lineKey) {
     return COLORS[type] || "#000";
 }
 
-// Determine the proper container for the map (desktop or mobile)
-function getMapLayoutContainer() {
-    const layout = document.querySelector(".stops-map-layout");
-    if (layout) return layout;          // desktop layout
-    return document.querySelector(".content"); // fallback for mobile
-}
+async function fetchRelationGeoJSON(relationId) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s timeout
 
-async function renderLeafletMap(direction, type, lineKey, wrapper) {
-    wrapper.innerHTML = ""; // clear wrapper
-
-    if (!direction.relationId) {
-        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-        return wrapper;
-    }
-
-    const mapDiv = document.createElement("div");
-    mapDiv.className = "leaflet-map";
-    wrapper.appendChild(mapDiv);
-
-    const color = getLineColor(type, lineKey);
+    const query = `
+        [out:json];
+        relation(${relationId});
+        out geom;
+    `;
 
     try {
-        const map = L.map(mapDiv, {
-            zoomControl: false,
-            attributionControl: false
-        });
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19
-        }).addTo(map);
-
-        // Fetch Overpass API with 60s max wait
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 100000); // 
-        const res = await fetch(`https://overpass-api.de/api/interpreter`, {
+        const res = await fetch("https://overpass-api.de/api/interpreter", {
             method: "POST",
-            body: `[out:json];relation(${direction.relationId});out geom;`,
+            body: query,
             signal: controller.signal
         });
+
         clearTimeout(timeoutId);
 
         const data = await res.json();
 
-        const geojson = {
+        return {
             type: "FeatureCollection",
             features: data.elements
                 .filter(el => el.type === "relation")
@@ -215,24 +187,48 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
                     }
                 }))
         };
+    } catch (e) {
+        clearTimeout(timeoutId);
+        return { type: "FeatureCollection", features: [] };
+    }
+}
 
+async function renderLeafletMap(direction, type, lineKey) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "map-wrapper";
+
+    const mapDiv = document.createElement("div");
+    mapDiv.className = "leaflet-map";
+    wrapper.appendChild(mapDiv);
+
+    if (!direction.relationId) {
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        return wrapper;
+    }
+
+    const map = L.map(mapDiv, { zoomControl: false, attributionControl: false });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 })
+        .addTo(map);
+
+    try {
+        const geojson = await fetchRelationGeoJSON(direction.relationId);
+
+        // Only show no-map if there are truly no features
         if (!geojson.features || geojson.features.length === 0) {
-            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+            wrapper.innerHTML = `<div class="no-map">No map available</div>`;
             return wrapper;
         }
 
         const layer = L.geoJSON(geojson, {
-            style: { color, weight: 5, opacity: 0.9 }
+            style: { color: getLineColor(type, lineKey), weight: 5, opacity: 0.9 }
         }).addTo(map);
 
         map.fitBounds(layer.getBounds(), { padding: [20, 20] });
 
     } catch (e) {
-        console.error("Leaflet map error:", e);
-        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
     }
 
     return wrapper;
 }
-
-
