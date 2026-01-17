@@ -98,32 +98,27 @@ async function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
-    // Handle map layout (desktop: right of stops)
+    // Determine map container (desktop: right of stops, mobile: below stops)
     const layoutContainer = getMapLayoutContainer();
 
-    // Remove old map if exists in DOM (cached maps stay)
+    // Remove old map from DOM (cached wrapper remains)
     const oldMap = document.querySelector(".map-wrapper");
     if (oldMap) oldMap.remove();
 
-    let wrapper;
     if (mapCache[cacheKey]) {
-        // Load from cache
-        wrapper = mapCache[cacheKey];
-        layoutContainer.appendChild(wrapper);
-
-        // Force Leaflet to recalc size after DOM update
-        const map = wrapper._leafletMap;
-        if (map) setTimeout(() => map.invalidateSize(), 100);
+        // Load map from cache
+        layoutContainer.appendChild(mapCache[cacheKey]);
     } else {
         // Create new map wrapper
-        wrapper = document.createElement("div");
+        const wrapper = document.createElement("div");
         wrapper.className = "map-wrapper";
         layoutContainer.appendChild(wrapper);
 
-        // Render map and store in cache
-        const map = await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
+        // Render map (async)
+        await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
+
+        // Store in cache
         mapCache[cacheKey] = wrapper;
-        wrapper._leafletMap = map; // store reference for invalidateSize
     }
 }
 
@@ -163,11 +158,11 @@ function getLineColor(type, lineKey) {
     return COLORS[type] || "#000";
 }
 
-// Determine the proper container for the map (desktop or mobile)
+// Determine proper container for map (desktop vs mobile)
 function getMapLayoutContainer() {
-    const layout = document.querySelector(".stops-map-layout"); // desktop
-    if (layout) return layout;
-    return document.querySelector(".content"); // mobile fallback
+    const layout = document.querySelector(".stops-map-layout");
+    if (layout) return layout;          // desktop layout
+    return document.querySelector(".content"); // fallback for mobile
 }
 
 async function renderLeafletMap(direction, type, lineKey, wrapper) {
@@ -175,7 +170,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
     if (!direction.relationId) {
         wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-        return null;
+        return wrapper;
     }
 
     const mapDiv = document.createElement("div");
@@ -194,10 +189,10 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
             maxZoom: 19
         }).addTo(map);
 
-        // 60s fetch timeout
+        // Fetch relation GeoJSON with 60s timeout
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000);
-        const res = await fetch(`https://overpass-api.de/api/interpreter`, {
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s
+        const res = await fetch("https://overpass-api.de/api/interpreter", {
             method: "POST",
             body: `[out:json];relation(${direction.relationId});out geom;`,
             signal: controller.signal
@@ -206,6 +201,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
         const data = await res.json();
 
+        // Build GeoJSON
         const geojson = {
             type: "FeatureCollection",
             features: data.elements
@@ -223,23 +219,24 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
         if (!geojson.features || geojson.features.length === 0) {
             wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-            return null;
+            return wrapper;
         }
 
+        // Add GeoJSON to map
         const layer = L.geoJSON(geojson, {
             style: { color, weight: 5, opacity: 0.9 }
         }).addTo(map);
 
+        // Fit bounds
         map.fitBounds(layer.getBounds(), { padding: [20, 20] });
 
-        // Force layout recalculation (fix mobile first destination)
-        setTimeout(() => map.invalidateSize(), 100);
-
-        return map;
+        // Force redraw in case container dimensions changed
+        requestAnimationFrame(() => map.invalidateSize());
 
     } catch (e) {
-        console.warn("Leaflet map error:", e);
+        console.error("Leaflet map error:", e);
         wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-        return null;
     }
+
+    return wrapper;
 }
