@@ -28,6 +28,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
 				relationId: 16914094,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/1/",
                 stops: [
                    { name: "СЕЛО КОКАЛЯНЕ", onDemand: false },
                     { name: "УЛ. ЦАР ИВАН АСЕН ІІ", onDemand: false },
@@ -9011,3 +9012,4 @@ const lines = {
         ]
     },
 };
+
