@@ -152,6 +152,7 @@ body.fade-out {
 /* (your existing CSS unchanged above) */
 
 /* Timetable modal styles */
+/* Timetable modal styles (replace existing modal rules with this) */
 .timetable-modal {
     display: none;
     position: fixed;
@@ -161,16 +162,18 @@ body.fade-out {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .timetable-modal.open {
     display: flex;
 }
 
+/* Modal box fills most of viewport so iframe can fill it reliably */
 .timetable-modal__box {
     width: 100%;
     max-width: 1024px;
-    max-height: 90vh;
+    height: 90vh;               /* explicit height so children can use 100% reliably */
     background: white;
     border-radius: 8px;
     overflow: hidden;
@@ -178,8 +181,10 @@ body.fade-out {
     box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
+/* Close button */
 .timetable-close {
     position: absolute;
     right: 8px;
@@ -194,17 +199,41 @@ body.fade-out {
     font-size: 16px;
 }
 
+/* Content area is a flex child and allowed to shrink/grow correctly */
 .timetable-content {
-    flex: 1;
-    min-height: 300px;
+    flex: 1 1 auto;
+    min-height: 0;              /* critical: lets children (iframe) fill flex height */
+    display: flex;
+    flex-direction: column;
     background: #fff;
 }
 
+/* Iframe fills the entire content area */
 .timetable-iframe {
+    flex: 1 1 auto;
     width: 100%;
     height: 100%;
     border: 0;
     display: block;
+}
+
+/* Fallback UI displayed inside the modal if embedding is blocked */
+.timetable-fallback {
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+/* Buttons inside fallback */
+.timetable-fallback .switch-dir {
+    margin-right: 8px;
 }
 
 /* Transport colors */
@@ -432,6 +461,7 @@ body.fade-out {
     flex-direction: column;
 }
 }
+
 
 
 
