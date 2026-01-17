@@ -434,37 +434,54 @@ body.fade-out {
         box-sizing: border-box;
     }
 
-    /* Line header: wrap items, switch button on new row, centered */
+    /* Line header: wrap items, centered */
     .line-header-icon {
         display: flex;
         flex-wrap: wrap;
         justify-content: center; /* centers all items */
         align-items: center;
-        gap: 4px;
+        gap: 8px;
         text-align: center;
     }
 
-    /* Switch button on a new row, centered */
-    .line-header-icon .switch-dir {
-        flex-basis: 100%; /* moves to a new row */
+    /* Actions container (holds switch + timetable buttons).
+       Always present; may have class 'single-action' applied by JS. */
+    .header-actions {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        justify-content: center;
         margin-top: 8px;
+        box-sizing: border-box;
+        padding: 0 12px;
+    }
+
+    /* When only one action exists, stretch it full width */
+    .header-actions.single-action .switch-dir {
+        flex: 1 1 100%;
         max-width: 100%;
         box-sizing: border-box;
     }
 
-        .map-wrapper {
+    /* When two actions exist, keep them side-by-side with reasonable minimum width */
+    .header-actions .switch-dir {
+        flex: 0 0 auto;
+        min-width: 120px;
+        box-sizing: border-box;
+    }
+
+    /* Switch button occupies its natural size but doesn't exceed container */
+    .line-header-icon .switch-dir {
+        /* remove previous forced new-row behavior */
+        margin-top: 0;
+    }
+
+    .map-wrapper {
         max-width: 100%;
         margin: 25px auto 0;
     }
 
     .stops-map-layout {
-    flex-direction: column;
+        flex-direction: column;
+    }
 }
-}
-
-
-
-
-
-
-
