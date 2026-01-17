@@ -11,7 +11,7 @@ function refreshLineList(filter = null) {
         const data = lines[lineKey];
         const type = data.type;
 
-        if (filter && (type.startsWith(filter) === false)) continue;
+        if (filter && !type.startsWith(filter)) continue;
 
         // Determine correct color class
         let colorClass = '';
@@ -24,7 +24,7 @@ function refreshLineList(filter = null) {
         const pill = document.createElement("div");
         pill.className = `line-pill ${type} ${colorClass}`;
         if (type.startsWith("metro")) pill.classList.add("metro-pill");
-        pill.textContent = type.startsWith("metro") ? `${data.number}` : data.number;
+        pill.textContent = data.number;
 
         pill.onclick = () => showLine(lineKey);
 
@@ -57,7 +57,7 @@ document.getElementById("searchLine").addEventListener("input", e => {
 /* ----------------------------------------
    LINE DISPLAY
 -------------------------------------------*/
-function showLine(lineKey) {
+async function showLine(lineKey) {
     const data = lines[lineKey];
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
     const dir = directionState[lineKey];
@@ -96,16 +96,22 @@ function showLine(lineKey) {
 
     renderStops(data.directions[dir].stops);
 
+    /* ----------------------------------------
+       MAP LOGIC (Desktop: right of stops)
+    -------------------------------------------*/
+
     // Remove old map
     const oldMap = document.querySelector(".map-wrapper");
     if (oldMap) oldMap.remove();
 
-    const stopsContainer = document.getElementById("stopsContainer");
+    // Ensure the wrapper exists in DOM
+    const layoutContainer = document.querySelector(".stops-map-layout");
+    const wrapper = document.createElement("div");
+    wrapper.className = "map-wrapper";
+    layoutContainer.appendChild(wrapper);
 
-    renderLeafletMap(data.directions[dir], data.type, lineKey)
-        .then(map => {
-    document.querySelector(".stops-map-layout").appendChild(map);
-});
+    // Render Leaflet map inside the wrapper
+    await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
 }
 
 function switchDirection(lineKey) {
@@ -176,9 +182,8 @@ async function fetchRelationGeoJSON(relationId) {
     };
 }
 
-async function renderLeafletMap(direction, type, lineKey) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "map-wrapper";
+async function renderLeafletMap(direction, type, lineKey, wrapper) {
+    wrapper.innerHTML = ""; // clear wrapper
 
     if (!direction.relationId) {
         wrapper.innerHTML = `<div class="no-map">No map available</div>`;
@@ -191,16 +196,16 @@ async function renderLeafletMap(direction, type, lineKey) {
 
     const color = getLineColor(type, lineKey);
 
-    const map = L.map(mapDiv, {
-        zoomControl: false,
-        attributionControl: false
-    });
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19
-    }).addTo(map);
-
     try {
+        const map = L.map(mapDiv, {
+            zoomControl: false,
+            attributionControl: false
+        });
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 19
+        }).addTo(map);
+
         const geojson = await fetchRelationGeoJSON(direction.relationId);
 
         const layer = L.geoJSON(geojson, {
@@ -214,9 +219,9 @@ async function renderLeafletMap(direction, type, lineKey) {
         map.fitBounds(layer.getBounds(), { padding: [20, 20] });
 
     } catch (e) {
-        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        console.error("Leaflet map error:", e);
+        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
     }
 
     return wrapper;
 }
-
