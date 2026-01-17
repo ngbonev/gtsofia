@@ -169,7 +169,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
     wrapper.innerHTML = ""; // clear wrapper
 
     if (!direction.relationId) {
-        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
         return wrapper;
     }
 
@@ -217,7 +217,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
         };
 
         if (!geojson.features || geojson.features.length === 0) {
-            wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
             return wrapper;
         }
 
@@ -229,8 +229,9 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
     } catch (e) {
         console.error("Leaflet map error:", e);
-        wrapper.innerHTML = `<div class="no-map">No map available</div>`;
+        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
     }
 
     return wrapper;
 }
+
