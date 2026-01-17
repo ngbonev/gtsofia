@@ -63,6 +63,7 @@ const lines = {
             {
                 name: "КОКАЛЯНЕ",
 				relationId: 16914093,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/1/",
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -120,6 +121,7 @@ const lines = {
             },
 			            {
                 name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A31/",
                 stops: [
                     { name: "БАЛКАНКАР АД", onDemand: false },
                     { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
@@ -177,6 +179,7 @@ const lines = {
             },
             {
                 name: "18 СУ УИЛЯМ ГЛАДСТОН",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A32/",
                 stops: [
                     { name: "Ж.К. ЛЮЛИН 5", onDemand: false },
                     { name: "УЛ. ПОРУЧИК ГР. ЗАГОРСКИ", onDemand: false },
@@ -252,6 +255,7 @@ const lines = {
             {
                 name: "ДОЛНИ ПАСАРЕЛ",
 				relationId: 16130284,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/3/",
                 stops: [
                     { name: "УЛ. ГЕНЕРАЛ ГУРКО", onDemand: false },
                     { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -327,6 +331,7 @@ const lines = {
             {
                 name: "КОКАЛЯНСКО ХАНЧЕ",
 				relationId: 16949315,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/4/",
                 stops: [
                     { name: "Ж.К. МЛАДОСТ 1", onDemand: false },
                     { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -403,6 +408,7 @@ const lines = {
             {
                 name: "ДОЛНИ ЛОЗЕН",
 				relationId: 17587802,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/5/",
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -466,6 +472,7 @@ const lines = {
             {
                 name: "ГЕРМАН",
 				relationId: 16130185,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/6/",
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -528,6 +535,7 @@ const lines = {
             {
                 name: "ГАРА ВЕРИЛА",
 				relationId: 16949411,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/7/",
                 stops: [
                     { name: "ГАРА ИСКЪР", onDemand: false },
                     { name: "КВ. ГАРА ИСКЪР", onDemand: false },
@@ -613,6 +621,7 @@ const lines = {
             {
                 name: "ГЕРМАН",
 				relationId: 17000430,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/8/",
                 stops: [
                     { name: "СЕЛО КРИВИНА", onDemand: false },
                     { name: "ЦЕНТЪРА С. КРИВИНА", onDemand: false },
@@ -682,6 +691,7 @@ const lines = {
             },
             {
                 name: "УЛ. ТЪРНОВО (ЛЮЛИН 8)",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/8TM/",
                 stops: [
                     { name: "Ж.К. ЛЮЛИН 5", onDemand: false },
                     { name: "БЛ. 539 Ж.К. ЛЮЛИН 5", onDemand: false },
@@ -730,6 +740,7 @@ const lines = {
             {
                 name: "АВТОБАЗА ИСКЪР",
 				relationId: 16149006,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/9/",
                 stops: [
                     { name: "УЛ. ГЕНЕРАЛ ГУРКО", onDemand: false },
                     { name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
@@ -790,6 +801,7 @@ const lines = {
             {
                 name: "БУСМАНЦИ",
 				relationId: 17000803,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/10/",
                 stops: [
                     { name: "КВ. ДИМИТЪР МИЛЕНКОВ", onDemand: false },
                     { name: "ПРОМИШЛЕНА ЗОНА", onDemand: false },
@@ -865,6 +877,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
 				relationId: 16148995,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/11/",
                 stops: [
                     { name: "Ж.К. ОВЧА КУПЕЛ 2", onDemand: false },
                     { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -935,6 +948,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
 				relationId: 17001047,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/12/",
                 stops: [
                     { name: "СЕЛО ДОЛНИ БОГРОВ", onDemand: false },
                     { name: "КМЕТСТВО ДОЛНИ БОГРОВ", onDemand: false },
@@ -1011,6 +1025,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
 				relationId: 17002128,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/14/",
                 stops: [
                     { name: "ГАРА ИСКЪР", onDemand: false },
                     { name: "28-МИ ПОЩЕНСКИ КЛОН", onDemand: false },
@@ -1099,6 +1114,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ",
 				relationId: 17002238,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/18/",
                 stops: [
                     { name: "МЕЛНИЦАТА ЧЕПИНЦИ", onDemand: false },
                     { name: "УЛ. НАДЕЖДА", onDemand: false },
@@ -1167,6 +1183,7 @@ const lines = {
             {
                 name: "ЛОКОРСКО",
 				relationId: 17004212,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/20/",
                 stops: [
                     { name: "ПЛ. ЛЪВОВ МОСТ", onDemand: false },
                     { name: "ПЛ. ЛЪВОВ МОСТ", onDemand: false },
@@ -1246,6 +1263,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 17005398,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/21/",
                 stops: [
                     { name: "СЕЛО ВОЙНЕГОВЦИ", onDemand: false },
                     { name: "ЦЕНТЪР С. ВОЙНЕГОВЦИ", onDemand: false },
@@ -1324,6 +1342,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 17005993,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/22/",
                 stops: [
                     { name: "БОЛНИЦАТА ПОДГУМЕР", onDemand: false },
                     { name: "В. З. ПОДГУМЕР", onDemand: true },
@@ -1402,6 +1421,7 @@ const lines = {
             {
                 name: "ГАРА КУРИЛО",
 				relationId: 17012743,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/23/",
                 stops: [
    					{ name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ", onDemand: false },
     				{ name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
@@ -1460,6 +1480,7 @@ const lines = {
             {
                 name: "МАНАСТИР СВ. МИНА",
 				relationId: 17012753,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/24/",
                 stops: [
    					{ name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ", onDemand: false },
     				{ name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
@@ -1547,6 +1568,7 @@ const lines = {
             {
                 name: "НАЧАЛО КВ. ГНИЛЯНЕ",
 				relationId: 17020012,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/26/",
                 stops: [
   	                { name: "Ж.К. ОБЕЛЯ-1", onDemand: false },
   	                { name: "БЛ. 111 Ж.К. ОБЕЛЯ-1", onDemand: false },
@@ -1610,7 +1632,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ КНЯГИНЯ МАРИЯ ЛУИЗА",
+                name: "МС КНЯГИНЯ МАРИЯ ЛУИЗА",
 				relationId: 17041566,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/27/",
                 stops: [
@@ -1650,6 +1672,7 @@ const lines = {
             {
                 name: "КЪТИНА",
 				relationId: 17041565,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/27/",
                 stops: [
   	                { name: "МЕТРОСТАНЦИЯ КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
 					{ name: "БУЛ. ГЕН. Н. СТОЛЕТОВ", onDemand: false },
@@ -1758,6 +1781,7 @@ const lines = {
             {
                 name: "МРАМОР",
 				relationId: 17042303,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/28/",
                 stops: [
 { name: "СЕЛО ЛОКОРОСКО", onDemand: false },
 { name: "УЛ. ВЕСКО ВЕСЕЛИНОВ", onDemand: false },
@@ -1859,6 +1883,7 @@ const lines = {
             {
                 name: "ЦЕНТЪРА ИЛИЯНЦИ",
 				relationId: 17045126,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/29/",
                 stops: [
   { name: "СЕЛО БАЛША", onDemand: false },
   { name: "УЛ. СТАРА ПЛАНИНА", onDemand: false },
@@ -1924,6 +1949,7 @@ const lines = {
             {
                 name: "БАЛША",
 				relationId: 17045124,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/30/",
                 stops: [
   { name: "КВ. ОБЕЛЯ", onDemand: false },
   { name: "УЛ. 9", onDemand: false },
@@ -1983,6 +2009,7 @@ const lines = {
             {
                 name: "ГОЛЯНОВЦИ",
 				relationId: 17045122,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/31/",
                 stops: [
   { name: "КВ. ОБЕЛЯ", onDemand: false },
   { name: "УЛ. 9", onDemand: false },
@@ -2053,6 +2080,7 @@ const lines = {
             {
                 name: "КРАЯ МИХАЙЛОВО",
 				relationId: 16239519,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/42/",
                 stops: [
 { name: "УЛ. ТЪРНОВО", onDemand: false },
 { name: "УЛ. ГЕН. АС. НИКОЛОВ", onDemand: false },
@@ -2121,6 +2149,7 @@ const lines = {
             {
                 name: "ПЛ. СВ. АЛЕКСАНДЪР НЕВСКИ",
 				relationId: 17552140,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/X43/",
                 stops: [
 { name: "АВТОСТАНЦИЯ БАНКЯ", onDemand: false },
 { name: "СТАДИОНА БАНКЯ", onDemand: false },
@@ -2166,6 +2195,7 @@ const lines = {
             {
                 name: "ИВАНЯНЕ",
 				relationId: 16239037,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/44/",
                 stops: [
 { name: "АВТОСТАНЦИЯ БАНКЯ", onDemand: false },
 { name: "УЛ. ХИСАРЯ", onDemand: false },
@@ -2203,6 +2233,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
 				relationId: 18653924,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/46/",
                 stops: [
 { name: "МАНАСТИР СВ. ПЕТКА ПАРАСКЕВА", onDemand: false },
 { name: "КВ. ВЕРДИКАЛ", onDemand: true },
@@ -2252,8 +2283,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+                name: "МС СЛИВНИЦА",
 				relationId: 16239843,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/47/",
                 stops: [
   { name: "КВ. ГРАДОМАН", onDemand: false },
   { name: "НАЧАЛО КВ. ГРАДОМАН", onDemand: false },
@@ -2321,8 +2353,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+                name: "МС СЛИВНИЦА",
 				relationId: 16242499,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/49/",
                 stops: [
   { name: "КВ. КЛИСУРА", onDemand: false },
   { name: "МОСТА", onDemand: false },
@@ -2384,8 +2417,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+                name: "МС СЛИВНИЦА",
 				relationId: 16242757,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/54/",
                 stops: [
   { name: "ПЪТЕН ВЪЗЕЛ КАЛОТИНА", onDemand: false },
   { name: "УЛ. ХАН КРУМ КВ. МАКСИМ ГОРКИ", onDemand: false },
@@ -2447,6 +2481,7 @@ const lines = {
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
 				relationId: 19674308,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/56/",
                 stops: [
 { name: "СЕЛО МАЛО БУЧИНО", onDemand: false },
 { name: "УЛ. ДЕМОКРАЦИЯ", onDemand: false },
@@ -2504,6 +2539,7 @@ const lines = {
             {
                 name: "ГАРА ВЛАДАЯ",
 				relationId: 16237583,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/58/",
                 stops: [
 { name: "АВТОСТАНЦИЯ КНЯЖЕВО", onDemand: false },
 { name: "УЛ. СИНЯТА СКАЛА", onDemand: true },
@@ -2527,7 +2563,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ МИЗИЯ",
+                name: "МС МИЗИЯ",
 				relationId: 13892501,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/59/",
                 stops: [
@@ -2564,6 +2600,7 @@ const lines = {
             {
                 name: "МЪРЧАЕВО",
 				relationId: 13892502,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/59/",
                 stops: [
 { name: "МЕТРОСТАНЦИЯ МИЗИЯ", onDemand: false },
 { name: "ПГСС", onDemand: false },
@@ -2643,6 +2680,7 @@ const lines = {
             {
                 name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА",
 				relationId: 16148997,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/60/",
                 stops: [
 { name: "ЖК. ОВЧА КУПЕЛ 2", onDemand: false },
 { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -2708,6 +2746,7 @@ const lines = {
             {
                 name: "ЗЛАТНИТЕ МОСТОВЕ",
 				relationId: 16363800,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/61/",
                 stops: [
 { name: "БУЛ. ЧЕРНИ ВРЪХ", onDemand: false },
 { name: "БУЛ. АКАД. ИВАН ГЕШОВ", onDemand: false },
@@ -2766,6 +2805,7 @@ const lines = {
             {
                 name: "БУЛ. ЦАР БОРИС III",
 				relationId: 16363799,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/63/",
                 stops: [
 { name: "ЗЛАТНИТЕ МОСТОВЕ", onDemand: false },
 { name: "ДЕТСКИ СТАЦИОНАР", onDemand: true },
@@ -2843,6 +2883,7 @@ const lines = {
             {
                 name: "ЦЕНТЪР ПО ХИГИЕНА",
 				relationId: 17051978,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/64/",
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -2907,6 +2948,7 @@ const lines = {
             {
                 name: "ХИЖА АЛЕКО",
 				relationId: 17051983,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/66/",
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
@@ -2959,6 +3001,7 @@ const lines = {
             {
                 name: "ДУХОВНА СЕМИНАРИЯ",
 				relationId: 16362264,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/67/",
                 stops: [
 { name: "КВ. СИМЕОНОВО", onDemand: false },
 { name: "64-ТО ОУ", onDemand: false },
@@ -3016,6 +3059,7 @@ const lines = {
             {
                 name: "ЗООПАРКА",
 				relationId: 16362531,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/68/",
                 stops: [
 { name: "КВ. СИМЕОНОВО", onDemand: false },
 { name: "64-ТО ОУ", onDemand: false },
@@ -3094,6 +3138,7 @@ const lines = {
         {
             name: "НСБАЛ ПО ОНКОЛОГИЯ",
 			relationId: 17052025,
+			timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/69/",
             stops: [
 { name: "МЕСТНОСТ ЯРЕМА", onDemand: false },
 { name: "ПАРАКЛИС СВ. ВМЧК МИНА", onDemand: true },
@@ -3201,6 +3246,7 @@ const lines = {
             {
                 name: "НСБАЛ ПО ОНКОЛОГИЯ",
 				relationId: 552425,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/70/",
                 stops: [
   { name: "СЕЛО ПЛАНА", onDemand: false },
   { name: "ТУРМАЧКА МАХАЛА", onDemand: false },
@@ -3294,6 +3340,7 @@ const lines = {
             {
                 name: "ХОТЕЛ ПЛИСКА",
 				relationId: 16350673,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/72/",
                 stops: [
 { name: "Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
 { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
@@ -3379,6 +3426,7 @@ const lines = {
             {
                 name: "ОВЧА КУПЕЛ 2",
 				relationId: 16129658,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/73/",
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -3453,6 +3501,7 @@ const lines = {
             {
                 name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА",
 				relationId: 17256890,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/74/",
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. ТОДОР КАБЛЕШКОВ", onDemand: false },
@@ -3500,6 +3549,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
 				relationId: 3474565,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/75/",
                 stops: [
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
 { name: "ВОЕННА АКАДЕМИЯ", onDemand: false },
@@ -3561,6 +3611,7 @@ const lines = {
             {
                 name: "МЛАДОСТ 4",
 				relationId: 16148335,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/76/",
                 stops: [
 { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
 { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -3625,6 +3676,7 @@ const lines = {
             {
                 name: "ЗАПАДЕН ПАРК",
 				relationId: 3487624,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/77/",
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. ОПЪЛЧЕНСКА", onDemand: false },
@@ -3683,6 +3735,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 3474680,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/78/",
                 stops: [
 { name: "ПЛОЩАДА КВ. ВРАЖДЕБНА", onDemand: false },
 { name: "КВ. ВРАЖДЕБНА", onDemand: false },
@@ -3757,6 +3810,7 @@ const lines = {
             {
                 name: "ХРИСТО БОТЕВ",
 				relationId: 3479864,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/79/",
                 stops: [
 { name: "СТИНД – 2", onDemand: false },
 { name: "СТИНД – 1", onDemand: false },
@@ -3834,6 +3888,7 @@ const lines = {
             {
                 name: "ИВАНЯНЕ",
 				relationId: 3557078,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/81/",
                 stops: [
 { name: "СЕВЕРНА ПРОМИШЛЕНА ЗОНА", onDemand: false },
 { name: "УЛ. ГЕОРГИ КАРАСЛАВОВ", onDemand: false },
@@ -3910,6 +3965,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 19819816,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/82/",
                 stops: [
 { name: "Ж.К. ЛЮЛИН-5", onDemand: false },
 { name: "Ж.К. ЛЮЛИН-3", onDemand: false },
@@ -3993,6 +4049,7 @@ const lines = {
             {
                 name: "ЗООПАРКА",
 				relationId: 16847314,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/83/",
                 stops: [
 { name: "СТАДИОН ЛОКОМОТИВ", onDemand: false },
 { name: "СОФАРМА АД", onDemand: false },
@@ -4072,6 +4129,7 @@ const lines = {
             {
                 name: "ЛЕТИЩЕ СОФИЯ",
 				relationId: 16928721,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/84/",
                 stops: [
 { name: "УЛ. ГЕН. ГУРКО", onDemand: false },
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -4133,6 +4191,7 @@ const lines = {
             {
                 name: "ХАДЖИ ДИМИТЪР",
 				relationId: 3488416,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/85/",
                 stops: [
 { name: "Ж.К. ВРЪБНИЦА-2", onDemand: false },
 { name: "БЛ. 603 Ж.К. ВРЪБНИЦА-2", onDemand: false },
@@ -4196,6 +4255,7 @@ const lines = {
             {
                 name: "АП МАЛАШЕВЦИ",
 				relationId: 18356646,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/86/",
                 stops: [
 { name: "АП МАЛАШЕВЦИ", onDemand: false },
 { name: "АВТОСЕРВИЗ", onDemand: false },
@@ -4277,6 +4337,7 @@ const lines = {
             {
                 name: "ЗООПАРКА",
 				relationId: 17554929,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/88/",
                 stops: [
 { name: "Ж.К. ДРУЖБА 2", onDemand: false },
 { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -4371,6 +4432,7 @@ const lines = {
             {
                 name: "БУХОВО",
 				relationId: 18356644,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/90/",
                 stops: [
 { name: "АП МАЛАШЕВЦИ", onDemand: false },
 { name: "АВТОСЕРВИЗ", onDemand: false },
@@ -4433,6 +4495,7 @@ const lines = {
             {
                 name: "СТУДЕНТСКИ ГРАД",
 				relationId: 16149002,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/94/",
                 stops: [
 { name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -4486,8 +4549,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ЖОЛИО КЮРИ",
+                name: "МС ЖОЛИО КЮРИ",
 				relationId: 19894246,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/97/",
                 stops: [
 { name: "ХОТЕЛ АМБАСАДОР", onDemand: false },
 { name: "УЛ. БОЯН БОЯНОВ", onDemand: false },
@@ -4557,6 +4621,7 @@ const lines = {
             {
                 name: "ЗООПАРКА",
 				relationId: 13935928,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/98/",
                 stops: [
 { name: "КМЕТСТВО ЖЕЛЕЗНИЦА", onDemand: false },
 { name: "АНЕВА ЧЕШМА", onDemand: false },
@@ -4637,6 +4702,7 @@ const lines = {
             {
                 name: "ПЪТНОСТРОИТЕЛНА ТЕХНИКА",
 				relationId: 16347919,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/100/",
                 stops: [
 { name: "КВ. БЕНКОВСКИ", onDemand: false },
 { name: "60-ТО ОУ", onDemand: false },
@@ -4700,6 +4766,7 @@ const lines = {
             {
                 name: "ФОНДОВИ ЖИЛИЩА",
 				relationId: 17221217,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/101/",
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -4768,6 +4835,7 @@ const lines = {
             {
                 name: "ОВЧА КУПЕЛ 2",
 				relationId: 16149000,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/102/",
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -4837,6 +4905,7 @@ const lines = {
             {
                 name: "ВИЛНА ЗОНА ЛЮЛИН",
 				relationId: 17221188,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/103/",
                 stops: [
 { name: "АВТОСТАНЦИЯ ОВЧА КУПЕЛ", onDemand: false },
 { name: "НЦ ПО РЕХАБИЛИТАЦИЯ", onDemand: false },
@@ -4895,6 +4964,7 @@ const lines = {
             {
                 name: "БОЯНСКА ЦЪРКВА",
 				relationId: 16197854,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/107/",
                 stops: [
 { name: "КВ. КАРПУЗИЦА", onDemand: false },
 { name: "УЛ. БУРЯ", onDemand: false },
@@ -4965,6 +5035,7 @@ const lines = {
             {
                 name: "СТАДИОН ЛОКОМОТИВ",
 				relationId: 19696446,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/108/",
                 stops: [
 { name: "Ж.К. ЛЮЛИН-5", onDemand: false },
 { name: "Ж.К. ЛЮЛИН-3", onDemand: false },
@@ -5000,7 +5071,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ АЛЕКСАНДЪР ТЕОДОРОВ-БАЛАН",
+                name: "МС АЛЕКСАНДЪР ТЕОДОРОВ-БАЛАН",
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A59/",
 				relationId: 15699686,
                 stops: [
@@ -5029,6 +5100,7 @@ const lines = {
             {
                 name: "ЛОЗЕНЕЦ",
 				relationId: 15699686,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A59/",
                 stops: [
 { name: "МЕТРОСТАНЦИЯ АКАД.А.Т.-БАЛАН", onDemand: false },
 { name: "БЛ. 323 Ж.К. МЛАДОСТ 3", onDemand: false },
@@ -5088,6 +5160,7 @@ const lines = {
             {
                 name: "БЪКСТОН",
 				relationId: 15698641,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A510/",
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "БЛ. 245 Ж.К. МЛАДОСТ 2", onDemand: false },
@@ -5171,6 +5244,7 @@ const lines = {
             {
                 name: "ЛЮЛИН 1,2",
 				relationId: 16198540,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/111/",
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -5272,6 +5346,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
 				relationId: 17521276,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/117/",
                 stops: [
   { name: "ГРАД БУХОВО", onDemand: false },
   { name: "УЛ. ЗАХАРИ ПОПОВ", onDemand: false },
@@ -5363,6 +5438,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
 				relationId: 17521281,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/118/",
                 stops: [
   { name: "СЕЛО ЖЕЛЯВА", onDemand: false },
   { name: "УЛ. 24-ТИ МАЙ", onDemand: false },
@@ -5440,6 +5516,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
 				relationId: 3574122,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/119/",
                 stops: [
   { name: "МК КРЕМИКОВЦИ", onDemand: false },
   { name: "ИНСТИТУТ ПО ЧЕРНА МЕТАЛУРГИЯ", onDemand: true },
@@ -5508,6 +5585,7 @@ const lines = {
             {
                 name: "ЗООПАРКА",
 				relationId: 16908460,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/120/",
                 stops: [
   { name: "Ж.К. ЛЕВСКИ-Г", onDemand: false },
   { name: "БЛ. 10 Ж.К. ЛЕВСКИ-Г", onDemand: false },
@@ -5570,6 +5648,7 @@ const lines = {
             {
                 name: "ЛИФТА СИМЕОНОВО",
 				relationId: 17216896,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/123/",
                 stops: [
   { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
   { name: "СК ЦСКА", onDemand: false },
@@ -5628,6 +5707,7 @@ const lines = {
             {
                 name: "ВОЛУЯК",
 				relationId: 2620838,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/150/",
                 stops: [
   { name: "Ж.К. ОБЕЛЯ-1", onDemand: false },
   { name: "БЛ. 111 Ж.К. ОБЕЛЯ-1", onDemand: false },
@@ -5696,6 +5776,7 @@ const lines = {
             {
                 name: "ДРУЖБА 2",
 				relationId: 16148336,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/204/",
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. КОСТЕНСКИ ВОДОПАД", onDemand: false },
@@ -5766,6 +5847,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 3476948,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/213/",
                 stops: [
   { name: "Ж.К. МЛАДОСТ-4", onDemand: false },
   { name: "БЛ. 480 Ж.К. МЛАДОСТ-4", onDemand: false },
@@ -5824,6 +5906,7 @@ const lines = {
             {
                 name: "ГОРНА БАНЯ",
 				relationId: 58632,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/260/",
                 stops: [
   { name: "БУЛ. ПРАГА", onDemand: false },
   { name: "ПЛ. РУСКИ ПАМЕТНИК", onDemand: false },
@@ -5877,6 +5960,7 @@ const lines = {
             {
                 name: "СТУДЕНТСКИ ГРАД",
 				relationId: 16149003,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/280/",
                 stops: [
   { name: "СУ СВ.КЛИМЕНТ ОХРИДСКИ", onDemand: false },
   { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -5936,6 +6020,7 @@ const lines = {
             {
                 name: "ХАДЖИ ДИМИТЪР",
 				relationId: 17299857,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/285/",
                 stops: [
   { name: "Ж.К. ВРЪБНИЦА-2", onDemand: false },
   { name: "БЛ. 603 Ж.К. ВРЪБНИЦА-2", onDemand: false },
@@ -5968,7 +6053,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ ВИТОША",
+                name: "МС ВИТОША",
 				relationId: 16946684,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/288/",
                 stops: [
@@ -5991,6 +6076,7 @@ const lines = {
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
 				relationId: 16946683,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/288/",
                 stops: [
   { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
   { name: "МБАЛ ВИТА", onDemand: false },
@@ -6015,7 +6101,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ Г. М. ДИМИТРОВ",
+                name: "МС Г.М. ДИМИТРОВ",
 				relationId: 17299827,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/294/",
                 stops: [
@@ -6034,6 +6120,7 @@ const lines = {
             {
                 name: "СТУДЕНТСКИ ГРАД",
 				relationId: 17299826,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/294/",
                 stops: [
   { name: "МЕТРОСТАНЦИЯ Г. М. ДИМИТРОВ", onDemand: false },
   { name: "МГУ СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -6079,6 +6166,7 @@ const lines = {
             {
                 name: "НИМ",
 				relationId: 16148339,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/304/",
                 stops: [
   { name: "Ж.К. ДРУЖБА 2", onDemand: false },
   { name: "БЛ. 501 Ж.К. ДРУЖБА 2", onDemand: false },
@@ -6139,6 +6227,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 17009883,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/305/",
                 stops: [
   { name: "КУЛИНАРЕН К-Т ПЕЙФИЛ", onDemand: false },
   { name: "ВИК ЕАД СОФИЯ", onDemand: false },
@@ -6208,6 +6297,7 @@ const lines = {
             {
                 name: "БУЛ. ИЛИЯНЦИ-ПОДЛЕЗА",
 				relationId: 17009823,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/309/",
                 stops: [
   { name: "Ж.К. ЛЮЛИН-1,2", onDemand: false },
   { name: "БЛ. 11 Ж.К. ЛЮЛИН-1", onDemand: false },
@@ -6275,6 +6365,7 @@ const lines = {
             {
                 name: "ЛЮЛИН 5",
 				relationId: 17008662,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/310/",
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. КНЯЗ БОРИС I", onDemand: false },
@@ -6344,6 +6435,7 @@ const lines = {
             {
                 name: "БИСТРИЦА",
 				relationId: 17008535,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/314/",
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -6420,6 +6512,7 @@ const lines = {
             {
                 name: "ЦЕНТРАЛНА ГАРА",
 				relationId: 17006482,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/404/",
                 stops: [
 { name: "АП ДРУЖБА", onDemand: false },
 { name: "БЛ. 501 Ж.К. ДРУЖБА 2", onDemand: false },
@@ -6502,6 +6595,7 @@ const lines = {
             {
                 name: "ТЕХНОПОЛИС МЛАДОСТ 4",
 				relationId: 17006424,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/413/",
                 stops: [
 { name: "ГАРА СОФИЯ СЕВЕР", onDemand: false },
 { name: "МОДНА КЪЩА АГРЕСИЯ", onDemand: false },
@@ -6581,6 +6675,7 @@ const lines = {
             {
                 name: "ГАРА ИСКЪР",
 				relationId: 3492546,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/604/",
                 stops: [
 { name: "УМБАЛСМ ПИРОГОВ", onDemand: false },
 { name: "УМБАЛ АЛЕКСАНДРОВСКА", onDemand: false },
@@ -6637,6 +6732,7 @@ const lines = {
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
 				relationId: 16335423,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/801/",
                 stops: [
 { name: "Ж.К. КРАСНО СЕЛО", onDemand: false },
 { name: "КВ. ОВЧА КУПЕЛ", onDemand: false },
@@ -6657,7 +6753,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+                name: "МС ГОРНА БАНЯ",
 				relationId: 16333620,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/802/",
                 stops: [
@@ -6669,7 +6765,8 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+                name: "МС ГОРНА БАНЯ",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/802/",
 				relationId: 16333620,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
@@ -6686,7 +6783,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+                name: "МС ГОРНА БАНЯ",
 				relationId: 16334912,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/803/",
                 stops: [
@@ -6704,6 +6801,7 @@ const lines = {
             },
             {
                 name: "ВИЛНА ЗОНА ЛЮЛИН",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/803/",
 				relationId: 16334915,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
@@ -6742,8 +6840,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+                name: "МС ГОРНА БАНЯ",
 				relationId: 16335257,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/804/",
                 stops: [
 { name: "ПЛ. СРЕД СЕЛО", onDemand: false },
 { name: "УЛ. ПОЛК. СТ. БАЧИЙСКИ", onDemand: false },
@@ -6781,8 +6880,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ВИТОША",
+                name: "МС ВИТОША",
 				relationId: 16408125,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/805/",
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -6859,6 +6959,7 @@ const lines = {
             {
                 name: "МЛАДОСТ 4",
 				relationId: 16125837,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/N1/",
                 stops: [
 { name: "Ж.К. ЛЮЛИН-1,2", onDemand: false },
 { name: "БЛ. 264 Ж.К. ЛЮЛИН-2", onDemand: false },
@@ -6964,6 +7065,7 @@ const lines = {
             {
                 name: "ОБЕЛЯ",
 				relationId: 16607222,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/N2/",
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -7064,6 +7166,7 @@ const lines = {
             {
                 name: "ОВЧА КУПЕЛ 2",
 				relationId: 16868616,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/N3/",
                 stops: [
 { name: "Ж.К. ЛЕВСКИ-Г", onDemand: false },
 { name: "БЛ. 10 Ж.К. ЛЕВСКИ-Г", onDemand: false },
@@ -7194,6 +7297,7 @@ const lines = {
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
 				relationId: 16868619,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/N4/",
                 stops: [
 { name: "ЖК. ДРУЖБА 2", onDemand: false },
 { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -7304,6 +7408,7 @@ const lines = {
             {
                 name: "ПЕТА ГРАДСКА БОЛНИЦА",
 				relationId: 13973777,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/1/",
                 stops: [
   { name: "Ж.К. ЛЕВСКИ Г", onDemand: false },
   { name: "УЛ. СТ. ДОСПЕВСКИ", onDemand: false },
@@ -7377,6 +7482,7 @@ const lines = {
             {
                 name: "БЪКСТОН",
 				relationId: 13974504,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/2/",
                 stops: [
   { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
   { name: "МАК ГАРАЖ", onDemand: false },
@@ -7445,6 +7551,7 @@ const lines = {
             {
                 name: "ЛЕВСКИ Г",
 				relationId: 13978135,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/3/",
                 stops: [
   { name: "УМБАЛ СВЕТА АННА – УХО", onDemand: false },
   { name: "СОФИЯ ТЕХ ПАРК", onDemand: false },
@@ -7515,6 +7622,7 @@ const lines = {
             {
                 name: "ДРУЖБА 2",
 				relationId: 13982084,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/4/",
                 stops: [
   { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
   { name: "УЛ. МАКГАХАН", onDemand: false },
@@ -7586,6 +7694,7 @@ const lines = {
             {
                 name: "НАДЛЕЗ НАДЕЖДА",
 				relationId: 14156823,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/5/",
                 stops: [
   { name: "УМБАЛ СВЕТА АННА", onDemand: false },
   { name: "СОФИЯ ТЕХ ПАРК", onDemand: false },
@@ -7658,6 +7767,7 @@ const lines = {
             {
                 name: "ЛЮЛИН 3",
 				relationId: 14355031,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/6/",
                 stops: [
   { name: "Ж.К. ЛОЗЕНЕЦ", onDemand: false },
   { name: "ХОТЕЛ ХЕМУС", onDemand: false },
@@ -7743,6 +7853,7 @@ const lines = {
             {
                 name: "ЛЮЛИН 3",
 				relationId: 14597381,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/7/",
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -7818,6 +7929,7 @@ const lines = {
             {
                 name: "СТОЧНА ГАРА",
 				relationId: 15066858,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/8/",
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -7880,6 +7992,7 @@ const lines = {
             {
                 name: "БОРОВО",
 				relationId: 16364046,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/9/",
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. ДУНАВ", onDemand: false },
@@ -7942,6 +8055,7 @@ const lines = {
             {
                 name: "ДРУЖБА 1",
 				relationId: 16946991,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!trolley/11/",
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. ИСКЪР", onDemand: false },
@@ -7998,6 +8112,7 @@ const lines = {
             {
                 name: "ИВАН ВАЗОВ",
 				relationId: 12684730,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/1/",
                 stops: [
 { name: "НАДЛЕЗ НАДЕЖДА", onDemand: false },
 { name: "ПЕТА ГРАДСКА БОЛНИЦА", onDemand: false },
@@ -8053,6 +8168,7 @@ const lines = {
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
 				relationId: 12695832,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/3/",
                 stops: [
 { name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
 { name: "КАТОЛИЧЕСКИ ГРОБИЩЕН ПАРК", onDemand: false },
@@ -8114,6 +8230,7 @@ const lines = {
             {
                 name: "БУЛ. НИКОЛА ПЕТКОВ",
 				relationId: 12696013,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/4/",
                 stops: [
 { name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
 { name: "КАТОЛИЧЕСКИ ГРОБИЩЕН ПАРК", onDemand: false },
@@ -8172,6 +8289,7 @@ const lines = {
             {
                 name: "СЪДЕБНА ПАЛАТА",
 				relationId: 12696829,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/5/",
                 stops: [
 { name: "КВ. КНЯЖЕВО", onDemand: false },
 { name: "УЛ. РАЙСКА ГРАДИНА", onDemand: false },
@@ -8235,6 +8353,7 @@ const lines = {
             {
                 name: "ОБЕЛЯ 2",
 				relationId: 12697125,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/6/",
                 stops: [
 { name: "ЖК. ИВАН ВАЗОВ", onDemand: false },
 { name: "ЧИТАЛИЩЕ Д-Р П. БЕРОН", onDemand: false },
@@ -8297,8 +8416,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ХАН КУБРАТ",
+                name: "МС ХАН КУБРАТ",
 				relationId: 12699445,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/7/",
                 stops: [
 { name: "КВ. МАНАСТИРСКИ ЛИВАДИ – ЗАПАД", onDemand: false },
 { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -8327,7 +8447,7 @@ const lines = {
         type: "tram",
         directions: [
             {
-                name: "МЕТРОСТАНЦИЯ ВИТОША",
+                name: "МС ВИТОША",
 				relationId: 12700646,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/10/",
                 stops: [
@@ -8359,6 +8479,7 @@ const lines = {
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
 				relationId: 12700647,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/10/",
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
 { name: "БУЛ. НИКОЛА ВАПЦАРОВ", onDemand: false },
@@ -8430,6 +8551,7 @@ const lines = {
             {
                 name: "КНЯЖЕВО",
 				relationId: 12703384,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/11/",
                 stops: [
 { name: "КВ. ИЛИЯНЦИ", onDemand: false },
 { name: "УЛ. КИРИЛ БЛАГОЕВ", onDemand: false },
@@ -8498,6 +8620,7 @@ const lines = {
             {
                 name: "ИЛИЯНЦИ",
 				relationId: 15926646,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/12/",
                 stops: [
 { name: "ПЛ. ЖУРНАЛИСТ", onDemand: false },
 { name: "УАСГ", onDemand: false },
@@ -8556,8 +8679,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ВИТОША",
+                name: "МС ВИТОША",
 				relationId: 17576031,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/15/",
                 stops: [
 { name: "Ж.К. БЪКСТОН", onDemand: false },
 { name: "Ж.К. КРАСНО СЕЛО", onDemand: false },
@@ -8612,6 +8736,7 @@ const lines = {
             {
                 name: "ОРЛАНДОВЦИ",
 				relationId: 12704012,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/18/",
                 stops: [
 { name: "ПЛ. ЖУРНАЛИСТ", onDemand: false },
 { name: "УАСГ", onDemand: false },
@@ -8673,8 +8798,9 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА",
+                name: "МС ОПЪЛЧЕНСКА",
 				relationId: 12704101,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/20/",
                 stops: [
 { name: "ДЕПО ИСКЪР", onDemand: false },
 { name: "СОФИЯ МЕД АД", onDemand: false },
@@ -8739,7 +8865,8 @@ const lines = {
                 ]
             },
             {
-                name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА",
+                name: "МС ОПЪЛЧЕНСКА",
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/21/",
                 stops: [
 { name: "Ж.К. ГЕО МИЛЕВ", onDemand: false },
 { name: "НУ ЗА ТАНЦОВО ИЗКУСТВО", onDemand: false },
@@ -8804,6 +8931,7 @@ const lines = {
             {
                 name: "КРАСНА ПОЛЯНА",
 				relationId: 12712489,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/22/",
                 stops: [
 { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
 { name: "УЛ. ПОП ГРУЙО", onDemand: false },
@@ -8865,6 +8993,7 @@ const lines = {
             {
                 name: "ГЕО МИЛЕВ",
 				relationId: 12704111,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/23/",
                 stops: [
   { name: "УЛ. ОБИКОЛНА", onDemand: false },
   { name: "БУЛ. ПРОФ. ЦВ. ЛАЗАРОВ", onDemand: false },
@@ -8921,6 +9050,7 @@ const lines = {
             {
                 name: "МАНАСТИРСКИ ЛИВАДИ - ЗАПАД",
 				relationId: 14001353,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/27/",
                 stops: [
   { name: "ГАРА СОФИЯ СЕВЕР", onDemand: false },
   { name: "МОДНА КЪЩА АГРЕСИЯ", onDemand: false },
@@ -8978,6 +9108,7 @@ const lines = {
             {
                 name: "СЛИВНИЦА",
 				relationId: 406492,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!metro/M1/",
                 stops: [
 { name: "БИЗНЕС ПАРК СОФИЯ", onDemand: false },
 { name: "АЛЕКСАНДЪР ТЕОДОРОВ - БАЛАН", onDemand: false },
@@ -9026,6 +9157,7 @@ const lines = {
             {
                 name: "ВИТОША",
 				relationId: 3549690,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!metro/M2/",
                 stops: [
 { name: "ОБЕЛЯ", onDemand: false },
 { name: "ЛОМСКО ШОСЕ", onDemand: false },
@@ -9070,6 +9202,7 @@ const lines = {
             {
                 name: "ГОРНА БАНЯ",
 				relationId: 8403504,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!metro/M3/",
                 stops: [
 { name: "ХАДЖИ ДИМИТЪР", onDemand: false },
 { name: "ТЕАТРАЛНА", onDemand: false },
@@ -9120,6 +9253,7 @@ const lines = {
             {
                 name: "СЛИВНИЦА",
 				relationId: 11613156,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!metro/M4/",
                 stops: [
 { name: "ЛЕТИЩЕ СОФИЯ", onDemand: false },
 { name: "СОФИЙСКА СВЕТА ГОРА", onDemand: false },
