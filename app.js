@@ -228,10 +228,15 @@ async function showLine(lineKey) {
 
     const colorClass = data.type.startsWith("metro") ? getMetroColorClass(lineKey) : '';
 
-    // Use the same styling class as switch button so timetable button looks identical
-    const timetableButtonHtml = data.directions[dir].timetable
+    const hasTimetable = !!data.directions[dir].timetable;
+
+    // timetable button markup (if any)
+    const timetableButtonHtml = hasTimetable
         ? `<button class="switch-dir timetable-btn" aria-label="Разписание">Разписание</button>`
         : '';
+
+    // Add header-actions container; if only one action, add single-action class so CSS can make it full width
+    const actionsClass = hasTimetable ? "header-actions" : "header-actions single-action";
 
     header.innerHTML = `
         <div class="line-header-icon" style="--line-color:${color}">
@@ -241,21 +246,21 @@ async function showLine(lineKey) {
             </div>
             <img class="arrow" src="https://sofiatraffic.bg/images/next.svg" alt="next">
             <span class="destination">${data.directions[dir].name}</span>
-            <button class="switch-dir" aria-label="Промени посоката">Промяна на посоката</button>
-            ${timetableButtonHtml}
+
+            <div class="${actionsClass}">
+                <button class="switch-dir" aria-label="Промени посоката">Промяна на посоката</button>
+                ${timetableButtonHtml}
+            </div>
         </div>
     `;
 
-    const switchBtn = header.querySelector(".switch-dir");
+    // attach handlers to the specific buttons inside header-actions
+    const switchBtn = header.querySelector(".header-actions .switch-dir:not(.timetable-btn)");
     if (switchBtn) {
-        // the first .switch-dir is the change-direction button; the timetable uses the same class but has timetable-btn
-        // ensure we attach only to the direction switch (the one without timetable-btn)
-        if (!switchBtn.classList.contains("timetable-btn")) {
-            switchBtn.addEventListener("click", () => switchDirection(lineKey));
-        }
+        switchBtn.addEventListener("click", () => switchDirection(lineKey));
     }
 
-    const ttBtn = header.querySelector(".timetable-btn");
+    const ttBtn = header.querySelector(".header-actions .timetable-btn");
     if (ttBtn) {
         ttBtn.addEventListener("click", (ev) => {
             const url = data.directions[dir].timetable;
