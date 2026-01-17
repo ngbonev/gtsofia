@@ -119,27 +119,6 @@ const lines = {
                     { name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
                 ]
             },
-			            {
-                name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ",
-				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A31/",
-                stops: [
-                    { name: "БАЛКАНКАР АД", onDemand: false },
-                    { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
-                    { name: "УЛ. ДОБРОТИЧ", onDemand: false },
-                    { name: "БУЛ. ВАРДАР", onDemand: false },
-                    { name: "БУЛ. АЛ. СТАМБОЛИЙСКИ", onDemand: false },
-                    { name: "МЕТРОСТАНЦИЯ ВАРДАР", onDemand: false },
-                    { name: "УЛ. ХАЙДУТ СИДЕР", onDemand: false },
-                    { name: "УЛ. ХАЙДУТ СИДЕР", onDemand: false },
-                    { name: "УЛ. ЗОГРАФСКИ МАНАСТИР", onDemand: false },
-                    { name: "УЛ. ЦАР СИМЕОН", onDemand: false },
-                    { name: "УЛ. ДИМИТЪР ПЕТКОВ", onDemand: false },
-                    { name: "УЛ. ОДРИН", onDemand: false },
-                    { name: "134 СУ ДИМЧО ДЕБЕЛЯНОВ", onDemand: false },
-                    { name: "18 СУ УИЛЯМ ГЛАДСТОН", onDemand: false },
-                    { name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
-                ]
-            }
         ]
     },
 
@@ -177,36 +156,6 @@ const lines = {
 					{ name: "18 СУ УИЛЯМ ГЛАДСТОН", onDemand: false },
                 ]
             },
-            {
-                name: "18 СУ УИЛЯМ ГЛАДСТОН",
-				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A32/",
-                stops: [
-                    { name: "Ж.К. ЛЮЛИН 5", onDemand: false },
-                    { name: "УЛ. ПОРУЧИК ГР. ЗАГОРСКИ", onDemand: false },
-                    { name: "УЛ. КАП. ВАСИЛ ДАНАДЖИЕВ", onDemand: false },
-                    { name: "МАГАЗИН ВИТОША", onDemand: false },
-                    { name: "ОБЩИНА ЛЮЛИН", onDemand: false },
-                    { name: "ТЪРГОВСКИ ЦЕНТЪР ЛЮЛИН", onDemand: false },
-                    { name: "МЕТРОСТАНЦИЯ ЛЮЛИН", onDemand: false },
-                    { name: "УЛ. ЛУИ ПАСТЬОР", onDemand: false },
-                    { name: "БУЛ. ЦАРИЦА ЙОАНА", onDemand: false },
-                    { name: "УЛ. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
-                    { name: "БЛ. 135 Ж.К. ЛЮЛИН 10", onDemand: false },
-                    { name: "УЛ. ОРИОН", onDemand: false },
-                    { name: "ЗАПАДЕН ПАРК", onDemand: false },
-                    { name: "УЛ. ОРЯХОВО", onDemand: false },
-                    { name: "УЛ. ПЛОВДИВ", onDemand: false },
-					{ name: "НАДЛЕЗ НАДЕЖДА", onDemand: false },
-					{ name: "БУЛ. ГЕН. Н. СТОЛЕТОВ", onDemand: false },
-					{ name: "ПЕТА ГРАДСКА БОЛНИЦА", onDemand: false },
-					{ name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
-					{ name: "УЛ. ОХРИД", onDemand: false },
-					{ name: "УЛ. ОПЪЛЧЕНСКА", onDemand: false },
-					{ name: "46-ТО ОУ КОНСТАНТИН ФОТИНОВ", onDemand: false },
-					{ name: "32 СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
-					{ name: "18 СУ УИЛЯМ ГЛАДСТОН", onDemand: false },
-                ]
-            }
         ]
     },
     "bus-3": {
@@ -6764,18 +6713,6 @@ const lines = {
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
                 ]
             },
-            {
-                name: "МС ГОРНА БАНЯ",
-				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/802/",
-				relationId: 16333620,
-                stops: [
-{ name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
-{ name: "УЛ. МАК", onDemand: false },
-{ name: "53-ТО ОУ", onDemand: false },
-{ name: "ХОТЕЛ ГОРНА БАНЯ", onDemand: false },
-{ name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
-]
-            }
         ]
     },
 	"bus-803": {
