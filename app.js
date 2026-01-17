@@ -176,7 +176,7 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
         // Fetch Overpass API with 30s max wait
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60s
         const res = await fetch(`https://overpass-api.de/api/interpreter`, {
             method: "POST",
             body: `[out:json];relation(${direction.relationId});out geom;`,
@@ -220,3 +220,4 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
 
     return wrapper;
 }
+
