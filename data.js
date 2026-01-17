@@ -209,6 +209,7 @@ const lines = {
         directions: [
             {
                 name: "УЛ. ГЕН. ГУРКО",
+				relationId: 16130285,
                 stops: [
                     { name: "СЕЛО ДОЛНИ ПАСАРЕЛ", onDemand: false },
                     { name: "МОСТА ДОЛНИ ПАСАРЕЛ", onDemand: false },
@@ -246,6 +247,7 @@ const lines = {
             },
             {
                 name: "ДОЛНИ ПАСАРЕЛ",
+				relationId: 16130284,
                 stops: [
                     { name: "УЛ. ГЕНЕРАЛ ГУРКО", onDemand: false },
                     { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -287,6 +289,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 1",
+				relationId: 19700268,
                 stops: [
                     { name: "КОКАЛЯНСКО ХАНЧЕ", onDemand: false },
                     { name: "ПЛАЖА ПАНЧАРЕВО", onDemand: true },
@@ -318,6 +321,7 @@ const lines = {
             },
             {
                 name: "КОКАЛЯНСКО ХАНЧЕ",
+				relationId: 16949315,
                 stops: [
                     { name: "Ж.К. МЛАДОСТ 1", onDemand: false },
                     { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -360,6 +364,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 17587801,
                 stops: [
                     { name: "СЕЛО ДОЛНИ ЛОЗЕН", onDemand: false },
                     { name: "УЛ. ВАСИЛ ЛЕВСКИ", onDemand: false },
@@ -391,6 +396,7 @@ const lines = {
             },
             {
                 name: "ДОЛНИ ЛОЗЕН",
+				relationId: 17587802,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -426,6 +432,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 16130186,
                 stops: [
                     { name: "СЕЛО ГЕРМАН", onDemand: false },
                     { name: "86-ТИ ПОЩЕНСКИ КЛОН", onDemand: false },
@@ -451,6 +458,7 @@ const lines = {
             },
             {
                 name: "ГЕРМАН",
+				relationId: 16130185,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "СК ЦСКА", onDemand: false },
@@ -481,6 +489,7 @@ const lines = {
         directions: [
             {
                 name: "ГАРА ИСКЪР",
+				relationId: 16949412,
                 stops: [
                     { name: "ЖП ГАРА ВЕРИЛА", onDemand: false },
                     { name: "МАНАСТИР СВ. АПОСТОЛИ ПЕТЪР И ПАВЕЛ", onDemand: false },
@@ -510,6 +519,7 @@ const lines = {
             },
             {
                 name: "ГАРА ВЕРИЛА",
+				relationId: 16949411,
                 stops: [
                     { name: "ГАРА ИСКЪР", onDemand: false },
                     { name: "КВ. ГАРА ИСКЪР", onDemand: false },
@@ -545,6 +555,7 @@ const lines = {
         directions: [
             {
                 name: "КРИВИНА",
+				relationId: 17000431,
                 stops: [
                     { name: "СЕЛО ГЕРМАН", onDemand: false },
                     { name: "86-ТИ ПОЩЕНСКИ КЛОН", onDemand: false },
@@ -592,6 +603,7 @@ const lines = {
             },
             {
                 name: "ГЕРМАН",
+				relationId: 17000430,
                 stops: [
                     { name: "СЕЛО КРИВИНА", onDemand: false },
                     { name: "ЦЕНТЪРА С. КРИВИНА", onDemand: false },
@@ -681,6 +693,7 @@ const lines = {
         directions: [
             {
                 name: "УЛ. ГЕН. ГУРКО",
+				relationId: 16149005,
                 stops: [
                     { name: "АВТОБАЗА ИСКЪР", onDemand: false },
                     { name: "БКС СРЕДЕЦ", onDemand: false },
@@ -705,6 +718,7 @@ const lines = {
             },
             {
                 name: "АВТОБАЗА ИСКЪР",
+				relationId: 16149006,
                 stops: [
                     { name: "УЛ. ГЕНЕРАЛ ГУРКО", onDemand: false },
                     { name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
@@ -734,6 +748,7 @@ const lines = {
         directions: [
             {
                 name: "ДИМИТЪР МИЛЕНКОВ",
+				relationId: 17000802,
                 stops: [
                     { name: "КВ. БУСМАНЦИ", onDemand: false },
                     { name: "ДЕТСКИ ДОМ", onDemand: false },
@@ -762,6 +777,7 @@ const lines = {
             },
             {
                 name: "БУСМАНЦИ",
+				relationId: 17000803,
                 stops: [
                     { name: "КВ. ДИМИТЪР МИЛЕНКОВ", onDemand: false },
                     { name: "ПРОМИШЛЕНА ЗОНА", onDemand: false },
@@ -796,6 +812,7 @@ const lines = {
         directions: [
             {
                 name: "ОВЧА КУПЕЛ 2",
+				relationId: 16148996,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
                     { name: "Ж.К. СЛАТИНА", onDemand: false },
@@ -834,6 +851,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 16148995,
                 stops: [
                     { name: "Ж.К. ОВЧА КУПЕЛ 2", onDemand: false },
                     { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -877,6 +895,7 @@ const lines = {
         directions: [
             {
                 name: "ДОЛНИ БОГРОВ",
+				relationId: 17001048,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
                     { name: "УЛ. СТ. ДОСПЕВСКИ", onDemand: false },
@@ -901,6 +920,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 17001047,
                 stops: [
                     { name: "СЕЛО ДОЛНИ БОГРОВ", onDemand: false },
                     { name: "КМЕТСТВО ДОЛНИ БОГРОВ", onDemand: false },
@@ -930,6 +950,7 @@ const lines = {
         directions: [
             {
                 name: "ГАРА ИСКЪР",
+				relationId: 17217047,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
                     { name: "УЛ. СТ. ДОСПЕВСКИ", onDemand: false },
@@ -974,6 +995,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 17002128,
                 stops: [
                     { name: "ГАРА ИСКЪР", onDemand: false },
                     { name: "28-МИ ПОЩЕНСКИ КЛОН", onDemand: false },
@@ -1036,6 +1058,7 @@ const lines = {
         directions: [
             {
                 name: "МЕЛНИЦАТА ЧЕПИНЦИ",
+				relationId: 17002237,
                 stops: [
                     { name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ", onDemand: false },
                     { name: "КВ. МАЛАШЕВЦИ", onDemand: false },
@@ -1059,6 +1082,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ",
+				relationId: 17002238,
                 stops: [
                     { name: "МЕЛНИЦАТА ЧЕПИНЦИ", onDemand: false },
                     { name: "УЛ. НАДЕЖДА", onDemand: false },
@@ -1089,6 +1113,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЪВОВ МОСТ",
+				relationId: 17004211,
                 stops: [
                     { name: "СЕЛО ЛОКОРСКО", onDemand: false },
                     { name: "УЛ. ВЕСКО ВЕСЕЛИНОВ", onDemand: false },
@@ -1124,6 +1149,7 @@ const lines = {
             },
             {
                 name: "ЛОКОРСКО",
+				relationId: 17004212,
                 stops: [
                     { name: "ПЛ. ЛЪВОВ МОСТ", onDemand: false },
                     { name: "ПЛ. ЛЪВОВ МОСТ", onDemand: false },
@@ -1167,6 +1193,7 @@ const lines = {
         directions: [
             {
                 name: "ВОЙНЕГОВЦИ",
+				relationId: 17005397,
                 stops: [
                     { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
                     { name: "УЛ. КОЗЛОДУЙ", onDemand: false },
@@ -1200,6 +1227,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 17005398,
                 stops: [
                     { name: "СЕЛО ВОЙНЕГОВЦИ", onDemand: false },
                     { name: "ЦЕНТЪР С. ВОЙНЕГОВЦИ", onDemand: false },
@@ -1240,6 +1268,7 @@ const lines = {
         directions: [
             {
                 name: "ПОДГУМЕР",
+				relationId: 17005992,
                 stops: [
                     { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
                     { name: "УЛ. КОЗЛОДУЙ", onDemand: false },
@@ -1275,6 +1304,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 17005993,
                 stops: [
                     { name: "БОЛНИЦАТА ПОДГУМЕР", onDemand: false },
                     { name: "В. З. ПОДГУМЕР", onDemand: true },
@@ -1317,6 +1347,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ",
+				relationId: 17012742,
                 stops: [
                     { name: "ГАРА КУРИЛО", onDemand: false },
                     { name: "ПОЩА КВ. КУРИЛО", onDemand: true },
@@ -1350,6 +1381,7 @@ const lines = {
             },
             {
                 name: "ГАРА КУРИЛО",
+				relationId: 17012743,
                 stops: [
    					{ name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ", onDemand: false },
     				{ name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
@@ -1388,6 +1420,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ",
+				relationId: 17012754,
                 stops: [
                     { name: "МАНАСТИР СВ. МИНА", onDemand: false },
                     { name: "ПРЕЧИСТВАТЕЛНА СТАНЦИЯ", onDemand: false },
@@ -1405,6 +1438,7 @@ const lines = {
             },
             {
                 name: "МАНАСТИР СВ. МИНА",
+				relationId: 17012753,
                 stops: [
    					{ name: "АВТОСТАНЦИЯ ОРЛАНДОВЦИ", onDemand: false },
     				{ name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
@@ -1428,6 +1462,7 @@ const lines = {
         directions: [
             {
                 name: "ОБЕЛЯ 1",
+				relationId: 17020013,
                 stops: [
 	                { name: "НАЧАЛО КВ. ГНИЛЯНЕ", onDemand: false },
   	                { name: "КВ. ГНИЛЯНЕ", onDemand: false },
@@ -1489,6 +1524,7 @@ const lines = {
             },
             {
                 name: "НАЧАЛО КВ. ГНИЛЯНЕ",
+				relationId: 17020012,
                 stops: [
   	                { name: "Ж.К. ОБЕЛЯ-1", onDemand: false },
   	                { name: "БЛ. 111 Ж.К. ОБЕЛЯ-1", onDemand: false },
@@ -1553,6 +1589,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ КНЯГИНЯ МАРИЯ ЛУИЗА",
+				relationId: 17041566,
                 stops: [
 	                { name: "СЕЛО КЪТИНА", onDemand: false },
 	                { name: "СТАРАТА ФУРНА", onDemand: true },
@@ -1589,6 +1626,7 @@ const lines = {
             },
             {
                 name: "КЪТИНА",
+				relationId: 17041565,
                 stops: [
   	                { name: "МЕТРОСТАНЦИЯ КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
 					{ name: "БУЛ. ГЕН. Н. СТОЛЕТОВ", onDemand: false },
@@ -1632,6 +1670,7 @@ const lines = {
         directions: [
             {
                 name: "ЛОКОРСКО",
+				relationId: 17042302,
                 stops: [
 { name: "ЦЕНТЪР С. МРАМОР", onDemand: false },
 { name: "СЕЛО МРАМОР", onDemand: false },
@@ -1694,6 +1733,7 @@ const lines = {
             },
             {
                 name: "МРАМОР",
+				relationId: 17042303,
                 stops: [
 { name: "СЕЛО ЛОКОРОСКО", onDemand: false },
 { name: "УЛ. ВЕСКО ВЕСЕЛИНОВ", onDemand: false },
@@ -1762,6 +1802,7 @@ const lines = {
         directions: [
             {
                 name: "БАЛША",
+				relationId: 17045127,
                 stops: [
   { name: "ЦЕНТЪРА ИЛИЯНЦИ", onDemand: false },
   { name: "УЛ. КИРИЛ БЛАГОЕВ", onDemand: false },
@@ -1792,6 +1833,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТЪРА ИЛИЯНЦИ",
+				relationId: 17045126,
                 stops: [
   { name: "СЕЛО БАЛША", onDemand: false },
   { name: "УЛ. СТАРА ПЛАНИНА", onDemand: false },
@@ -1828,6 +1870,7 @@ const lines = {
         directions: [
             {
                 name: "ОБЕЛЯ",
+				relationId: 17045125,
                 stops: [
   { name: "СЕЛО БАЛША", onDemand: false },
   { name: "УЛ. СТАРА ПЛАНИНА", onDemand: false },
@@ -1854,6 +1897,7 @@ const lines = {
             },
             {
                 name: "БАЛША",
+				relationId: 17045124,
                 stops: [
   { name: "КВ. ОБЕЛЯ", onDemand: false },
   { name: "УЛ. 9", onDemand: false },
@@ -1886,6 +1930,7 @@ const lines = {
         directions: [
             {
                 name: "ОБЕЛЯ",
+				relationId: 17045123,
                 stops: [
   { name: "СЕЛО ГОЛЯНОВЦИ", onDemand: false },
   { name: "НАЧАЛО С. ГОЛЯНОВЦИ", onDemand: false },
@@ -1910,6 +1955,7 @@ const lines = {
             },
             {
                 name: "ГОЛЯНОВЦИ",
+				relationId: 17045122,
                 stops: [
   { name: "КВ. ОБЕЛЯ", onDemand: false },
   { name: "УЛ. 9", onDemand: false },
@@ -1940,6 +1986,7 @@ const lines = {
         directions: [
             {
                 name: "УЛ. ТЪРНОВО",
+				relationId: 16239520,
                 stops: [
 { name: "КРАЯ НА КВ. МИХАЙЛОВО", onDemand: false },
 { name: "УЛ. КИТКАТА", onDemand: true },
@@ -1976,7 +2023,8 @@ const lines = {
                 ]
             },
             {
-                name: "КРАЯ НА МИХАЙЛОВО",
+                name: "КРАЯ МИХАЙЛОВО",
+				relationId: 16239519,
                 stops: [
 { name: "УЛ. ТЪРНОВО", onDemand: false },
 { name: "УЛ. ГЕН. АС. НИКОЛОВ", onDemand: false },
@@ -2020,6 +2068,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
+				relationId: 17552141,
                 stops: [
 { name: "ПЛ. СВ. АЛЕКСАНДЪР НЕВСКИ", onDemand: false },
 { name: "ПЛ. ВАСИЛ ЛЕВСКИ", onDemand: false },
@@ -2042,6 +2091,7 @@ const lines = {
             },
             {
                 name: "ПЛ. СВ. АЛЕКСАНДЪР НЕВСКИ",
+				relationId: 17552140,
                 stops: [
 { name: "АВТОСТАНЦИЯ БАНКЯ", onDemand: false },
 { name: "СТАДИОНА БАНКЯ", onDemand: false },
@@ -2069,6 +2119,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
+				relationId: 16239038,
                 stops: [
 { name: "КВ. ИВАНЯНЕ", onDemand: false },
 { name: "УЛ. МИЛЕНИУМ", onDemand: false },
@@ -2084,6 +2135,7 @@ const lines = {
             },
             {
                 name: "ИВАНЯНЕ",
+				relationId: 16239037,
                 stops: [
 { name: "АВТОСТАНЦИЯ БАНКЯ", onDemand: false },
 { name: "УЛ. ХИСАРЯ", onDemand: false },
@@ -2104,6 +2156,7 @@ const lines = {
         directions: [
             {
                 name: "МАНАСТИР СВ. ПЕТКА ПАРАСКЕВА",
+				relationId: 18653925,
                 stops: [
 { name: "АВТОСТАНЦИЯ БАНКЯ", onDemand: false },
 { name: "ЦЕНТЪРА БАНКЯ", onDemand: false },
@@ -2118,6 +2171,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
+				relationId: 18653924,
                 stops: [
 { name: "МАНАСТИР СВ. ПЕТКА ПАРАСКЕВА", onDemand: false },
 { name: "КВ. ВЕРДИКАЛ", onDemand: true },
@@ -2138,6 +2192,7 @@ const lines = {
         directions: [
             {
                 name: "ГРАДОМАН",
+				relationId: 16239844,
                 stops: [
   { name: "МЕТРОСТАНЦИЯ СЛИВНИЦА", onDemand: false },
   { name: "НЕСТЛЕ-СОФИЯ", onDemand: false },
@@ -2166,6 +2221,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+				relationId: 16239843,
                 stops: [
   { name: "КВ. ГРАДОМАН", onDemand: false },
   { name: "НАЧАЛО КВ. ГРАДОМАН", onDemand: false },
@@ -2200,6 +2256,7 @@ const lines = {
         directions: [
             {
                 name: "КЛИСУРА",
+				relationId: 16242500,
                 stops: [
   { name: "МЕТРОСТАНЦИЯ СЛИВНИЦА", onDemand: false },
   { name: "НЕСТЛЕ - СОФИЯ", onDemand: false },
@@ -2232,6 +2289,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+				relationId: 16242499,
                 stops: [
   { name: "КВ. КЛИСУРА", onDemand: false },
   { name: "МОСТА", onDemand: false },
@@ -2270,6 +2328,7 @@ const lines = {
         directions: [
             {
                 name: "ПЪТЕН ВЪЗЕЛ КАЛОТИНА",
+				relationId: 16242756,
                 stops: [
   { name: "МЕТРОСТАНЦИЯ СЛИВНИЦА", onDemand: false },
   { name: "НЕСТЛЕ - СОФИЯ", onDemand: false },
@@ -2292,6 +2351,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
+				relationId: 16242757,
                 stops: [
   { name: "ПЪТЕН ВЪЗЕЛ КАЛОТИНА", onDemand: false },
   { name: "УЛ. ХАН КРУМ КВ. МАКСИМ ГОРКИ", onDemand: false },
@@ -2320,6 +2380,7 @@ const lines = {
         directions: [
             {
                 name: "МАЛО БУЧИНО",
+				relationId: 17051959,
                 stops: [
 { name: "ГАРА ЗАХАРНА ФАБРИКА", onDemand: false },
 { name: "УЛ. ХАЙДУТ СИДЕР", onDemand: false },
@@ -2350,6 +2411,7 @@ const lines = {
             },
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
+				relationId: 19674308,
                 stops: [
 { name: "СЕЛО МАЛО БУЧИНО", onDemand: false },
 { name: "УЛ. ДЕМОКРАЦИЯ", onDemand: false },
@@ -2386,6 +2448,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ КНЯЖЕВО",
+				relationId: 16237584,
                 stops: [
 { name: "ГАРА ВЛАДАЯ", onDemand: false },
 { name: "СЕЛИМИЦА", onDemand: false },
@@ -2404,6 +2467,7 @@ const lines = {
             },
             {
                 name: "ГАРА ВЛАДАЯ",
+				relationId: 16237583,
                 stops: [
 { name: "АВТОСТАНЦИЯ КНЯЖЕВО", onDemand: false },
 { name: "УЛ. СИНЯТА СКАЛА", onDemand: true },
@@ -2428,6 +2492,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ МИЗИЯ",
+				relationId: 13892501,
                 stops: [
 { name: "С. МЪРЧАЕВО - ТОЛУМСКА МАХАЛА", onDemand: false },
 { name: "ТОЛУМСКА МАХАЛА", onDemand: true },
@@ -2460,7 +2525,8 @@ const lines = {
                 ]
             },
             {
-                name: "МЪРЧАЕВО (ТОЛУМСКА МАХАЛА)",
+                name: "МЪРЧАЕВО",
+				relationId: 13892502,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ МИЗИЯ", onDemand: false },
 { name: "ПГСС", onDemand: false },
@@ -2500,6 +2566,7 @@ const lines = {
         directions: [
             {
                 name: "ОВЧА КУПЕЛ 2",
+				relationId: 16148998,
                 stops: [
 { name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
 { name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
@@ -2537,6 +2604,7 @@ const lines = {
             },
             {
                 name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА",
+				relationId: 16148997,
                 stops: [
 { name: "ЖК. ОВЧА КУПЕЛ 2", onDemand: false },
 { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -2580,6 +2648,7 @@ const lines = {
         directions: [
             {
                 name: "БУЛ. ЧЕРНИ ВРЪХ",
+				relationId: 16363801,
                 stops: [
 { name: "ЗЛАТНИТЕ МОСТОВЕ", onDemand: false },
 { name: "ДЕТСКИ СТАЦИОНАР", onDemand: true },
@@ -2599,6 +2668,7 @@ const lines = {
             },
             {
                 name: "ЗЛАТНИТЕ МОСТОВЕ",
+				relationId: 16363800,
                 stops: [
 { name: "БУЛ. ЧЕРНИ ВРЪХ", onDemand: false },
 { name: "БУЛ. АКАД. ИВАН ГЕШОВ", onDemand: false },
@@ -2624,6 +2694,7 @@ const lines = {
         directions: [
             {
                 name: "ЗЛАТНИТЕ МОСТОВЕ",
+				relationId: 16363798,
                 stops: [
 { name: "БУЛ. ЦАР БОРИС III", onDemand: false },
 { name: "Ж.К. КРАСНО СЕЛО", onDemand: false },
@@ -2654,6 +2725,7 @@ const lines = {
             },
             {
                 name: "БУЛ. ЦАР БОРИС III",
+				relationId: 16363799,
                 stops: [
 { name: "ЗЛАТНИТЕ МОСТОВЕ", onDemand: false },
 { name: "ДЕТСКИ СТАЦИОНАР", onDemand: true },
@@ -2690,6 +2762,7 @@ const lines = {
         directions: [
             {
                 name: "ЗООПАРКА",
+				relationId: 17305691,
                 stops: [
 { name: "ЦЕНТЪР ПО ХИГИЕНА", onDemand: false },
 { name: "БУЛ. АКАД. ИВАН Е. ГЕШОВ", onDemand: false },
@@ -2728,6 +2801,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТЪР ПО ХИГИЕНА",
+				relationId: 17051978,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -2772,6 +2846,7 @@ const lines = {
         directions: [
             {
                 name: "ЗООПАРКА",
+				relationId: 17051982,
                 stops: [
 { name: "ХИЖА АЛЕКО", onDemand: false },
 { name: "ЗАСЛОН БАЙ КРЪСТЬО", onDemand: true },
@@ -2789,6 +2864,7 @@ const lines = {
             },
             {
                 name: "ХИЖА АЛЕКО",
+				relationId: 17051983,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
@@ -2812,6 +2888,7 @@ const lines = {
         directions: [
             {
                 name: "СИМЕОНОВО",
+				relationId: 16362263,
                 stops: [
 { name: "СЕМИНАРИЯТА", onDemand: false },
 { name: "УЛ. СТОЯН МИХАЙЛОВСКИ", onDemand: false },
@@ -2838,6 +2915,7 @@ const lines = {
             },
             {
                 name: "ДУХОВНА СЕМИНАРИЯ",
+				relationId: 16362264,
                 stops: [
 { name: "КВ. СИМЕОНОВО", onDemand: false },
 { name: "64-ТО ОУ", onDemand: false },
@@ -2870,6 +2948,7 @@ const lines = {
         directions: [
             {
                 name: "СИМЕОНОВО",
+				relationId: 16362532,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -2892,6 +2971,7 @@ const lines = {
             },
             {
                 name: "ЗООПАРКА",
+				relationId: 16362531,
                 stops: [
 { name: "КВ. СИМЕОНОВО", onDemand: false },
 { name: "64-ТО ОУ", onDemand: false },
@@ -2920,6 +3000,7 @@ const lines = {
     directions: [
         {
             name: "МЕСТНОСТ ЯРЕМА",
+			relationId: 17052025,
             stops: [
 { name: "НСБАЛ ПО ОНКОЛОГИЯ", onDemand: false },
 { name: "МГУ СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -2967,6 +3048,7 @@ const lines = {
         },
         {
             name: "НСБАЛ ПО ОНКОЛОГИЯ",
+			relationId: 17052025,
             stops: [
 { name: "МЕСТНОСТ ЯРЕМА", onDemand: false },
 { name: "ПАРАКЛИС СВ. ВМЧК МИНА", onDemand: true },
@@ -3020,6 +3102,7 @@ const lines = {
         directions: [
             {
                 name: "ПЛАНА",
+				relationId: 552425,
                 stops: [
   { name: "НСБАЛ ПО ОНКОЛОГИЯ", onDemand: false },
   { name: "МГУ СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -3071,6 +3154,7 @@ const lines = {
             },
             {
                 name: "НСБАЛ ПО ОНКОЛОГИЯ",
+				relationId: 552425,
                 stops: [
   { name: "СЕЛО ПЛАНА", onDemand: false },
   { name: "ТУРМАЧКА МАХАЛА", onDemand: false },
@@ -3128,6 +3212,7 @@ const lines = {
         directions: [
             {
                 name: "ЗАПАДЕН ПАРК",
+				relationId: 16350674,
                 stops: [
 { name: "ХОТЕЛ ПЛИСКА", onDemand: false },
 { name: "ШИПЧЕНСКИ ПРОХОД", onDemand: false },
@@ -3161,6 +3246,7 @@ const lines = {
             },
             {
                 name: "ХОТЕЛ ПЛИСКА",
+				relationId: 16350673,
                 stops: [
 { name: "Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
 { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
@@ -3200,6 +3286,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 1",
+				relationId: 16129657,
                 stops: [
 { name: "Ж.К. ОВЧА КУПЕЛ 2", onDemand: false },
 { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -3243,6 +3330,7 @@ const lines = {
             },
             {
                 name: "ОВЧА КУПЕЛ 2",
+				relationId: 16129658,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -3292,6 +3380,7 @@ const lines = {
         directions: [
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 17256889,
                 stops: [
 { name: "БУЛ. КН. МАРИЯ ЛУИЗА", onDemand: false },
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
@@ -3314,6 +3403,7 @@ const lines = {
             },
             {
                 name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА",
+				relationId: 17256890,
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. ТОДОР КАБЛЕШКОВ", onDemand: false },
@@ -3342,6 +3432,7 @@ const lines = {
         directions: [
             {
                 name: "ПЛ. ОРЛОВ МОСТ",
+				relationId: 3474565,
                 stops: [
 { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
 { name: "ЖК. СЛАТИНА", onDemand: false },
@@ -3358,6 +3449,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 3474565,
                 stops: [
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
 { name: "ВОЕННА АКАДЕМИЯ", onDemand: false },
@@ -3380,6 +3472,7 @@ const lines = {
         directions: [
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 16148337,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-4", onDemand: false },
 { name: "БЛ. 465 Ж.К. МЛАДОСТ-4", onDemand: false },
@@ -3416,6 +3509,7 @@ const lines = {
             },
             {
                 name: "МЛАДОСТ 4",
+				relationId: 16148335,
                 stops: [
 { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
 { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -3458,6 +3552,7 @@ const lines = {
         directions: [
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 3487624,
                 stops: [
 { name: "Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
 { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
@@ -3477,6 +3572,7 @@ const lines = {
             },
             {
                 name: "ЗАПАДЕН ПАРК",
+				relationId: 3487624,
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. ОПЪЛЧЕНСКА", onDemand: false },
@@ -3502,6 +3598,7 @@ const lines = {
         directions: [
             {
                 name: "ВРАЖДЕБНА",
+				relationId: 3474680,
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -3532,6 +3629,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 3474680,
                 stops: [
 { name: "ПЛОЩАДА КВ. ВРАЖДЕБНА", onDemand: false },
 { name: "КВ. ВРАЖДЕБНА", onDemand: false },
@@ -3568,6 +3666,7 @@ const lines = {
         directions: [
             {
                 name: "СТИНД 2",
+				relationId: 3479864,
                 stops: [
 { name: "КВ. ХРИСТО БОТЕВ", onDemand: false },
 { name: "УЛ. 507", onDemand: false },
@@ -3603,6 +3702,7 @@ const lines = {
             },
             {
                 name: "ХРИСТО БОТЕВ",
+				relationId: 3479864,
                 stops: [
 { name: "СТИНД – 2", onDemand: false },
 { name: "СТИНД – 1", onDemand: false },
@@ -3644,6 +3744,7 @@ const lines = {
         directions: [
             {
                 name: "СЕВЕРНА ПРОМИШЛЕНА ЗОНА",
+				relationId: 3557078,
                 stops: [
 { name: "КВ. ИВАНЯНЕ", onDemand: false },
 { name: "КМЕТСТВО ИВАНЯНЕ", onDemand: false },
@@ -3677,6 +3778,7 @@ const lines = {
             },
             {
                 name: "ИВАНЯНЕ",
+				relationId: 3557078,
                 stops: [
 { name: "СЕВЕРНА ПРОМИШЛЕНА ЗОНА", onDemand: false },
 { name: "УЛ. ГЕОРГИ КАРАСЛАВОВ", onDemand: false },
@@ -3716,6 +3818,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЮЛИН 5",
+				relationId: 19819815,
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -3750,6 +3853,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 19819816,
                 stops: [
 { name: "Ж.К. ЛЮЛИН-5", onDemand: false },
 { name: "Ж.К. ЛЮЛИН-3", onDemand: false },
@@ -3790,6 +3894,7 @@ const lines = {
         directions: [
             {
                 name: "СТАДИОН ЛОКОМОТИВ",
+				relationId: 16847315,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -3830,6 +3935,7 @@ const lines = {
             },
             {
                 name: "ЗООПАРКА",
+				relationId: 16847314,
                 stops: [
 { name: "СТАДИОН ЛОКОМОТИВ", onDemand: false },
 { name: "СОФАРМА АД", onDemand: false },
@@ -3879,6 +3985,7 @@ const lines = {
         directions: [
             {
                 name: "УЛ. ГЕНЕРАЛ ГУРКО",
+				relationId: 16928722,
                 stops: [
 { name: "ЛЕТИЩЕ СОФИЯ ТЕРМИНАЛ 2", onDemand: false },
 { name: "РВД", onDemand: false },
@@ -3906,6 +4013,7 @@ const lines = {
             },
             {
                 name: "ЛЕТИЩЕ СОФИЯ",
+				relationId: 16928721,
                 stops: [
 { name: "УЛ. ГЕН. ГУРКО", onDemand: false },
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -3939,6 +4047,7 @@ const lines = {
         directions: [
             {
                 name: "ВРЪБНИЦА 2",
+				relationId: 3488416,
                 stops: [
 { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
 { name: "УЛ. ГИНЦИ", onDemand: false },
@@ -3964,6 +4073,7 @@ const lines = {
             },
             {
                 name: "ХАДЖИ ДИМИТЪР",
+				relationId: 3488416,
                 stops: [
 { name: "Ж.К. ВРЪБНИЦА-2", onDemand: false },
 { name: "БЛ. 603 Ж.К. ВРЪБНИЦА-2", onDemand: false },
@@ -3995,6 +4105,7 @@ const lines = {
         directions: [
             {
                 name: "СВОБОДА",
+				relationId: 18356647,
                 stops: [
 { name: "АП МАЛАШЕВЦИ", onDemand: false },
 { name: "АВТОСЕРВИЗ", onDemand: false },
@@ -4024,6 +4135,7 @@ const lines = {
             },
             {
                 name: "АП МАЛАШЕВЦИ",
+				relationId: 18356646,
                 stops: [
 { name: "АП МАЛАШЕВЦИ", onDemand: false },
 { name: "АВТОСЕРВИЗ", onDemand: false },
@@ -4059,6 +4171,7 @@ const lines = {
         directions: [
             {
                 name: "ДРУЖБА 2",
+				relationId: 17554928,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -4102,6 +4215,7 @@ const lines = {
             },
             {
                 name: "ЗООПАРКА",
+				relationId: 17554929,
                 stops: [
 { name: "Ж.К. ДРУЖБА 2", onDemand: false },
 { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -4151,6 +4265,7 @@ const lines = {
         directions: [
             {
                 name: "АП МАЛАШЕВЦИ",
+				relationId: 18356643,
                 stops: [
 { name: "ГРАД БУХОВО", onDemand: false },
 { name: "УЛ. ЗАХАРИ ПОПОВ", onDemand: false },
@@ -4193,6 +4308,7 @@ const lines = {
             },
             {
                 name: "БУХОВО",
+				relationId: 18356644,
                 stops: [
 { name: "АП МАЛАШЕВЦИ", onDemand: false },
 { name: "АВТОСЕРВИЗ", onDemand: false },
@@ -4228,6 +4344,7 @@ const lines = {
         directions: [
             {
                 name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ",
+				relationId: 16149001,
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -4252,6 +4369,7 @@ const lines = {
             },
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 16149002,
                 stops: [
 { name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ", onDemand: false },
 { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -4282,6 +4400,7 @@ const lines = {
         directions: [
             {
                 name: "МАЛИНОВА ДОЛИНА",
+				relationId: 19894246,
                 stops: [
 { name: "СТЦ ИНТЕРПРЕД", onDemand: false },
 { name: "Ж.К. ДИАНАБАД", onDemand: false },
@@ -4304,6 +4423,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ЖОЛИО КЮРИ",
+				relationId: 19894246,
                 stops: [
 { name: "ХОТЕЛ АМБАСАДОР", onDemand: false },
 { name: "УЛ. БОЯН БОЯНОВ", onDemand: false },
@@ -4332,6 +4452,7 @@ const lines = {
         directions: [
             {
                 name: "КМЕТСТВО ЖЕЛЕЗНИЦА",
+				relationId: 13935929,
                 stops: [
 { name: "ЗООПАРКА", onDemand: false },
 { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -4370,6 +4491,7 @@ const lines = {
             },
             {
                 name: "ЗООПАРКА",
+				relationId: 13935928,
                 stops: [
 { name: "КМЕТСТВО ЖЕЛЕЗНИЦА", onDemand: false },
 { name: "АНЕВА ЧЕШМА", onDemand: false },
@@ -4414,6 +4536,7 @@ const lines = {
         directions: [
             {
                 name: "БЕНКОВСКИ",
+				relationId: 16347918,
                 stops: [
 { name: "ПЪТНОСТРОИТЕЛНА ТЕХНИКА", onDemand: false },
 { name: "УЛ. ВИТИНЯ", onDemand: false },
@@ -4447,6 +4570,7 @@ const lines = {
             },
             {
                 name: "ПЪТНОСТРОИТЕЛНА ТЕХНИКА",
+				relationId: 16347919,
                 stops: [
 { name: "КВ. БЕНКОВСКИ", onDemand: false },
 { name: "60-ТО ОУ", onDemand: false },
@@ -4486,6 +4610,7 @@ const lines = {
         directions: [
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 17221216,
                 stops: [
 { name: "ФОНДОВИ ЖИЛИЩА", onDemand: false },
 { name: "БУЛАВТО", onDemand: false },
@@ -4507,6 +4632,7 @@ const lines = {
             },
             {
                 name: "ФОНДОВИ ЖИЛИЩА",
+				relationId: 17221217,
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -4534,6 +4660,7 @@ const lines = {
         directions: [
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 16148999,
                 stops: [
 { name: "Ж.К. ОВЧА КУПЕЛ 2", onDemand: false },
 { name: "ПАЗАР ОВЧА КУПЕЛ", onDemand: false },
@@ -4572,6 +4699,7 @@ const lines = {
             },
             {
                 name: "ОВЧА КУПЕЛ 2",
+				relationId: 16149000,
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -4616,6 +4744,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ОВЧА КУПЕЛ",
+				relationId: 17221189,
                 stops: [
 { name: "В.З. ЛЮЛИН", onDemand: false },
 { name: "ВИЛИТЕ", onDemand: false },
@@ -4638,6 +4767,7 @@ const lines = {
             },
             {
                 name: "ВИЛНА ЗОНА ЛЮЛИН",
+				relationId: 17221188,
                 stops: [
 { name: "АВТОСТАНЦИЯ ОВЧА КУПЕЛ", onDemand: false },
 { name: "НЦ ПО РЕХАБИЛИТАЦИЯ", onDemand: false },
@@ -4666,6 +4796,7 @@ const lines = {
         directions: [
             {
                 name: "КАРПУЗИЦА",
+				relationId: 16197853,
                 stops: [
 { name: "БОЯНСКА ЦЪРКВА", onDemand: false },
 { name: "БОЯНСКО ХАНЧЕ", onDemand: false },
@@ -4693,6 +4824,7 @@ const lines = {
             },
             {
                 name: "БОЯНСКА ЦЪРКВА",
+				relationId: 16197854,
                 stops: [
 { name: "КВ. КАРПУЗИЦА", onDemand: false },
 { name: "УЛ. БУРЯ", onDemand: false },
@@ -4726,6 +4858,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЮЛИН 5",
+				relationId: 19696445,
                 stops: [
 { name: "СТАДИОН ЛОКОМОТИВ", onDemand: false },
 { name: "СОФАРМА АД", onDemand: false },
@@ -4760,6 +4893,7 @@ const lines = {
             },
             {
                 name: "СТАДИОН ЛОКОМОТИВ",
+				relationId: 19696446,
                 stops: [
 { name: "Ж.К. ЛЮЛИН-5", onDemand: false },
 { name: "Ж.К. ЛЮЛИН-3", onDemand: false },
@@ -4796,6 +4930,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ АЛЕКСАНДЪР ТЕОДОРОВ-БАЛАН",
+				relationId: 15699686,
                 stops: [
 { name: "ПК СПАРТАК", onDemand: false },
 { name: "ПК СПАРТАК", onDemand: false },
@@ -4821,6 +4956,7 @@ const lines = {
             },
             {
                 name: "ЛОЗЕНЕЦ",
+				relationId: 15699686,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ АКАД.А.Т.-БАЛАН", onDemand: false },
 { name: "БЛ. 323 Ж.К. МЛАДОСТ 3", onDemand: false },
@@ -4852,6 +4988,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 1",
+				relationId: 15698641,
                 stops: [
 { name: "Ж.К. БЪКСТОН", onDemand: false },
 { name: "ПАРАКЛИС СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -4877,6 +5014,7 @@ const lines = {
             },
             {
                 name: "БЪКСТОН",
+				relationId: 15698641,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "БЛ. 245 Ж.К. МЛАДОСТ 2", onDemand: false },
@@ -4908,6 +5046,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 1",
+				relationId: 16198541,
                 stops: [
 { name: "Ж.К. ЛЮЛИН-1,2", onDemand: false },
 { name: "БЛ. 21 Ж.К. ЛЮЛИН-1", onDemand: false },
@@ -4956,7 +5095,8 @@ const lines = {
                 ]
             },
             {
-                name: "ЛЮЛИН 1, 2",
+                name: "ЛЮЛИН 1,2",
+				relationId: 16198540,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -5012,6 +5152,7 @@ const lines = {
         directions: [
             {
                 name: "БУХОВО",
+				relationId: 17521277,
                 stops: [
   { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
   { name: "БУЛ. ВЛАДИМИР ВАЗОВ", onDemand: false },
@@ -5055,6 +5196,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 17521276,
                 stops: [
   { name: "ГРАД БУХОВО", onDemand: false },
   { name: "УЛ. ЗАХАРИ ПОПОВ", onDemand: false },
@@ -5104,6 +5246,7 @@ const lines = {
         directions: [
             {
                 name: "ЖЕЛЯВА",
+				relationId: 17521282,
                 stops: [
   { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
   { name: "БУЛ. ВЛАДИМИР ВАЗОВ", onDemand: false },
@@ -5143,6 +5286,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 17521281,
                 stops: [
   { name: "СЕЛО ЖЕЛЯВА", onDemand: false },
   { name: "УЛ. 24-ТИ МАЙ", onDemand: false },
@@ -5188,6 +5332,7 @@ const lines = {
         directions: [
             {
                 name: "МК КРЕМИКОВЦИ",
+				relationId: 3574122,
                 stops: [
   { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
   { name: "УЛ. СТ. ДОСПЕВСКИ", onDemand: false },
@@ -5217,6 +5362,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 3574122,
                 stops: [
   { name: "МК КРЕМИКОВЦИ", onDemand: false },
   { name: "ИНСТИТУТ ПО ЧЕРНА МЕТАЛУРГИЯ", onDemand: true },
@@ -5252,6 +5398,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЕВСКИ Г",
+				relationId: 16908459,
                 stops: [
   { name: "ЗООПАРКА", onDemand: false },
   { name: "УЛ. СРЕБЪРНА", onDemand: false },
@@ -5282,6 +5429,7 @@ const lines = {
             },
             {
                 name: "ЗООПАРКА",
+				relationId: 16908460,
                 stops: [
   { name: "Ж.К. ЛЕВСКИ-Г", onDemand: false },
   { name: "БЛ. 10 Ж.К. ЛЕВСКИ-Г", onDemand: false },
@@ -5318,6 +5466,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 17216895,
                 stops: [
   { name: "ЛИФТ СИМЕОНОВО", onDemand: false },
   { name: "РАЗКЛОНА ЗА ЛИФТ СИМЕОНОВО", onDemand: false },
@@ -5341,6 +5490,7 @@ const lines = {
             },
             {
                 name: "ЛИФТА СИМЕОНОВО",
+				relationId: 17216896,
                 stops: [
   { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
   { name: "СК ЦСКА", onDemand: false },
@@ -5370,6 +5520,7 @@ const lines = {
         directions: [
             {
                 name: "ОБЕЛЯ 1",
+				relationId: 2620838,
                 stops: [
   { name: "ПЛОДОХРАНИЛИЩЕ", onDemand: false },
   { name: "ГАРА ВОЛУЯК", onDemand: false },
@@ -5396,6 +5547,7 @@ const lines = {
             },
             {
                 name: "ВОЛУЯК",
+				relationId: 2620838,
                 stops: [
   { name: "Ж.К. ОБЕЛЯ-1", onDemand: false },
   { name: "БЛ. 111 Ж.К. ОБЕЛЯ-1", onDemand: false },
@@ -5428,6 +5580,7 @@ const lines = {
         directions: [
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 16148338,
                 stops: [
   { name: "Ж.К. ДРУЖБА 2", onDemand: false },
   { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -5461,6 +5614,7 @@ const lines = {
             },
             {
                 name: "ДРУЖБА 2",
+				relationId: 16148336,
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. КОСТЕНСКИ ВОДОПАД", onDemand: false },
@@ -5500,6 +5654,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 4",
+				relationId: 3476948,
                 stops: [
   { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
   { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -5528,6 +5683,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 3476948,
                 stops: [
   { name: "Ж.К. МЛАДОСТ-4", onDemand: false },
   { name: "БЛ. 480 Ж.К. МЛАДОСТ-4", onDemand: false },
@@ -5562,6 +5718,7 @@ const lines = {
         directions: [
             {
                 name: "БУЛ. ПРАГА",
+				relationId: 58632,
                 stops: [
   { name: "КВ. ГОРНА БАНЯ", onDemand: false },
   { name: "УЛ. МАК", onDemand: false },
@@ -5583,6 +5740,7 @@ const lines = {
             },
             {
                 name: "ГОРНА БАНЯ",
+				relationId: 58632,
                 stops: [
   { name: "БУЛ. ПРАГА", onDemand: false },
   { name: "ПЛ. РУСКИ ПАМЕТНИК", onDemand: false },
@@ -5610,6 +5768,7 @@ const lines = {
         directions: [
             {
                 name: "СУ СВ. КЛИМЕНТ ОХРИДСКИ",
+				relationId: 16149004,
                 stops: [
   { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
   { name: "СК НА НСА", onDemand: false },
@@ -5633,6 +5792,7 @@ const lines = {
             },
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 16149003,
                 stops: [
   { name: "СУ СВ.КЛИМЕНТ ОХРИДСКИ", onDemand: false },
   { name: "ПЛ. ОРЛОВ МОСТ", onDemand: false },
@@ -5662,6 +5822,7 @@ const lines = {
         directions: [
             {
                 name: "ВРЪБНИЦА 2",
+				relationId: 17299856,
                 stops: [
   { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
   { name: "УЛ. ГИНЦИ", onDemand: false },
@@ -5689,6 +5850,7 @@ const lines = {
             },
             {
                 name: "ХАДЖИ ДИМИТЪР",
+				relationId: 17299857,
                 stops: [
   { name: "Ж.К. ВРЪБНИЦА-2", onDemand: false },
   { name: "БЛ. 603 Ж.К. ВРЪБНИЦА-2", onDemand: false },
@@ -5722,6 +5884,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ ВИТОША",
+				relationId: 16946684,
                 stops: [
   { name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ", onDemand: false },
   { name: "СК ЦСКА", onDemand: false },
@@ -5741,6 +5904,7 @@ const lines = {
             },
             {
                 name: "АВТОСТАНЦИЯ ГЕО МИЛЕВ",
+				relationId: 16946683,
                 stops: [
   { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
   { name: "МБАЛ ВИТА", onDemand: false },
@@ -5766,6 +5930,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ Г. М. ДИМИТРОВ",
+				relationId: 17299827,
                 stops: [
   { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
   { name: "СК НА НСА", onDemand: false },
@@ -5781,6 +5946,7 @@ const lines = {
             },
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 17299826,
                 stops: [
   { name: "МЕТРОСТАНЦИЯ Г. М. ДИМИТРОВ", onDemand: false },
   { name: "МГУ СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -5802,6 +5968,7 @@ const lines = {
         directions: [
             {
                 name: "ДРУЖБА 2",
+				relationId: 16148340,
                 stops: [
   { name: "НИМ", onDemand: false },
   { name: "КВ. МАНАСТИРСКИ ЛИВАДИ", onDemand: false },
@@ -5823,6 +5990,7 @@ const lines = {
             },
             {
                 name: "НИМ",
+				relationId: 16148339,
                 stops: [
   { name: "Ж.К. ДРУЖБА 2", onDemand: false },
   { name: "БЛ. 501 Ж.К. ДРУЖБА 2", onDemand: false },
@@ -5850,6 +6018,7 @@ const lines = {
         directions: [
             {
                 name: "КУЛИНАРЕН К-Т ПЕЙФИЛ",
+				relationId: 17009882,
                 stops: [
   { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
   { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -5880,6 +6049,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 17009883,
                 stops: [
   { name: "КУЛИНАРЕН К-Т ПЕЙФИЛ", onDemand: false },
   { name: "ВИК ЕАД СОФИЯ", onDemand: false },
@@ -5916,6 +6086,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЮЛИН 1,2",
+				relationId: 17009824,
                 stops: [
   { name: "БУЛ. ИЛИЯНЦИ-ПОДЛЕЗА", onDemand: false },
   { name: "КОТЛОСТРОЕНЕ АД", onDemand: false },
@@ -5946,6 +6117,7 @@ const lines = {
             },
             {
                 name: "БУЛ. ИЛИЯНЦИ-ПОДЛЕЗА",
+				relationId: 17009823,
                 stops: [
   { name: "Ж.К. ЛЮЛИН-1,2", onDemand: false },
   { name: "БЛ. 11 Ж.К. ЛЮЛИН-1", onDemand: false },
@@ -5982,6 +6154,7 @@ const lines = {
         directions: [
             {
                 name: "СТОЧНА ГАРА",
+				relationId: 17008663,
                 stops: [
   { name: "Ж.К. ЛЮЛИН-5", onDemand: false },
   { name: "УЛ. ПОРУЧИК ГР. ЗАГОРСКИ", onDemand: false },
@@ -6010,6 +6183,7 @@ const lines = {
             },
             {
                 name: "ЛЮЛИН 5",
+				relationId: 17008662,
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. КНЯЗ БОРИС I", onDemand: false },
@@ -6043,6 +6217,7 @@ const lines = {
         directions: [
             {
                 name: "МЛАДОСТ 1",
+				relationId: 17008534,
                 stops: [
 { name: "СЕЛО БИСТРИЦА", onDemand: false },
 { name: "НАЧАЛО С. БИСТРИЦА", onDemand: false },
@@ -6076,6 +6251,7 @@ const lines = {
             },
             {
                 name: "БИСТРИЦА",
+				relationId: 17008535,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-1", onDemand: false },
 { name: "ПОСОЛСТВАТА", onDemand: false },
@@ -6115,6 +6291,7 @@ const lines = {
         directions: [
             {
                 name: "АП ДРУЖБА",
+				relationId: 17006481,
                 stops: [
 { name: "ЦЕНТРАЛНА ГАРА", onDemand: false },
 { name: "УЛ. КЛОКОТНИЦА", onDemand: false },
@@ -6149,6 +6326,7 @@ const lines = {
             },
             {
                 name: "ЦЕНТРАЛНА ГАРА",
+				relationId: 17006482,
                 stops: [
 { name: "АП ДРУЖБА", onDemand: false },
 { name: "БЛ. 501 Ж.К. ДРУЖБА 2", onDemand: false },
@@ -6190,6 +6368,7 @@ const lines = {
         directions: [
             {
                 name: "ГАРА СОФИЯ СЕВЕР",
+				relationId: 17006096,
                 stops: [
 { name: "ТЕХНОПОЛИС Ж.К. МЛАДОСТ 4", onDemand: false },
 { name: "КИНО АРЕНА II", onDemand: false },
@@ -6228,6 +6407,7 @@ const lines = {
             },
             {
                 name: "ТЕХНОПОЛИС МЛАДОСТ 4",
+				relationId: 17006424,
                 stops: [
 { name: "ГАРА СОФИЯ СЕВЕР", onDemand: false },
 { name: "МОДНА КЪЩА АГРЕСИЯ", onDemand: false },
@@ -6272,6 +6452,7 @@ const lines = {
         directions: [
             {
                 name: "УМБАЛСМ ПИРОГОВ",
+				relationId: 3492546,
                 stops: [
 { name: "ГАРА ИСКЪР", onDemand: false },
 { name: "28-МИ ПОЩЕНСКИ КЛОН", onDemand: false },
@@ -6304,6 +6485,7 @@ const lines = {
             },
             {
                 name: "ГАРА ИСКЪР",
+				relationId: 3492546,
                 stops: [
 { name: "УМБАЛСМ ПИРОГОВ", onDemand: false },
 { name: "УМБАЛ АЛЕКСАНДРОВСКА", onDemand: false },
@@ -6342,6 +6524,7 @@ const lines = {
         directions: [
             {
                 name: "КРАСНО СЕЛО",
+				relationId: 16335422,
                 stops: [
 { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
 { name: "УЛ. ТОДОР КАБЛЕШКОВ", onDemand: false },
@@ -6357,6 +6540,7 @@ const lines = {
             },
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 16335423,
                 stops: [
 { name: "Ж.К. КРАСНО СЕЛО", onDemand: false },
 { name: "КВ. ОВЧА КУПЕЛ", onDemand: false },
@@ -6378,6 +6562,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+				relationId: 16333620,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
 { name: "УЛ. МАК", onDemand: false },
@@ -6388,6 +6573,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+				relationId: 16333620,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
 { name: "УЛ. МАК", onDemand: false },
@@ -6404,6 +6590,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+				relationId: 16334912,
                 stops: [
 { name: "В.З. ЛЮЛИН", onDemand: false },
 { name: "ВИЛИТЕ", onDemand: false },
@@ -6419,6 +6606,7 @@ const lines = {
             },
             {
                 name: "ВИЛНА ЗОНА ЛЮЛИН",
+				relationId: 16334915,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
 { name: "ХОТЕЛ ГОРНА БАНЯ", onDemand: false },
@@ -6441,6 +6629,7 @@ const lines = {
         directions: [
             {
                 name: "КАРПУЗИЦА",
+				relationId: 16335256,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ", onDemand: false },
 { name: "ХОТЕЛ ГОРНА БАНЯ", onDemand: false },
@@ -6455,6 +6644,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
+				relationId: 16335257,
                 stops: [
 { name: "ПЛ. СРЕД СЕЛО", onDemand: false },
 { name: "УЛ. ПОЛК. СТ. БАЧИЙСКИ", onDemand: false },
@@ -6474,6 +6664,7 @@ const lines = {
         directions: [
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 16408126,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
 { name: "ХЛЕБОЗАВОДА", onDemand: false },
@@ -6491,6 +6682,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ВИТОША",
+				relationId: 16408125,
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -6514,6 +6706,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЮЛИН 1,2",
+				relationId: 16421013,
                 stops: [
 { name: "Ж.К. МЛАДОСТ-4", onDemand: false },
 { name: "БЛ. 465 Ж.К. МЛАДОСТ-4", onDemand: false },
@@ -6564,6 +6757,7 @@ const lines = {
             },
             {
                 name: "МЛАДОСТ 4",
+				relationId: 16125837,
                 stops: [
 { name: "Ж.К. ЛЮЛИН-1,2", onDemand: false },
 { name: "БЛ. 264 Ж.К. ЛЮЛИН-2", onDemand: false },
@@ -6620,6 +6814,7 @@ const lines = {
         directions: [
             {
                 name: "СТУДЕНТСКИ ГРАД",
+				relationId: 16607223,
                 stops: [
 { name: "КВ. ОБЕЛЯ", onDemand: false },
 { name: "УЛ. 2", onDemand: false },
@@ -6666,6 +6861,7 @@ const lines = {
             },
             {
                 name: "ОБЕЛЯ",
+				relationId: 16607222,
                 stops: [
 { name: "СТУДЕНТСКИ ГРАД", onDemand: false },
 { name: "СК НА НСА", onDemand: false },
@@ -6718,6 +6914,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЕВСКИ Г",
+				relationId: 16868617,
                 stops: [
   { name: "ЖК. ОВЧА КУПЕЛ 2", onDemand: false },
   { name: "ПАЗАРА ОВЧА КУПЕЛ", onDemand: false },
@@ -6763,6 +6960,7 @@ const lines = {
             },
             {
                 name: "ОВЧА КУПЕЛ 2",
+				relationId: 16868616,
                 stops: [
 { name: "Ж.К. ЛЕВСКИ-Г", onDemand: false },
 { name: "БЛ. 10 Ж.К. ЛЕВСКИ-Г", onDemand: false },
@@ -6814,6 +7012,7 @@ const lines = {
         directions: [
             {
                 name: "ДРУЖБА 2",
+				relationId: 16868618,
                 stops: [
 { name: "ЖК. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
 { name: "УЛ. КОСТЕНСКИ ВОДОПАД", onDemand: false },
@@ -6890,6 +7089,7 @@ const lines = {
             },
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 16868619,
                 stops: [
 { name: "ЖК. ДРУЖБА 2", onDemand: false },
 { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -6966,6 +7166,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЕВСКИ Г",
+				relationId: 13973778,
                 stops: [
   { name: "ПЕТА ГРАДСКА БОЛНИЦА", onDemand: false },
   { name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
@@ -6997,6 +7198,7 @@ const lines = {
             },
             {
                 name: "ПЕТА ГРАДСКА БОЛНИЦА",
+				relationId: 13973777,
                 stops: [
   { name: "Ж.К. ЛЕВСКИ Г", onDemand: false },
   { name: "УЛ. СТ. ДОСПЕВСКИ", onDemand: false },
@@ -7034,6 +7236,7 @@ const lines = {
         directions: [
             {
                 name: "ХАДЖИ ДИМИТЪР",
+				relationId: 13974505,
                 stops: [
   { name: "Ж.К. БЪКСТОН", onDemand: false },
   { name: "ПАРАКЛИС СВ. ИВ. РИЛСКИ", onDemand: false },
@@ -7067,6 +7270,7 @@ const lines = {
             },
             {
                 name: "БЪКСТОН",
+				relationId: 13974504,
                 stops: [
   { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
   { name: "МАК ГАРАЖ", onDemand: false },
@@ -7106,6 +7310,7 @@ const lines = {
         directions: [
             {
                 name: "УМБАЛ СВЕТА АННА",
+				relationId: 13978136,
                 stops: [
   { name: "Ж.К. ЛЕВСКИ Г", onDemand: false },
   { name: "БЛ. 28 Ж.К. ЛЕВСКИ-Г", onDemand: false },
@@ -7132,6 +7337,7 @@ const lines = {
             },
             {
                 name: "ЛЕВСКИ Г",
+				relationId: 13978135,
                 stops: [
   { name: "УМБАЛ СВЕТА АННА – УХО", onDemand: false },
   { name: "СОФИЯ ТЕХ ПАРК", onDemand: false },
@@ -7164,6 +7370,7 @@ const lines = {
         directions: [
             {
                 name: "ХАДЖИ ДИМИТЪР",
+				relationId: 13982083,
                 stops: [
   { name: "ЖК. ДРУЖБА 2", onDemand: false },
   { name: "УЛ. ДИМИТЪР ПЕШЕВ", onDemand: false },
@@ -7199,6 +7406,7 @@ const lines = {
             },
             {
                 name: "ДРУЖБА 2",
+				relationId: 13982084,
                 stops: [
   { name: "Ж.К. ХАДЖИ ДИМИТЪР", onDemand: false },
   { name: "УЛ. МАКГАХАН", onDemand: false },
@@ -7240,6 +7448,7 @@ const lines = {
         directions: [
             {
                 name: "УМБАЛ СВЕТА АННА",
+				relationId: 14156822,
                 stops: [
   { name: "НАДЛЕЗ НАДЕЖДА", onDemand: false },
   { name: "БУЛ. КНЯГИНЯ МАРИЯ ЛУИЗА", onDemand: false },
@@ -7267,6 +7476,7 @@ const lines = {
             },
             {
                 name: "НАДЛЕЗ НАДЕЖДА",
+				relationId: 14156823,
                 stops: [
   { name: "УМБАЛ СВЕТА АННА", onDemand: false },
   { name: "СОФИЯ ТЕХ ПАРК", onDemand: false },
@@ -7300,6 +7510,7 @@ const lines = {
         directions: [
             {
                 name: "ЛОЗЕНЕЦ",
+				relationId: 14354956,
                 stops: [
   { name: "Ж.К. ЛЮЛИН 3 – УХО", onDemand: false },
   { name: "Ж.К. ЛЮЛИН 3", onDemand: false },
@@ -7336,6 +7547,7 @@ const lines = {
             },
             {
                 name: "ЛЮЛИН 3",
+				relationId: 14355031,
                 stops: [
   { name: "Ж.К. ЛОЗЕНЕЦ", onDemand: false },
   { name: "ХОТЕЛ ХЕМУС", onDemand: false },
@@ -7378,6 +7590,7 @@ const lines = {
         directions: [
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 14597380,
                 stops: [
   { name: "Ж.К. ЛЮЛИН-3 – УХО", onDemand: false },
   { name: "Ж.К. ЛЮЛИН-3", onDemand: false },
@@ -7418,6 +7631,7 @@ const lines = {
             },
             {
                 name: "ЛЮЛИН 3",
+				relationId: 14597381,
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -7464,6 +7678,7 @@ const lines = {
         directions: [
             {
                 name: "ГОЦЕ ДЕЛЧЕВ",
+				relationId: 15066859,
                 stops: [
   { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
   { name: "УЛ. ИСКЪР", onDemand: false },
@@ -7490,6 +7705,7 @@ const lines = {
             },
             {
                 name: "СТОЧНА ГАРА",
+				relationId: 15066858,
                 stops: [
   { name: "Ж.К. ГОЦЕ ДЕЛЧЕВ", onDemand: false },
   { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -7522,6 +7738,7 @@ const lines = {
         directions: [
             {
                 name: "СТОЧНА ГАРА",
+				relationId: 16364046,
                 stops: [
 { name: "Ж.К. БОРОВО", onDemand: false },
 { name: "20-ти ДКЦ", onDemand: false },
@@ -7549,6 +7766,7 @@ const lines = {
             },
             {
                 name: "БОРОВО",
+				relationId: 16364046,
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. ДУНАВ", onDemand: false },
@@ -7582,6 +7800,7 @@ const lines = {
         directions: [
             {
                 name: "СТОЧНА ГАРА",
+				relationId: 16946990,
                 stops: [
 { name: "ДЕПО ИСКЪР", onDemand: false },
 { name: "БЛ. 170 Ж.К. ДРУЖБА-1", onDemand: false },
@@ -7608,6 +7827,7 @@ const lines = {
             },
             {
                 name: "ДРУЖБА 1",
+				relationId: 16946991,
                 stops: [
 { name: "ПЛ. СТОЧНА ГАРА", onDemand: false },
 { name: "УЛ. ИСКЪР", onDemand: false },
@@ -7640,6 +7860,7 @@ const lines = {
         directions: [
             {
                 name: "НАДЛЕЗ НАДЕЖДА",
+				relationId: 12684731,
                 stops: [
 { name: "ЖК. ИВАН ВАЗОВ", onDemand: false },
 { name: "ЧИТАЛИЩЕ Д-Р П. БЕРОН", onDemand: false },
@@ -7661,6 +7882,7 @@ const lines = {
             },
             {
                 name: "ИВАН ВАЗОВ",
+				relationId: 12684730,
                 stops: [
 { name: "НАДЛЕЗ НАДЕЖДА", onDemand: false },
 { name: "ПЕТА ГРАДСКА БОЛНИЦА", onDemand: false },
@@ -7688,6 +7910,7 @@ const lines = {
         directions: [
             {
                 name: "ОРЛАНДОВЦИ",
+				relationId: 12695833,
                 stops: [
 { name: "ГАРА ЗАХАРНА ФАБРИКА", onDemand: false },
 { name: "УЛ. ХАЙДУТ СИДЕР", onDemand: false },
@@ -7713,6 +7936,7 @@ const lines = {
             },
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
+				relationId: 12695832,
                 stops: [
 { name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
 { name: "КАТОЛИЧЕСКИ ГРОБИЩЕН ПАРК", onDemand: false },
@@ -7744,6 +7968,7 @@ const lines = {
         directions: [
             {
                 name: "ОРЛАНДОВЦИ",
+				relationId: 12696014,
                 stops: [
 { name: "БУЛ. НИКОЛА ПЕТКОВ", onDemand: false },
 { name: "КВ. ПАВЛОВО", onDemand: false },
@@ -7771,6 +7996,7 @@ const lines = {
             },
             {
                 name: "БУЛ. НИКОЛА ПЕТКОВ",
+				relationId: 12696013,
                 stops: [
 { name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
 { name: "КАТОЛИЧЕСКИ ГРОБИЩЕН ПАРК", onDemand: false },
@@ -7804,6 +8030,7 @@ const lines = {
         directions: [
             {
                 name: "КНЯЖЕВО",
+				relationId: 12696828,
                 stops: [
 { name: "СЪДЕБНА ПАЛАТА", onDemand: false },
 { name: "ПЛ. МАКЕДОНИЯ", onDemand: false },
@@ -7826,6 +8053,7 @@ const lines = {
             },
             {
                 name: "СЪДЕБНА ПАЛАТА",
+				relationId: 12696829,
                 stops: [
 { name: "КВ. КНЯЖЕВО", onDemand: false },
 { name: "УЛ. РАЙСКА ГРАДИНА", onDemand: false },
@@ -7854,6 +8082,7 @@ const lines = {
         directions: [
             {
                 name: "ИВАН ВАЗОВ",
+				relationId: 12697124,
                 stops: [
 { name: "ЖК ОБЕЛЯ-2", onDemand: false },
 { name: "140-ТО СОУ", onDemand: false },
@@ -7886,6 +8115,7 @@ const lines = {
             },
             {
                 name: "ОБЕЛЯ 2",
+				relationId: 12697125,
                 stops: [
 { name: "ЖК. ИВАН ВАЗОВ", onDemand: false },
 { name: "ЧИТАЛИЩЕ Д-Р П. БЕРОН", onDemand: false },
@@ -7924,6 +8154,7 @@ const lines = {
         directions: [
             {
                 name: "МАНАСТИРСКИ ЛИВАДИ - ЗАПАД",
+				relationId: 12699444,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ХАН КУБРАТ", onDemand: false },
 { name: "КВ. ТРИЪГЪЛНИКА", onDemand: false },
@@ -7947,6 +8178,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ХАН КУБРАТ",
+				relationId: 12699445,
                 stops: [
 { name: "КВ. МАНАСТИРСКИ ЛИВАДИ – ЗАПАД", onDemand: false },
 { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -7976,6 +8208,7 @@ const lines = {
         directions: [
             {
                 name: "МЕТРОСТАНЦИЯ ВИТОША",
+				relationId: 12700646,
                 stops: [
 { name: "ГАРА ЗАХАРНА ФАБРИКА", onDemand: false },
 { name: "УЛ. ХАЙДУТ СИДЕР", onDemand: false },
@@ -8004,6 +8237,7 @@ const lines = {
             },
             {
                 name: "ГАРА ЗАХАРНА ФАБРИКА",
+				relationId: 12700647,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
 { name: "БУЛ. НИКОЛА ВАПЦАРОВ", onDemand: false },
@@ -8038,6 +8272,7 @@ const lines = {
         directions: [
             {
                 name: "ИЛИЯНЦИ",
+				relationId: 12703383,
                 stops: [
 { name: "КВ. КНЯЖЕВО", onDemand: false },
 { name: "УЛ. РАЙСКА ГРАДИНА", onDemand: false },
@@ -8072,6 +8307,7 @@ const lines = {
             },
             {
                 name: "КНЯЖЕВО",
+				relationId: 12703384,
                 stops: [
 { name: "КВ. ИЛИЯНЦИ", onDemand: false },
 { name: "УЛ. КИРИЛ БЛАГОЕВ", onDemand: false },
@@ -8112,6 +8348,7 @@ const lines = {
         directions: [
             {
                 name: "ПЛ. ЖУРНАЛИСТ",
+				relationId: 15926647,
                 stops: [
 { name: "КВ. ИЛИЯНЦИ", onDemand: false },
 { name: "УЛ. КИРИЛ БЛАГОЕВ", onDemand: false },
@@ -8137,6 +8374,7 @@ const lines = {
             },
             {
                 name: "ИЛИЯНЦИ",
+				relationId: 15926646,
                 stops: [
 { name: "ПЛ. ЖУРНАЛИСТ", onDemand: false },
 { name: "УАСГ", onDemand: false },
@@ -8168,6 +8406,7 @@ const lines = {
         directions: [
             {
                 name: "БЪКСТОН",
+				relationId: 17576032,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ВИТОША", onDemand: false },
 { name: "БУЛ. НИКОЛА ВАПЦАРОВ", onDemand: false },
@@ -8194,6 +8433,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ВИТОША",
+				relationId: 17576031,
                 stops: [
 { name: "Ж.К. БЪКСТОН", onDemand: false },
 { name: "Ж.К. КРАСНО СЕЛО", onDemand: false },
@@ -8226,6 +8466,7 @@ const lines = {
         directions: [
             {
                 name: "ПЛ. ЖУРНАЛИСТ",
+				relationId: 12704011,
                 stops: [
 { name: "КВ. ОРЛАНДОВЦИ", onDemand: false },
 { name: "КАТОЛИЧЕСКИ ГРОБИЩЕН ПАРК", onDemand: false },
@@ -8245,6 +8486,7 @@ const lines = {
             },
             {
                 name: "ОРЛАНДОВЦИ",
+				relationId: 12704012,
                 stops: [
 { name: "ПЛ. ЖУРНАЛИСТ", onDemand: false },
 { name: "УАСГ", onDemand: false },
@@ -8270,6 +8512,7 @@ const lines = {
         directions: [
             {
                 name: "ДЕПО ИСКЪР",
+				relationId: 12497663,
                 stops: [
 { name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА", onDemand: false },
 { name: "БУЛ. ХРИСТО БОТЕВ", onDemand: false },
@@ -8305,6 +8548,7 @@ const lines = {
             },
             {
                 name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА",
+				relationId: 12704101,
                 stops: [
 { name: "ДЕПО ИСКЪР", onDemand: false },
 { name: "СОФИЯ МЕД АД", onDemand: false },
@@ -8398,6 +8642,7 @@ const lines = {
         directions: [
             {
                 name: "АВТОСТАНЦИЯ ИЗТОК",
+				relationId: 12712490,
                 stops: [
 { name: "Ж.К. КРАСНА ПОЛЯНА", onDemand: false },
 { name: "УЛ. ДОБРОТИЧ", onDemand: false },
@@ -8430,6 +8675,7 @@ const lines = {
             },
             {
                 name: "КРАСНА ПОЛЯНА",
+				relationId: 12712489,
                 stops: [
 { name: "АВТОСТАНЦИЯ ИЗТОК", onDemand: false },
 { name: "УЛ. ПОП ГРУЙО", onDemand: false },
@@ -8468,6 +8714,7 @@ const lines = {
         directions: [
             {
                 name: "УЛ. ОБИКОЛНА",
+				relationId: 12704110,
                 stops: [
   { name: "Ж.К. ГЕО МИЛЕВ", onDemand: false },
   { name: "РАЗКЛОНА ЗА ЛЕТИЩЕТО", onDemand: false },
@@ -8488,6 +8735,7 @@ const lines = {
             },
             {
                 name: "ГЕО МИЛЕВ",
+				relationId: 12704111,
                 stops: [
   { name: "УЛ. ОБИКОЛНА", onDemand: false },
   { name: "БУЛ. ПРОФ. ЦВ. ЛАЗАРОВ", onDemand: false },
@@ -8514,6 +8762,7 @@ const lines = {
         directions: [
             {
                 name: "ГАРА СОФИЯ СЕВЕР",
+				relationId: 14001352,
                 stops: [
   { name: "КВ. МАНАСТИРСКИ ЛИВАДИ – ЗАПАД", onDemand: false },
   { name: "УЛ. Т. КАБЛЕШКОВ", onDemand: false },
@@ -8541,6 +8790,7 @@ const lines = {
             },
             {
                 name: "МАНАСТИРСКИ ЛИВАДИ - ЗАПАД",
+				relationId: 14001353,
                 stops: [
   { name: "ГАРА СОФИЯ СЕВЕР", onDemand: false },
   { name: "МОДНА КЪЩА АГРЕСИЯ", onDemand: false },
@@ -8574,6 +8824,7 @@ const lines = {
         directions: [
             {
                 name: "БИЗНЕС ПАРК",
+				relationId: 7734090,
                 stops: [
 { name: "СЛИВНИЦА", onDemand: false },
 { name: "ЛЮЛИН", onDemand: false },
@@ -8595,6 +8846,7 @@ const lines = {
             },
             {
                 name: "СЛИВНИЦА",
+				relationId: 406492,
                 stops: [
 { name: "БИЗНЕС ПАРК СОФИЯ", onDemand: false },
 { name: "АЛЕКСАНДЪР ТЕОДОРОВ - БАЛАН", onDemand: false },
@@ -8622,6 +8874,7 @@ const lines = {
         directions: [
             {
                 name: "ОБЕЛЯ",
+				relationId: 7734091,
                 stops: [
 { name: "ВИТОША", onDemand: false },
 { name: "ДЖЕЙМС БАУЧЕР", onDemand: false },
@@ -8640,6 +8893,7 @@ const lines = {
             },
             {
                 name: "ВИТОША",
+				relationId: 3549690,
                 stops: [
 { name: "ОБЕЛЯ", onDemand: false },
 { name: "ЛОМСКО ШОСЕ", onDemand: false },
@@ -8664,6 +8918,7 @@ const lines = {
         directions: [
             {
                 name: "ХАДЖИ ДИМИТЪР",
+				relationId: 11299963,
                 stops: [
 { name: "ГОРНА БАНЯ", onDemand: false },
 { name: "ОВЧА КУПЕЛ II", onDemand: false },
@@ -8681,6 +8936,7 @@ const lines = {
             },
             {
                 name: "ГОРНА БАНЯ",
+				relationId: 8403504,
                 stops: [
 { name: "ХАДЖИ ДИМИТЪР", onDemand: false },
 { name: "ТЕАТРАЛНА", onDemand: false },
@@ -8704,6 +8960,7 @@ const lines = {
         directions: [
             {
                 name: "ЛЕТИЩЕ СОФИЯ",
+				relationId: 11613157,
                 stops: [
 { name: "СЛИВНИЦА", onDemand: false },
 { name: "ЛЮЛИН", onDemand: false },
@@ -8728,6 +8985,7 @@ const lines = {
             },
             {
                 name: "СЛИВНИЦА",
+				relationId: 11613156,
                 stops: [
 { name: "ЛЕТИЩЕ СОФИЯ", onDemand: false },
 { name: "СОФИЙСКА СВЕТА ГОРА", onDemand: false },
@@ -8753,6 +9011,3 @@ const lines = {
         ]
     },
 };
-
-
-
