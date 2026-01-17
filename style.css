@@ -143,6 +143,7 @@ body.fade-out {
 .switch-dir {
     padding: 6px 14px;
     background: #e1e1e1;
+    font-family: "Sofia Sans", sans-serif;
     border-radius: 6px;
     border: none;
     cursor: pointer;
@@ -373,6 +374,7 @@ body.fade-out {
     flex-direction: column;
 }
 }
+
 
 
 
