@@ -214,6 +214,8 @@ document.getElementById("searchLine").addEventListener("input", e => {
 -------------------------------------------*/
 async function showLine(lineKey) {
     const data = lines[lineKey];
+
+    // Ensure direction state exists
     if (!(lineKey in directionState)) directionState[lineKey] = 0;
     const dir = directionState[lineKey];
     const cacheKey = `${lineKey}-${dir}`;
@@ -222,21 +224,23 @@ async function showLine(lineKey) {
     const color = getLineColor(data.type, lineKey);
     const icon = ICONS[data.type.startsWith("metro") ? "metro" : data.type];
 
+    // Detect whether we should show switch button and timetable button
+    const hasMultipleDirections = Array.isArray(data.directions) && data.directions.length > 1;
+    const hasTimetable = !!(data.directions && data.directions[dir] && data.directions[dir].timetable);
+
     // Animate header reset
     header.classList.remove("animate-in");
     void header.offsetWidth;
 
     const colorClass = data.type.startsWith("metro") ? getMetroColorClass(lineKey) : '';
 
-    const hasTimetable = !!data.directions[dir].timetable;
+    // Build action buttons conditionally
+    const switchButtonHtml = hasMultipleDirections ? `<button class="switch-dir" aria-label="Промени посоката">Промяна на посоката</button>` : '';
+    const timetableButtonHtml = hasTimetable ? `<button class="switch-dir timetable-btn" aria-label="Разписание">Разписание</button>` : '';
 
-    // timetable button markup (if any)
-    const timetableButtonHtml = hasTimetable
-        ? `<button class="switch-dir timetable-btn" aria-label="Разписание">Разписание</button>`
-        : '';
-
-    // Add header-actions container; if only one action, add single-action class so CSS can make it full width
-    const actionsClass = hasTimetable ? "header-actions" : "header-actions single-action";
+    // actions container class: single-action when only one button present so CSS can make it full width on mobile
+    const actionCount = (switchButtonHtml ? 1 : 0) + (timetableButtonHtml ? 1 : 0);
+    const actionsClass = actionCount === 1 ? "header-actions single-action" : "header-actions";
 
     header.innerHTML = `
         <div class="line-header-icon" style="--line-color:${color}">
@@ -248,13 +252,13 @@ async function showLine(lineKey) {
             <span class="destination">${data.directions[dir].name}</span>
 
             <div class="${actionsClass}">
-                <button class="switch-dir" aria-label="Промени посоката">Промяна на посоката</button>
+                ${switchButtonHtml}
                 ${timetableButtonHtml}
             </div>
         </div>
     `;
 
-    // attach handlers to the specific buttons inside header-actions
+    // Attach handlers only if the elements exist
     const switchBtn = header.querySelector(".header-actions .switch-dir:not(.timetable-btn)");
     if (switchBtn) {
         switchBtn.addEventListener("click", () => switchDirection(lineKey));
