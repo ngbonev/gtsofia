@@ -4,6 +4,10 @@
 let directionState = {}; // track direction per line
 const mapCache = {};     // store already loaded map wrappers + map instance for caching
 
+// Lightweight caches for geometry fetches
+const relationGeoCache = {};    // relationId -> { geojson, bounds }
+const inflightGeoFetches = {};  // relationId -> Promise
+
 function refreshLineList(filter = null) {
     const list = document.getElementById("lineList");
     list.innerHTML = "";
@@ -117,15 +121,13 @@ async function showLine(lineKey) {
             }
         });
     } else {
-        // Create new map wrapper
+        // Create new map wrapper (but we will only initialize Leaflet after confirming geo exists)
         const wrapper = document.createElement("div");
         wrapper.className = "map-wrapper";
         layoutContainer.appendChild(wrapper);
 
-        // Render map (async) -> returns { wrapper, map, bounds } on success
         const result = await renderLeafletMap(data.directions[dir], data.type, lineKey, wrapper);
 
-        // If renderLeafletMap returned a map object, store it for reuse
         if (result && result.wrapper && result.map) {
             mapCache[cacheKey] = result;
         }
@@ -158,7 +160,7 @@ function renderStops(stops) {
 }
 
 /* ----------------------------------------
-   LEAFLET MAP LOGIC
+   LEAFLET MAP LOGIC (LIGHTER + ROBUST)
 -------------------------------------------*/
 function getLineColor(type, lineKey) {
     if (type.startsWith("metro")) {
@@ -205,6 +207,124 @@ async function fetchOverpass(query, timeoutMs = 60000) {
     }
 }
 
+// Attempt to fetch geometry for a relationId with retries and caching.
+// Returns null if no usable geometry found.
+async function getRelationGeometry(relationId) {
+    if (!relationId) return null;
+
+    // Return cached geometry if present
+    if (relationGeoCache[relationId]) {
+        return relationGeoCache[relationId];
+    }
+
+    // Dedupe concurrent fetches
+    if (inflightGeoFetches[relationId]) {
+        return inflightGeoFetches[relationId];
+    }
+
+    const maxAttempts = 3; // primary + up to 2 retries/backoffs
+    let attempt = 0;
+
+    const promise = (async () => {
+        let lastError = null;
+
+        // Helper: extract features from any element that has geometry (ways/nodes)
+        const elementsToFeatures = (elements) => {
+            if (!elements || !Array.isArray(elements)) return [];
+            const features = [];
+
+            for (const el of elements) {
+                if (!el.geometry || !Array.isArray(el.geometry) || el.geometry.length === 0) continue;
+
+                // geometry could be a list of points (node/way); we will create LineString for ways,
+                // and for single-point geometries we create a small line (not ideal) OR skip.
+                const coords = el.geometry.map(p => [p.lon, p.lat]);
+
+                // prefer LineString for sequences, skip single-point nodes
+                if (coords.length >= 2) {
+                    features.push({
+                        type: "Feature",
+                        geometry: { type: "LineString", coordinates: coords },
+                        properties: el.tags || {}
+                    });
+                }
+            }
+            return features;
+        };
+
+        while (attempt < maxAttempts) {
+            attempt++;
+            try {
+                // Primary: relation(...) out geom (may or may not include member geometry)
+                const primaryQuery = `[out:json];relation(${relationId});out geom;`;
+                let data = null;
+                try {
+                    data = await fetchOverpass(primaryQuery, 60000);
+                } catch (errPrimary) {
+                    lastError = errPrimary;
+                    // If it's a transient error (e.g. 429 or network), try again below with backoff.
+                }
+
+                let features = [];
+                if (data) features = elementsToFeatures(data.elements);
+
+                // If no features from primary, try recursive query to fetch members (ways) geometry
+                if (!features || features.length === 0) {
+                    try {
+                        const recursiveQuery = `[out:json];relation(${relationId});>;out geom;`;
+                        const data2 = await fetchOverpass(recursiveQuery, 60000);
+                        features = elementsToFeatures(data2.elements);
+                    } catch (errRec) {
+                        lastError = errRec;
+                    }
+                }
+
+                if (features && features.length > 0) {
+                    const geojson = { type: "FeatureCollection", features };
+                    // compute bounds using a temporary Leaflet layer if Leaflet available,
+                    // otherwise omit bounds (map will fallback to city center)
+                    let bounds = null;
+                    try {
+                        const tmpLayer = L.geoJSON(geojson);
+                        bounds = tmpLayer.getBounds();
+                    } catch (e) {
+                        bounds = null;
+                    }
+
+                    const cached = { geojson, bounds };
+                    relationGeoCache[relationId] = cached;
+                    return cached;
+                } else {
+                    // No geometry found for this attempt; maybe it's permanent (incomplete relation)
+                    lastError = lastError || new Error("No geometry returned from Overpass for relation " + relationId);
+                }
+            } catch (err) {
+                lastError = err;
+            }
+
+            // If we will retry, backoff a bit (exponential)
+            if (attempt < maxAttempts) {
+                const backoffMs = 300 * Math.pow(2, attempt - 1); // 300ms, 600ms, ...
+                await new Promise(r => setTimeout(r, backoffMs));
+            }
+        }
+
+        // All attempts failed / no geometry
+        console.warn("getRelationGeometry: failed for relation", relationId, lastError);
+        return null;
+    })();
+
+    inflightGeoFetches[relationId] = promise;
+
+    try {
+        const result = await promise;
+        return result;
+    } finally {
+        // cleanup inflight entry
+        delete inflightGeoFetches[relationId];
+    }
+}
+
 async function renderLeafletMap(direction, type, lineKey, wrapper) {
     wrapper.innerHTML = ""; // clear wrapper
 
@@ -213,6 +333,21 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
         return { wrapper };
     }
 
+    // First, ensure we have geometry (cached or fetched). Don't init Leaflet until we know there's something to draw.
+    const relationId = direction.relationId;
+    let geoData = null;
+    try {
+        geoData = await getRelationGeometry(relationId);
+    } catch (e) {
+        console.warn("Error fetching relation geometry:", e);
+    }
+
+    if (!geoData || !geoData.geojson || !geoData.geojson.features || geoData.geojson.features.length === 0) {
+        wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
+        return { wrapper };
+    }
+
+    // Create map container and initialize Leaflet now that we have geometry
     const mapDiv = document.createElement("div");
     mapDiv.className = "leaflet-map";
     wrapper.appendChild(mapDiv);
@@ -229,87 +364,28 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
             maxZoom: 19
         }).addTo(map);
 
-        // Primary Overpass query: try to get geometry (relation members may or may not contain geometry)
-        const primaryQuery = `[out:json];relation(${direction.relationId});out geom;`;
-        let data;
-        try {
-            data = await fetchOverpass(primaryQuery, 60000);
-        } catch (err) {
-            console.warn("Primary Overpass fetch failed:", err);
-            // try fallback below
-        }
-
-        // Helper to extract coordinate arrays from any element with geometry
-        const elementsToFeatures = (elements) => {
-            if (!elements || !Array.isArray(elements)) return [];
-            return elements
-                .filter(el => Array.isArray(el.geometry) && el.geometry.length > 0)
-                .map(el => {
-                    const coords = el.geometry.map(p => [p.lon, p.lat]);
-                    // Use LineString per element (ways) to keep things simple
-                    return {
-                        type: "Feature",
-                        geometry: {
-                            type: "LineString",
-                            coordinates: coords
-                        }
-                    };
-                });
-        };
-
-        let features = [];
-        if (data) {
-            features = elementsToFeatures(data.elements);
-        }
-
-        // If no geometry was found, retry with a recursive query to fetch member ways/nodes
-        if (!features || features.length === 0) {
-            console.info("No geometry from primary query, trying recursive Overpass query for members...");
-            try {
-                const recursiveQuery = `[out:json];relation(${direction.relationId});>;out geom;`;
-                const data2 = await fetchOverpass(recursiveQuery, 60000);
-                features = elementsToFeatures(data2.elements);
-            } catch (err) {
-                console.warn("Recursive Overpass fetch failed:", err);
-            }
-        }
-
-        if (!features || features.length === 0) {
-            // Nothing to draw
-            console.warn("No geometry available for relation", direction.relationId);
-            wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
-            return { wrapper, map };
-        }
-
-        const geojson = {
-            type: "FeatureCollection",
-            features
-        };
-
-        // Add GeoJSON to map
-        const layer = L.geoJSON(geojson, {
+        // Add GeoJSON to map (use cached geojson)
+        const layer = L.geoJSON(geoData.geojson, {
             style: { color, weight: 5, opacity: 0.9 }
         }).addTo(map);
 
-        // Fit bounds
-        const bounds = layer.getBounds();
+        // Fit bounds (prefer precomputed bounds)
+        const bounds = geoData.bounds || layer.getBounds();
         if (bounds && typeof bounds.isValid === "function" && bounds.isValid()) {
             try {
                 map.fitBounds(bounds, { padding: [20, 20] });
             } catch (e) {
                 console.warn("fitBounds failed:", e);
+                map.setView([42.6977, 23.3219], 12);
             }
         } else {
-            // fallback to city center
             map.setView([42.6977, 23.3219], 12);
         }
 
         // Force redraw in case container dimensions changed
         requestAnimationFrame(() => map.invalidateSize());
 
-        // Return wrapper + map + bounds for caching
         return { wrapper, map, bounds };
-
     } catch (e) {
         console.error("Leaflet map error:", e);
         wrapper.innerHTML = `<div class="no-map">Няма налична карта</div>`;
