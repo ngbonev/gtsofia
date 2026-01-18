@@ -1581,7 +1581,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС КНЯГИНЯ МАРИЯ ЛУИЗА",
+                name: "МЕТРОСТАНЦИЯ КНЯГИНЯ М. ЛУИЗА",
 				relationId: 17041566,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/27/",
                 stops: [
@@ -2232,7 +2232,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС СЛИВНИЦА",
+                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
 				relationId: 16239843,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/47/",
                 stops: [
@@ -2302,7 +2302,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС СЛИВНИЦА",
+                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
 				relationId: 16242499,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/49/",
                 stops: [
@@ -2366,7 +2366,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС СЛИВНИЦА",
+                name: "МЕТРОСТАНЦИЯ СЛИВНИЦА",
 				relationId: 16242757,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/54/",
                 stops: [
@@ -2512,7 +2512,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС МИЗИЯ",
+                name: "МЕТРОСТАНЦИЯ МИЗИЯ",
 				relationId: 13892501,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/59/",
                 stops: [
@@ -4498,7 +4498,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ЖОЛИО КЮРИ",
+                name: "МЕТРОСТАНЦИЯ ЖОЛИО КЮРИ",
 				relationId: 19894246,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/97/",
                 stops: [
@@ -5020,7 +5020,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС АЛЕКСАНДЪР ТЕОДОРОВ-БАЛАН",
+                name: "МЕТРОСТАНЦИЯ АЛЕКСАНДЪР ТЕОДОРОВ-БАЛАН",
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/%D0%A59/",
 				relationId: 15699686,
                 stops: [
@@ -6002,7 +6002,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС ВИТОША",
+                name: "МЕТРОСТАНЦИЯ ВИТОША",
 				relationId: 16946684,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/288/",
                 stops: [
@@ -6050,7 +6050,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС Г.М. ДИМИТРОВ",
+                name: "МЕТРОСТАНЦИЯ Г.М. ДИМИТРОВ",
 				relationId: 17299827,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/294/",
                 stops: [
@@ -6702,7 +6702,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС ГОРНА БАНЯ",
+                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
 				relationId: 16333620,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/802/",
                 stops: [
@@ -6720,7 +6720,7 @@ const lines = {
         type: "bus",
         directions: [
             {
-                name: "МС ГОРНА БАНЯ",
+                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
 				relationId: 16334912,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/803/",
                 stops: [
@@ -6777,7 +6777,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ГОРНА БАНЯ",
+                name: "МЕТРОСТАНЦИЯ ГОРНА БАНЯ",
 				relationId: 16335257,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/804/",
                 stops: [
@@ -6817,7 +6817,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ВИТОША",
+                name: "МЕТРОСТАНЦИЯ ВИТОША",
 				relationId: 16408125,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/805/",
                 stops: [
@@ -8353,7 +8353,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ХАН КУБРАТ",
+                name: "МЕТРОСТАНЦИЯ ХАН КУБРАТ",
 				relationId: 12699445,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/7/",
                 stops: [
@@ -8384,7 +8384,7 @@ const lines = {
         type: "tram",
         directions: [
             {
-                name: "МС ВИТОША",
+                name: "МЕТРОСТАНЦИЯ ВИТОША",
 				relationId: 12700646,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/10/",
                 stops: [
@@ -8616,7 +8616,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ВИТОША",
+                name: "МЕТРОСТАНЦИЯ ВИТОША",
 				relationId: 17576031,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/15/",
                 stops: [
@@ -8735,7 +8735,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ОПЪЛЧЕНСКА",
+                name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА",
 				relationId: 12704101,
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/20/",
                 stops: [
@@ -8802,7 +8802,7 @@ const lines = {
                 ]
             },
             {
-                name: "МС ОПЪЛЧЕНСКА",
+                name: "МЕТРОСТАНЦИЯ ОПЪЛЧЕНСКА",
 				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/21/",
                 stops: [
 { name: "Ж.К. ГЕО МИЛЕВ", onDemand: false },
@@ -9216,4 +9216,5 @@ const lines = {
         ]
     },
 };
+
 
