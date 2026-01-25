@@ -4,6 +4,7 @@ const ICONS = {
     tram: "https://stolica.bg/svg/02-tram.svg",
     trolley: "https://stolica.bg/svg/04-trolley.svg",
     bus: "https://stolica.bg/svg/05-bus.svg",
+	tourist: "https://stolica.bg/svg/06-tourist-bus.svg",
     nightbus: "https://stolica.bg/svg/07-night-bus.svg"
 };
 
@@ -16,6 +17,7 @@ const COLORS = {
     tram: "#f6921e",
     trolley: "#0095da",
     bus: "#be1e2d",
+	tourist: "#006838",
     nightbus: "#000000"
 };
 
@@ -2069,7 +2071,7 @@ const lines = {
     },
 	"bus-X43": {
         number: "X43",
-        type: "bus",
+        type: "tourist",
         directions: [
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
@@ -9216,5 +9218,6 @@ const lines = {
         ]
     },
 };
+
 
 
