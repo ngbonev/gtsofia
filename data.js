@@ -2071,7 +2071,7 @@ const lines = {
     },
 	"bus-X43": {
         number: "X43",
-        type: "tourist",
+        type: "bus",
         directions: [
             {
                 name: "АВТОСТАНЦИЯ БАНКЯ",
@@ -9218,6 +9218,7 @@ const lines = {
         ]
     },
 };
+
 
 
 
