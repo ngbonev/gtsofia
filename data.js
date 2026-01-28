@@ -619,45 +619,6 @@ const lines = {
             }
         ]
     },
-    "bus-8TM": {
-        number: "8TM",
-        type: "bus",
-        directions: [
-            {
-                name: "ЛЮЛИН 5",
-				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/8TM/",
-                stops: [
-                    { name: "УЛ. ТЪРНОВО", onDemand: false },
-                    { name: "УЛ. ГЕН. АСЕН НИКОЛОВ", onDemand: false },
-                    { name: "УЛ. ГЕН. НИКОЛА ГЕНЕВ", onDemand: false },
-                    { name: "МЕТРОСТАНЦИЯ ЛЮЛИН", onDemand: false },
-                    { name: "ТЪРГОВСКИ ЦЕНТЪР ЛЮЛИН", onDemand: false },
-                    { name: "ОБЩИНА ЛЮЛИН", onDemand: false },
-                    { name: "МАГАЗИН ВИТОША", onDemand: false },
-                    { name: "БУЛ. Д-Р ПЕТЪР ДЕРТЛИЕВ", onDemand: false },
-                    { name: "БУЛ. ПЕТЪР ДЕРТЛИЕВ", onDemand: false },
-                    { name: "БЛ. 539 Ж.К. ЛЮЛИН 5", onDemand: false },
-                    { name: "Ж.К. ЛЮЛИН 5", onDemand: false },
-                ]
-            },
-            {
-                name: "УЛ. ТЪРНОВО (ЛЮЛИН 8)",
-				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!bus/8TM/",
-                stops: [
-                    { name: "Ж.К. ЛЮЛИН 5", onDemand: false },
-                    { name: "БЛ. 539 Ж.К. ЛЮЛИН 5", onDemand: false },
-                    { name: "БУЛ. Д-Р ПЕТЪР ДЕРТЛИЕВ", onDemand: false },
-                    { name: "МАГАЗИН ВИТОША", onDemand: false },
-                    { name: "ОБЩИНА ЛЮЛИН", onDemand: false },
-                    { name: "ТЪРГОВСКИ ЦЕНТЪР ЛЮЛИН", onDemand: false },
-                    { name: "МЕТРОСТАНЦИЯ ЛЮЛИН", onDemand: false },
-                    { name: "УЛ. ГЕН. НИКОЛА ГЕНЕВ", onDemand: false },
-                    { name: "УЛ. ГЕН. АСЕН НИКОЛОВ", onDemand: false },
-                    { name: "Ж.К. ЛЮЛИН 8", onDemand: false },
-                ]
-            }
-        ]
-    },
     "bus-9": {
         number: "9",
         type: "bus",
@@ -8381,6 +8342,51 @@ const lines = {
             }
         ]
     },
+	"tram-8": {
+        number: "8",
+        type: "tram",
+        directions: [
+            {
+                name: "ЛЮЛИН 5",
+				relationId: 12699785,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/8/",
+                stops: [
+{ name: "Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
+{ name: "БЛ. 13 Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ВАРДАР", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ЗАПАДЕН ПАРК", onDemand: false },
+{ name: "БУЛ. ЛУИ ПАСТЬОР", onDemand: false },
+{ name: "БУЛ. ДЖАВАХАРЛАЛ НЕРУ", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ЛЮЛИН", onDemand: false },
+{ name: "ОБЩИНА ЛЮЛИН", onDemand: false },
+{ name: "МАГАЗИН ВИТОША", onDemand: false },
+{ name: "БУЛ. ПЕТЪР ДЕРТЛИЕВ", onDemand: false },
+{ name: "БЛ. 539 Ж.К. ЛЮЛИН 5", onDemand: false },
+{ name: "Ж.К. ЛЮЛИН 5", onDemand: false },
+                ]
+            },
+            {
+                name: "ЗАПАДЕН ПАРК",
+				relationId: 12699784,
+				timetable: "https://dimitar5555.github.io/sofiatraffic-schedules/#!tram/8/",
+                stops: [
+{ name: "Ж.К. ЛЮЛИН 5", onDemand: false },
+{ name: "БЛ. 539 Ж.К. ЛЮЛИН 5", onDemand: false },
+{ name: "БУЛ. ПЕТЪР ДЕРТЛИЕВ", onDemand: false },
+{ name: "МАГАЗИН ВИТОША", onDemand: false },
+{ name: "ОБЩИНА ЛЮЛИН", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ЛЮЛИН", onDemand: false },
+{ name: "БУЛ. ДЖАВАХАРЛАЛ НЕРУ", onDemand: false },
+{ name: "БУЛ. ЛУИ ПАСТЬОР", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ЗАПАДЕН ПАРК", onDemand: false },
+{ name: "МЕТРОСТАНЦИЯ ВАРДАР", onDemand: false },
+{ name: "БУЛ. АЛ. СТАМБОЛИЙСКИ", onDemand: false },
+{ name: "БЛ. 13 Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
+{ name: "Ж.К. ЗАПАДЕН ПАРК", onDemand: false },
+]
+            }
+        ]
+    },
 	"tram-10": {
         number: "10",
         type: "tram",
@@ -8400,6 +8406,7 @@ const lines = {
 { name: "УЛ. ОПЪЛЧЕНСКА", onDemand: false },
 { name: "ПЛ. ВЪЗРАЖДАНЕ", onDemand: false },
 { name: "ПЛ. МАКЕДОНИЯ", onDemand: false },
+{ name: "БУЛ. ВИТОША", onDemand: false },
 { name: "ПЛОЩАД ГАРИБАЛДИ", onDemand: false },
 { name: "ПЛ. СЛАВЕЙКОВ", onDemand: false },
 { name: "БУЛ. ВАСИЛ ЛЕВСКИ", onDemand: false },
@@ -8433,6 +8440,7 @@ const lines = {
 { name: "БУЛ. ВАСИЛ ЛЕВСКИ", onDemand: false },
 { name: "ПЛ. СЛАВЕЙКОВ", onDemand: false },
 { name: "ПЛОЩАД ГАРИБАЛДИ", onDemand: false },
+{ name: "БУЛ. ВИТОША", onDemand: false },
 { name: "ПЛ. МАКЕДОНИЯ", onDemand: false },
 { name: "ПЛ. ВЪЗРАЖДАНЕ", onDemand: false },
 { name: "УЛ. ОПЪЛЧЕНСКА", onDemand: false },
@@ -9218,6 +9226,7 @@ const lines = {
         ]
     },
 };
+
 
 
 
