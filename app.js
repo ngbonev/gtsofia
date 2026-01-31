@@ -335,7 +335,7 @@ function renderStops(stops) {
         const item = document.createElement("div");
         item.className = "stop-item";
         item.style.animationDelay = `${index * 0.04}s`;
-        item.textContent = (stop.onDemand ? "👋 " : "") + stop.name;
+        item.textContent = (stop.onDemand ? "👋 " : "") + stop.name <i>(по желание)</i>;
         container.appendChild(item);
     });
 
@@ -619,3 +619,4 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
         return { wrapper };
     }
 }
+
