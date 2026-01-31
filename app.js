@@ -50,9 +50,7 @@ function ensureTimetableModal() {
     });
 
     // close-inline button: just close modal
-    overlay.querySelector(".close-inline").addEventListener("click", closeTimetable);
-
-    document.body.appendChild(overlay);
+    overlay.querySelector(".close-inline").addEventListener("click", closeTimetable);indexpendChild(overlay);
     _timetableModal = overlay;
     return _timetableModal;
 }
@@ -335,7 +333,7 @@ function renderStops(stops) {
         const item = document.createElement("div");
         item.className = "stop-item";
         item.style.animationDelay = `${index * 0.04}s`;
-        item.textContent = (stop.onDemand ? "👋 " : "" : "<i>(по желание)</i>") + stop.name;
+        item.textContent = (stop.onDemand ? "👋 " : "") + stop.name;
         container.appendChild(item);
     });
 
@@ -619,5 +617,6 @@ async function renderLeafletMap(direction, type, lineKey, wrapper) {
         return { wrapper };
     }
 }
+
 
 
